@@ -17,6 +17,9 @@ const config: Config = {
         green: {
           primary: "#405444",
         },
+        navy: {
+          primary: "#15253B",
+        },
       },
     },
   },

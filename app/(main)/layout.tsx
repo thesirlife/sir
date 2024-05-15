@@ -1,9 +1,11 @@
+import { PropsWithChildren } from "react";
 import Header from "../components/global/header";
 
-const MainLayout = () => {
+const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <div>
       <Header />
+      {children}
     </div>
   );
 };
