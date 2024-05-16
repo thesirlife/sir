@@ -1,6 +1,7 @@
 import { PodcastsOutlined } from "@mui/icons-material";
 import CtaBox from "./ctaBox";
 import brainGames from "@/app/cta-images/brain-games.jpg";
+
 type FeaturedActivityProps = {
   activity: any;
   // This will need fleshed out more obviously when I build out the activity block

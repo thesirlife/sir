@@ -33,8 +33,8 @@ const CtaBox = ({
 }: PropsWithChildren<CtaBoxProps>) => {
   const Icon = icon;
   return (
-    <Paper square>
-      <div className="flex flex-col gap-4 container p-6 max-w-[956px]">
+    <Paper elevation={2} square>
+      <div className="flex flex-col gap-4 container p-6 max-w-[442px]">
         <div className="basis-1/2 relative ">
           <Image src={image} alt={header} className="w-full" />
           {Icon && (
