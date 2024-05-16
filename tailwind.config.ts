@@ -1,3 +1,4 @@
+import { Gloock } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -20,6 +21,10 @@ const config: Config = {
         navy: {
           primary: "#15253B",
         },
+      },
+      fontFamily: {
+        gloock: ["var(--font-gloock)"],
+        roboto: ["var(--font-roboto)"],
       },
     },
   },

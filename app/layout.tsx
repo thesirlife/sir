@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Gloock, Roboto } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const gloock = Gloock({
+  weight: "400",
+  variable: "--font-gloock",
+  preload: false,
+});
+
+const roboto = Roboto({
+  weight: "400",
+  variable: "--font-roboto",
+  preload: false,
+});
 
 export const metadata: Metadata = {
   title: "SIR",
@@ -15,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${gloock.variable} ${roboto.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }
