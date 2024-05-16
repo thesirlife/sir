@@ -25,6 +25,10 @@ const config: Config = {
         },
         navy: {
           primary: "#15253B",
+          secondary: "#15253B60",
+        },
+        orange: {
+          primary: "#B6622D",
         },
       },
       fontFamily: {

@@ -37,6 +37,10 @@ h4 {
   @apply font-gloock;
 }
 
+h2 {
+  @apply text-4xl;
+}
+
 p {
   @apply font-roboto;
 }

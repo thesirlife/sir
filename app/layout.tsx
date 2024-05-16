@@ -29,7 +29,9 @@ export default function RootLayout({
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
+        {/* Maybe remove this or investigate more if needed to make MUI/Tailwind happy, it's causing a style flash after painting */}
         <CssBaseline />
+        {/*  */}
         <html lang="en">
           <body className={`${gloock.variable} ${roboto.variable}`}>
             {children}
