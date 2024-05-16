@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Gloock, Roboto } from "next/font/google";
 import "./globals.css";
+import { StyledEngineProvider } from "@mui/material/styles";
+import { theme } from "./theme";
+import { ThemeProvider, CssBaseline } from "@mui/material";
 
 const gloock = Gloock({
   weight: "400",
@@ -24,10 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${gloock.variable} ${roboto.variable}`}>
-        {children}
-      </body>
-    </html>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <html lang="en">
+          <body className={`${gloock.variable} ${roboto.variable}`}>
+            {children}
+          </body>
+        </html>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }

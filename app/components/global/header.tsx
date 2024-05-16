@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/app/sir-header-logo.svg";
 import { FC } from "react";
+
 const Header: FC = () => {
   return (
     <div className="bg-green-primary flex flex-row justify-between h-[72px] align-center ">
