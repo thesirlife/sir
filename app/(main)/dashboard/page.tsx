@@ -1,5 +1,7 @@
-import FeaturedActivity from "@/app/components/featuredActivity";
-import WelcomeBanner from "@/app/components/welcomeBanner";
+import FeaturedActivity from "@/app/components/FeaturedActivity";
+import WelcomeBanner from "@/app/components/WelcomeBanner";
+import Explore from "@/app/components/Explore";
+
 import { FC } from "react";
 
 const Dashboard: FC = () => {
@@ -7,6 +9,7 @@ const Dashboard: FC = () => {
     <div>
       <WelcomeBanner user="Gavin" />
       <FeaturedActivity />
+      <Explore />
     </div>
   );
 };

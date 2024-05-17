@@ -1,5 +1,5 @@
 import { PodcastsOutlined } from "@mui/icons-material";
-import CtaBox from "./ctaBox";
+import CtaBox from "./CtaBox/CtaBox";
 import brainGames from "@/app/cta-images/brain-games.jpg";
 
 type FeaturedActivityProps = {

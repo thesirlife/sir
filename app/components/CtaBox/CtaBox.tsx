@@ -2,12 +2,11 @@ import Paper from "@mui/material/Paper";
 import { ImageProps } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
-import { ArrowForward, OpenInNew, PodcastsOutlined } from "@mui/icons-material";
+import { PodcastsOutlined } from "@mui/icons-material";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
-import IconWithBackground from "./iconWithBackground";
-import Link from "next/link";
-import LinkWithIcon from "./linkWithIcon";
+import IconWithBackground from "../IconWithBackground";
+import LinkWithIcon from "../LinkWithIcon";
 
 type CtaBoxProps = {
   image: ImageProps["src"];
@@ -17,9 +16,11 @@ type CtaBoxProps = {
   };
   link?: {
     href: string;
-    label: string;
+    label?: string;
     isExternal?: boolean;
   };
+  boxLink?: string;
+  imageOnTop?: boolean;
 };
 
 const CtaBox = ({
@@ -27,13 +28,19 @@ const CtaBox = ({
   header,
   icon,
   link,
+  boxLink = "#",
+  imageOnTop = true,
   children,
 }: PropsWithChildren<CtaBoxProps>) => {
   const Icon = icon;
   return (
     <Paper elevation={2} square>
       <div className="flex flex-col gap-4 container p-6 max-w-[442px]">
-        <div className="basis-1/2 relative ">
+        <div
+          className={`basis-1/2 relative ${
+            imageOnTop ? "order-first" : "order-last"
+          }`}
+        >
           <Image src={image} alt={header} className="w-full" />
           {Icon && (
             <IconWithBackground
