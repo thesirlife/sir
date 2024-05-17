@@ -2,10 +2,12 @@ import Paper from "@mui/material/Paper";
 import { ImageProps } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
-import { OpenInNew, PodcastsOutlined } from "@mui/icons-material";
+import { ArrowForward, OpenInNew, PodcastsOutlined } from "@mui/icons-material";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import IconWithBackground from "./iconWithBackground";
+import Link from "next/link";
+import LinkWithIcon from "./linkWithIcon";
 
 type CtaBoxProps = {
   image: ImageProps["src"];
@@ -13,13 +15,10 @@ type CtaBoxProps = {
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
   };
-  internalLink?: {
+  link?: {
     href: string;
     label: string;
-  };
-  externalLink?: {
-    href: string;
-    label: string;
+    isExternal?: boolean;
   };
 };
 
@@ -27,8 +26,7 @@ const CtaBox = ({
   image,
   header,
   icon,
-  internalLink,
-  externalLink,
+  link,
   children,
 }: PropsWithChildren<CtaBoxProps>) => {
   const Icon = icon;
@@ -50,17 +48,11 @@ const CtaBox = ({
             {children}
           </p>
           <div className="text-orange-primary text-sm uppercase mt-8">
-            {internalLink && (
-              <a href={internalLink.href}>{internalLink.label}</a>
-            )}
-            {externalLink && (
-              <a
-                href={externalLink.href}
-                className="flex items-center gap-1 leading-5"
-              >
-                <span>{externalLink.label}</span> <OpenInNew fontSize="small" />
-              </a>
-            )}
+            <LinkWithIcon
+              href={String(link?.href)}
+              label={String(link?.label)}
+              isExternal={link?.isExternal}
+            />
           </div>
         </div>
       </div>

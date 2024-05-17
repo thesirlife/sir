@@ -23,7 +23,7 @@ const FeaturedActivity = () => {
             image={brainGames}
             header="Target Tracker"
             icon={PodcastsOutlined}
-            externalLink={{ href: "google.com", label: "Play Game" }}
+            link={{ href: "google.com", label: "Play Game", isExternal: true }}
           >
             When you&apos;re driving through a busy intersection, how well can
             you track other cars, pedestrians, and everything else moving around
