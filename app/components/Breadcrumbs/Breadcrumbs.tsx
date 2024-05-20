@@ -21,6 +21,7 @@ const Breadcrumbs: FC = () => {
     }
   > = {
     "general-learning": ViewModule,
+    // eventually need to add whatever other pages/icons there are to this pathsMap dictionary
   };
 
   const Seperator: FC = () => <span className="px-2"> / </span>;
