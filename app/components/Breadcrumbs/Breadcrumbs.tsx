@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC, Fragment } from "react";
 import { Home, ViewModule } from "@mui/icons-material";
