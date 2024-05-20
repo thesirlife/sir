@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Gloock, Roboto } from "next/font/google";
 import "./globals.css";
-import { StyledEngineProvider } from "@mui/material/styles";
+import {
+  Experimental_CssVarsProvider,
+  StyledEngineProvider,
+} from "@mui/material/styles";
 import { theme } from "./theme";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 
@@ -28,13 +31,13 @@ export default function RootLayout({
 }>) {
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
+      <Experimental_CssVarsProvider>
         <html lang="en">
           <body className={`${gloock.variable} ${roboto.variable}`}>
             {children}
           </body>
         </html>
-      </ThemeProvider>
+      </Experimental_CssVarsProvider>
     </StyledEngineProvider>
   );
 }

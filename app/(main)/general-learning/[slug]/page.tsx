@@ -1,4 +1,5 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import { Chip } from "@mui/material";
 
 const QueryExample = {
   author: "Gavin Gregory",
@@ -21,12 +22,10 @@ const GeneralLearningArticle = () => {
               <div className=" mt-2">
                 <p>{QueryExample.description}</p>
               </div>
-              <div className="bg-gray-200 p-4 mt-4">
-                <ul>
-                  {QueryExample.tags.map((tag, index) => (
-                    <li key={index}>{tag}</li>
-                  ))}
-                </ul>
+              <div className="flex flex-row gap-2 flex-wrap">
+                {QueryExample.tags.map((tag) => (
+                  <Chip key={tag} label={tag} color="warning" />
+                ))}
               </div>
             </aside>
             <main>

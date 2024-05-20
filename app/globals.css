@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --green-primary: #405444;
+
+    --navy-primary: #15253b;
+    --navy-secondary: #15253b60;
+
+    --blue-primary: #0288d1;
+
+    --orange-primary: #b6622d;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

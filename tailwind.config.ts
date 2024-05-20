@@ -21,14 +21,17 @@ const config: Config = {
       },
       colors: {
         green: {
-          primary: "#405444",
+          primary: "var(--green-primary)",
         },
         navy: {
-          primary: "#15253B",
-          secondary: "#15253B60",
+          primary: "var(--navy-primary)",
+          secondary: "var(--navy-secondary)",
+        },
+        blue: {
+          primary: "var(--blue-primary)",
         },
         orange: {
-          primary: "#B6622D",
+          primary: "var(--orange-primary)",
         },
       },
       fontFamily: {
