@@ -1,6 +1,6 @@
-import FeaturedActivity from "@/app/components/FeaturedActivity";
 import WelcomeBanner from "@/app/components/WelcomeBanner";
 import Explore from "@/app/components/Explore";
+import FeaturedActivity from "@/app/components/FeaturedActivity";
 
 import { FC } from "react";
 
