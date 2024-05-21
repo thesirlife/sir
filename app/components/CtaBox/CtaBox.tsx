@@ -1,4 +1,4 @@
-import Paper from "@mui/material/Paper";
+import Paper, { PaperProps } from "@mui/material/Paper";
 import { ImageProps } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
@@ -8,7 +8,7 @@ import { OverridableComponent } from "@mui/material/OverridableComponent";
 import IconWithBackground from "../IconWithBackground";
 import LinkWithIcon from "../LinkWithIcon";
 
-type CtaBoxProps = {
+type CtaBoxProps = PaperProps & {
   image: ImageProps["src"];
   header: string;
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
@@ -28,13 +28,13 @@ const CtaBox = ({
   header,
   icon,
   link,
-  boxLink = "#",
   imageOnTop = true,
   children,
+  ...props
 }: PropsWithChildren<CtaBoxProps>) => {
   const Icon = icon;
   return (
-    <Paper elevation={2} square>
+    <Paper elevation={2} square {...props}>
       <div className="flex flex-col gap-4 container p-6 max-w-[442px]">
         <div
           className={`basis-1/2 relative ${

@@ -5,7 +5,7 @@ import { FC } from "react";
 
 const Header: FC = () => {
   return (
-    <div className="bg-green-primary flex flex-row justify-between h-[72px] align-center ">
+    <header className="bg-green-primary flex flex-row justify-between h-[72px] align-center ">
       <div className="pl-4 items-center flex">
         <Image src={Logo} alt="SIR Header Logo" />
       </div>
@@ -20,7 +20,7 @@ const Header: FC = () => {
           Get Support
         </Link>
       </nav>
-    </div>
+    </header>
   );
 };
 
