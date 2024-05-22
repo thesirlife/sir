@@ -6,7 +6,24 @@ const QueryExample = {
   description: "This is a general learning article",
   tags: ["Guides", "History", "Science"],
 };
-const GeneralLearningArticle = () => {
+
+const getGeneralLearningArticle = async (id: string) => {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts/${id}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        // remove once live and we're not behind wpengine login
+        Authorization: "Basic ZGVtbzpiNDJjZTM1Yzg5ODM=",
+      },
+    }
+  );
+
+  return await data.json();
+};
+
+const GeneralLearningArticle = async () => {
+  const article = await getGeneralLearningArticle("8");
   return (
     <div className="bg-navy-primary h-full flex justify-center">
       <div className="container ">
@@ -17,10 +34,10 @@ const GeneralLearningArticle = () => {
           <div className="flex flex-row gap-16 mt-10">
             <aside>
               <div className="">
-                <p>{QueryExample.author}</p>
+                <p>{article.author}</p>
               </div>
               <div className=" mt-2">
-                <p>{QueryExample.description}</p>
+                <p>{article.description}</p>
               </div>
               <div className="flex flex-row gap-2 flex-wrap">
                 {QueryExample.tags.map((tag) => (
@@ -29,9 +46,7 @@ const GeneralLearningArticle = () => {
               </div>
             </aside>
             <main>
-              <h1 className="text-4xl">
-                RMS Titanic - History and Significance
-              </h1>
+              <h1 className="text-4xl">{article.title.rendered}</h1>
               {/* Featured Video */}
             </main>
             <aside>Join our community discussion on this topic</aside>

@@ -5,8 +5,6 @@ import {
   Experimental_CssVarsProvider,
   StyledEngineProvider,
 } from "@mui/material/styles";
-import { theme } from "./theme";
-import { ThemeProvider, CssBaseline } from "@mui/material";
 
 const gloock = Gloock({
   weight: "400",
