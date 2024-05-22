@@ -1,13 +1,9 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import getTagById from "@/app/data/getTagById";
 import getUserById from "@/app/data/getUserById";
 import { Post } from "@/app/types/post/types";
+import { getTagColor } from "@/app/util/getTagColor";
 import { Chip } from "@mui/material";
-
-const QueryExample = {
-  author: "Gavin Gregory",
-  description: "This is a general learning article",
-  tags: ["Guides", "History", "Science"],
-};
 
 const getGeneralLearningArticle = async (id: string): Promise<Post> => {
   const data = await fetch(
@@ -29,9 +25,19 @@ const getGeneralLearningArticle = async (id: string): Promise<Post> => {
 };
 
 const GeneralLearningArticle = async () => {
+  // IDK if this makes sense to keep in this file, or parse out
+  // my gut tells me move it out but with new server component paradigms, maybe it's fine
   const article = await getGeneralLearningArticle("1");
   const author = await getUserById(article.author);
-  console.log(article.content.rendered);
+
+  const getTags = async () => {
+    const tagData = await Promise.all(
+      article.tags.map((tagId) => getTagById(tagId))
+    );
+    return tagData;
+  };
+  const tags = await getTags();
+
   return (
     <div className="bg-navy-primary h-full flex justify-center">
       <div className="container ">
@@ -46,8 +52,12 @@ const GeneralLearningArticle = async () => {
               </div>
 
               <div className="flex flex-row gap-2 flex-wrap mt-4">
-                {QueryExample.tags.map((tag) => (
-                  <Chip key={tag} label={tag} color="warning" />
+                {tags.map((tag) => (
+                  <Chip
+                    key={tag.id}
+                    label={tag.name}
+                    color={getTagColor(tag.slug)}
+                  />
                 ))}
               </div>
             </aside>
