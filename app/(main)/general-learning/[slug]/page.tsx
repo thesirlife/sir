@@ -1,5 +1,6 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
-import { Post } from "@/app/types/posts/types";
+import getUserById from "@/app/data/getUserById";
+import { Post } from "@/app/types/post/types";
 import { Chip } from "@mui/material";
 
 const QueryExample = {
@@ -17,6 +18,10 @@ const getGeneralLearningArticle = async (id: string): Promise<Post> => {
         // remove once live and we're not behind wpengine login
         Authorization: "Basic ZGVtbzpiNDJjZTM1Yzg5ODM=",
       },
+      next: {
+        // maybe we'll change, but this'll refetch content after 10 minutes, probably not necessary but a good experience if it changes in wordpress
+        revalidate: 6000,
+      },
     }
   );
 
@@ -24,7 +29,8 @@ const getGeneralLearningArticle = async (id: string): Promise<Post> => {
 };
 
 const GeneralLearningArticle = async () => {
-  const article = await getGeneralLearningArticle("8");
+  const article = await getGeneralLearningArticle("1");
+  const author = await getUserById(article.author);
   return (
     <div className="bg-navy-primary h-full flex justify-center">
       <div className="container ">
@@ -35,11 +41,12 @@ const GeneralLearningArticle = async () => {
           <div className="flex flex-row gap-16 mt-10">
             <aside>
               <div className="">
-                <p>{article.author}</p>
+                <p>{author.name}</p>
               </div>
-              <div className=" mt-2">
-                <p>{article.excerpt.rendered}</p>
-              </div>
+              <div
+                className=" mt-2"
+                dangerouslySetInnerHTML={{ __html: article.excerpt.rendered }}
+              ></div>
               <div className="flex flex-row gap-2 flex-wrap">
                 {QueryExample.tags.map((tag) => (
                   <Chip key={tag} label={tag} color="warning" />
@@ -48,7 +55,9 @@ const GeneralLearningArticle = async () => {
             </aside>
             <main>
               <h1 className="text-4xl">{article.title.rendered}</h1>
-              {/* Featured Video */}
+              <div
+                dangerouslySetInnerHTML={{ __html: article.content.rendered }}
+              ></div>
             </main>
             <aside>Join our community discussion on this topic</aside>
           </div>
