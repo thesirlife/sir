@@ -31,6 +31,7 @@ const getGeneralLearningArticle = async (id: string): Promise<Post> => {
 const GeneralLearningArticle = async () => {
   const article = await getGeneralLearningArticle("1");
   const author = await getUserById(article.author);
+  console.log(article.content.rendered);
   return (
     <div className="bg-navy-primary h-full flex justify-center">
       <div className="container ">
@@ -38,28 +39,27 @@ const GeneralLearningArticle = async () => {
           <Breadcrumbs />
         </div>
         <div className="border-t-2 border-gray-600 mb-10">
-          <div className="flex flex-row gap-16 mt-10">
-            <aside>
-              <div className="">
+          <div className="grid grid-cols-4 gap-16 mt-10">
+            <aside className="col-span-1">
+              <div>
                 <p>{author.name}</p>
               </div>
-              <div
-                className=" mt-2"
-                dangerouslySetInnerHTML={{ __html: article.excerpt.rendered }}
-              ></div>
-              <div className="flex flex-row gap-2 flex-wrap">
+
+              <div className="flex flex-row gap-2 flex-wrap mt-4">
                 {QueryExample.tags.map((tag) => (
                   <Chip key={tag} label={tag} color="warning" />
                 ))}
               </div>
             </aside>
-            <main>
-              <h1 className="text-4xl">{article.title.rendered}</h1>
+            <main className="col-span-2">
+              <h1 className="text-4xl mb-8">{article.title.rendered}</h1>
               <div
                 dangerouslySetInnerHTML={{ __html: article.content.rendered }}
               ></div>
             </main>
-            <aside>Join our community discussion on this topic</aside>
+            <aside className="col-span-1">
+              Join our community discussion on this topic
+            </aside>
           </div>
         </div>
       </div>
