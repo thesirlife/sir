@@ -1,4 +1,5 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import { Post } from "@/app/types/posts/types";
 import { Chip } from "@mui/material";
 
 const QueryExample = {
@@ -7,7 +8,7 @@ const QueryExample = {
   tags: ["Guides", "History", "Science"],
 };
 
-const getGeneralLearningArticle = async (id: string) => {
+const getGeneralLearningArticle = async (id: string): Promise<Post> => {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts/${id}`,
     {
@@ -37,7 +38,7 @@ const GeneralLearningArticle = async () => {
                 <p>{article.author}</p>
               </div>
               <div className=" mt-2">
-                <p>{article.description}</p>
+                <p>{article.excerpt.rendered}</p>
               </div>
               <div className="flex flex-row gap-2 flex-wrap">
                 {QueryExample.tags.map((tag) => (
