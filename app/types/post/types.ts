@@ -1,4 +1,4 @@
-export interface Post {
+export type Post = {
   date: string;
   date_gmt: string;
   guid: {
@@ -43,4 +43,4 @@ export interface Post {
   template: string;
   categories: number[];
   tags: number[];
-}
+};
