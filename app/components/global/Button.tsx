@@ -7,12 +7,10 @@ type ButtonProps = MuiButtonProps & {
 const Button = ({ text, ...props }: ButtonProps) => {
   return (
     <MuiButton
-      variant="contained"
-      color="warning"
-      className="rounded-tr-xl rounded-tl-sm rounded-bl-xl rounded-br-sm text-white py-2 px-4"
+      className="rounded-tr-xl rounded-tl-sm rounded-bl-xl rounded-br-sm  py-2 px-3"
       {...props}
     >
-      {text}
+      <span>{text}</span>
     </MuiButton>
   );
 };

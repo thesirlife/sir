@@ -1,3 +1,4 @@
+import BasicCta from "@/app/components/BasicCta";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import SocialShare from "@/app/components/SocialShare";
 import getTagById from "@/app/data/getTagById";
@@ -67,10 +68,25 @@ const GeneralLearningArticle = async () => {
               <div
                 dangerouslySetInnerHTML={{ __html: article.content.rendered }}
               ></div>
+              <BasicCta
+                className="mt-6 text-center"
+                button={{
+                  text: "Join Discussion",
+                }}
+              >
+                Join our community discussion on this topic
+              </BasicCta>
             </main>
             <aside className="col-span-1">
               <SocialShare />
-              Join our community discussion on this topic
+              <BasicCta
+                className="mt-10"
+                button={{
+                  text: "Join Discussion",
+                }}
+              >
+                Join our community discussion on this topic
+              </BasicCta>
             </aside>
           </div>
         </div>
