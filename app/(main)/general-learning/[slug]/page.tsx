@@ -1,4 +1,5 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import SocialShare from "@/app/components/SocialShare";
 import getTagById from "@/app/data/getTagById";
 import getUserById from "@/app/data/getUserById";
 import { Post } from "@/app/types/post/types";
@@ -68,6 +69,7 @@ const GeneralLearningArticle = async () => {
               ></div>
             </main>
             <aside className="col-span-1">
+              <SocialShare />
               Join our community discussion on this topic
             </aside>
           </div>

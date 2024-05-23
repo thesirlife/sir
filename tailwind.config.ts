@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { blueGrey } from "@mui/material/colors";
 
 const config: Config = {
   // settings to get Tailwind to work with MUI
@@ -29,6 +30,9 @@ const config: Config = {
         },
         blue: {
           primary: "var(--blue-primary)",
+        },
+        blueGrey: {
+          primary: blueGrey[800],
         },
         orange: {
           primary: "var(--orange-primary)",
