@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Gloock, Roboto } from "next/font/google";
 import "./globals.css";
+
 import {
-  Experimental_CssVarsProvider,
+  Experimental_CssVarsProvider as CssVarsProvider,
   StyledEngineProvider,
 } from "@mui/material/styles";
+import { theme } from "./theme";
 
 const gloock = Gloock({
   weight: "400",
@@ -29,13 +31,13 @@ export default function RootLayout({
 }>) {
   return (
     <StyledEngineProvider injectFirst>
-      <Experimental_CssVarsProvider>
+      <CssVarsProvider theme={theme}>
         <html lang="en">
           <body className={`${gloock.variable} ${roboto.variable}`}>
             {children}
           </body>
         </html>
-      </Experimental_CssVarsProvider>
+      </CssVarsProvider>
     </StyledEngineProvider>
   );
 }
