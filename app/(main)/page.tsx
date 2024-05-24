@@ -10,14 +10,10 @@ const Dashboard: FC = () => {
   return (
     <div>
       <WelcomeBanner user="Gavin" />
-
       <div className="relative">
-        <div className="absolute -translate-y-1/2 left-1/2 -translate-x-1/2">
-          <DailyChecklist />
-        </div>
+        <DailyChecklist className="absolute -translate-y-1/2 left-1/2 -translate-x-1/2" />
         <FeaturedActivity />
       </div>
-
       <Explore />
       <RelatedArticles header="Summer Box" />
     </div>
