@@ -92,7 +92,7 @@ const GeneralLearningArticle = async () => {
           </div>
         </div>
       </div>
-      <RelatedArticles />
+      <RelatedArticles header="Related Articles & Games" />
     </div>
   );
 };

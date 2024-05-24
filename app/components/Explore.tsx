@@ -2,10 +2,9 @@ import CtaBox from "./CtaBox/CtaBox";
 import brainGames from "@/app/cta-images/brain-games.jpg";
 const Explore = () => {
   return (
-    <div className="bg-navy-primary pb-8">
-      <h2 className="text-center py-8">Explore Something New:</h2>
+    <div className="bg-navy-primary pb-8 flex flex-col items-center justify-center">
+      <h2 className="text-center py-10">Explore Something New:</h2>
       <div className="grid grid-cols-6 gap-6 container">
-        {/* first row */}
         <div className="col-span-2 row-span-1">
           <CtaBox image={brainGames} header="Target Tracker">
             When you&apos;re driving through a busy intersection, how well can
@@ -66,8 +65,6 @@ const Explore = () => {
             other players all at once?
           </CtaBox>
         </div>
-
-        {/* second */}
       </div>
     </div>
   );

@@ -1,11 +1,15 @@
 import CtaBox from "./CtaBox/CtaBox";
 import brainGames from "@/app/cta-images/brain-games.jpg";
 
-const RelatedArticles = () => {
+type RelatedArticlesProps = {
+  header: string;
+};
+
+const RelatedArticles = ({ header }: RelatedArticlesProps) => {
   return (
     <div className="py-20 bg-green-primary w-full">
       <div className="flex flex-col items-center">
-        <h2 className="mb-6">Related Articles & Games</h2>
+        <h2 className="mb-6">{header}</h2>
         <div className="grid grid-cols-3 gap-6 container">
           <CtaBox
             header="Video Title"
