@@ -1,16 +1,12 @@
 import MuiButton, { ButtonProps as MuiButtonProps } from "@mui/material/Button";
+import { PropsWithChildren } from "react";
 
-type ButtonProps = MuiButtonProps & {
-  text: string;
-};
+type ButtonProps = MuiButtonProps;
 
-const Button = ({ text, ...props }: ButtonProps) => {
+const Button = ({ children, ...props }: PropsWithChildren<ButtonProps>) => {
   return (
-    <MuiButton
-      className="rounded-tr-xl rounded-tl-sm rounded-bl-xl rounded-br-sm  py-2 px-3"
-      {...props}
-    >
-      <span>{text}</span>
+    <MuiButton {...props}>
+      <span>{children}</span>
     </MuiButton>
   );
 };

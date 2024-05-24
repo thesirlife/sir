@@ -9,7 +9,7 @@ type FeaturedActivityProps = {
 
 const FeaturedActivity = () => {
   return (
-    <div className="bg-pattern-green h-[424px] flex items-center justify-center">
+    <div className="bg-pattern-green h-[424px] flex items-center justify-center pt-8">
       <div className="flex flex-row gap-5 container px-4 max-w-[956px] items-center">
         <div className="flex flex-col w-1/2">
           <h2 className="max-w-[70%] mb-4">Get Started With a Brain Game!</h2>

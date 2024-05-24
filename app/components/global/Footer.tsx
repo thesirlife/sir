@@ -11,9 +11,10 @@ const Footer = () => {
           <Button
             variant="contained"
             color="warning"
-            text="Open Survey"
             endIcon={<OpenInNew fontSize="small" />}
-          />
+          >
+            Open Survey
+          </Button>
         </div>
         <div className="border-t-2 border-gray-600 pt-6 flex justify-center items-center">
           &copy; SIR {dayjs().year()}

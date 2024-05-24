@@ -3,6 +3,8 @@ import brainGames from "@/app/cta-images/brain-games.jpg";
 
 type RelatedArticlesProps = {
   header: string;
+  // eventually this will be an array of articles
+  articles?: any[];
 };
 
 const RelatedArticles = ({ header }: RelatedArticlesProps) => {

@@ -18,12 +18,9 @@ const BasicCta = ({
     <div className={props.className}>
       <div className="bg-white p-4">
         <p className="text-navy-primary text-lg">{children}</p>
-        <Button
-          color="warning"
-          text={text}
-          variant="text"
-          endIcon={<OpenInNew />}
-        />
+        <Button color="warning" variant="text" endIcon={<OpenInNew />}>
+          {text}
+        </Button>
       </div>
     </div>
   );

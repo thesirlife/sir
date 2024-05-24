@@ -5,7 +5,7 @@ type WelcomeBannerProps = {
 
 const WelcomeBanner = ({ user }: WelcomeBannerProps) => {
   return (
-    <div className="text-white bg-navy-primary py-12 text-center">
+    <div className="text-white bg-navy-primary pt-12 pb-14 text-center">
       <h2 className="text-3xl">Hi, {user}! Welcome To Your Hub </h2>
       <p className="text-lg">
         Discover new hobbies for ongoing learning and connect with like-minded
