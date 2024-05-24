@@ -11,7 +11,7 @@ const Header: FC = () => {
       </div>
       <nav className="flex gap-4 flex-row items-center pr-4">
         <Link className="underline" href="/dashboard">
-          My Dashboard
+          My Hub
         </Link>
         <Link className="underline" href="/my-badges">
           My Badges

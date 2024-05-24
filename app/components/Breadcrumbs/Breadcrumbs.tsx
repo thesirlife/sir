@@ -30,7 +30,7 @@ const Breadcrumbs: FC = () => {
       <ul className="flex flex-row">
         <li>
           <BreadcrumbsLink href="/" icon={Home}>
-            My Dashboard
+            My Hub
           </BreadcrumbsLink>
         </li>
         {pathNames.length > 0 && <Seperator />}
