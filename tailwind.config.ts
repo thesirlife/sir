@@ -41,6 +41,7 @@ const config: Config = {
       fontFamily: {
         gloock: ["var(--font-gloock)"],
         roboto: ["var(--font-roboto)"],
+        bitter: ["var(--font-bitter)"],
       },
     },
   },

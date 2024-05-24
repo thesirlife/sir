@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Gloock, Roboto } from "next/font/google";
+import { Gloock, Roboto, Bitter } from "next/font/google";
 import "./globals.css";
 
 import {
@@ -11,6 +11,12 @@ import { theme } from "./theme";
 const gloock = Gloock({
   weight: "400",
   variable: "--font-gloock",
+  preload: false,
+});
+
+const bitter = Bitter({
+  weight: "400",
+  variable: "--font-bitter",
   preload: false,
 });
 
@@ -33,7 +39,9 @@ export default function RootLayout({
     <StyledEngineProvider injectFirst>
       <CssVarsProvider theme={theme}>
         <html lang="en">
-          <body className={`${gloock.variable} ${roboto.variable}`}>
+          <body
+            className={`${gloock.variable} ${roboto.variable} ${bitter.variable}`}
+          >
             {children}
           </body>
         </html>
