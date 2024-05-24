@@ -1,5 +1,6 @@
 import BasicCta from "@/app/components/BasicCta";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import RelatedArticles from "@/app/components/RelatedArticles";
 import SocialShare from "@/app/components/SocialShare";
 import getTagById from "@/app/data/getTagById";
 import getUserById from "@/app/data/getUserById";
@@ -41,7 +42,7 @@ const GeneralLearningArticle = async () => {
   const tags = await getTags();
 
   return (
-    <div className="bg-navy-primary h-full flex justify-center">
+    <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
       <div className="container ">
         <div className="py-10">
           <Breadcrumbs />
@@ -91,6 +92,7 @@ const GeneralLearningArticle = async () => {
           </div>
         </div>
       </div>
+      <RelatedArticles />
     </div>
   );
 };

@@ -35,7 +35,7 @@ const CtaBox = ({
   const Icon = icon;
   return (
     <Paper elevation={2} square {...props}>
-      <div className="flex flex-col gap-4 container p-6 max-w-[442px]">
+      <div className="flex flex-col gap-4  p-6 max-w-[442px]">
         <div
           className={`basis-1/2 relative ${
             imageOnTop ? "order-first" : "order-last"
@@ -54,13 +54,15 @@ const CtaBox = ({
           <p className="text-navy-secondary overflow-hidden whitespace-nowrap text-ellipsis">
             {children}
           </p>
-          <div className="text-orange-primary text-sm uppercase mt-8">
-            <LinkWithIcon
-              href={String(link?.href)}
-              label={String(link?.label)}
-              isExternal={link?.isExternal}
-            />
-          </div>
+          {link ? (
+            <div className="text-orange-primary text-sm uppercase mt-8">
+              <LinkWithIcon
+                href={String(link?.href)}
+                label={String(link?.label)}
+                isExternal={link?.isExternal}
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </Paper>
