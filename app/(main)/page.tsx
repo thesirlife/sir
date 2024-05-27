@@ -1,6 +1,6 @@
 import WelcomeBanner from "@/app/components/WelcomeBanner";
 import Explore from "@/app/components/Explore";
-import FeaturedActivity from "@/app/components/FeaturedActivity";
+import FeaturedActivityCarousel from "@/app/components/FeaturedActivityCarousel/Carousel";
 
 import { FC } from "react";
 import RelatedArticles from "../components/RelatedArticles";
@@ -12,7 +12,7 @@ const Dashboard: FC = () => {
       <WelcomeBanner user="Gavin" />
       <div className="relative">
         <DailyChecklist className="absolute -translate-y-1/2 left-1/2 -translate-x-1/2" />
-        <FeaturedActivity />
+        <FeaturedActivityCarousel />
       </div>
       <Explore />
       <RelatedArticles header="Summer Box" />
