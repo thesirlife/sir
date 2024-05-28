@@ -22,9 +22,18 @@ const getArticles = async (): Promise<Post[]> => {
 const ArticlesList = async () => {
   const articles = await getArticles();
   return (
-    <div>
+    <>
       <Filters />
-    </div>
+      <div className="border-t-2 border-gray-600 container pt-8">
+        <p className="text-center">{articles.length} Articles Found</p>
+        {articles.map((article) => (
+          <div key={article.id}>
+            <h2>{article.title.rendered}</h2>
+            <p>{article.excerpt.rendered}</p>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

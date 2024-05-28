@@ -15,7 +15,7 @@ const FiltersList: string[] = [
 const Filters = () => {
   const [activeFilter, setActiveFilter] = useState<string>("Show All");
   return (
-    <div className="flex flex-col items-center gap-3 py-20">
+    <div className="flex flex-col items-center gap-3 pt-20 pb-8">
       <p>Explore:</p>
       <div className="flex flex-row gap-2">
         {FiltersList.map((filter) => (
