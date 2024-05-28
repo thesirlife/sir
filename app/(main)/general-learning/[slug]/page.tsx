@@ -42,58 +42,53 @@ const GeneralLearningArticle = async () => {
   const tags = await getTags();
 
   return (
-    <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
-      <div className="container ">
-        <div className="py-10">
-          <Breadcrumbs />
-        </div>
-        <div className="border-t-2 border-gray-600 mb-10">
-          <div className="grid grid-cols-4 gap-16 mt-10">
-            <aside className="col-span-1">
-              <div>
-                <p>{author.name}</p>
-              </div>
+    <>
+      <div className="border-t-2 border-gray-600 mb-10 container">
+        <div className="grid grid-cols-4 gap-16 mt-10">
+          <aside className="col-span-1">
+            <div>
+              <p>{author.name}</p>
+            </div>
 
-              <div className="flex flex-row gap-2 flex-wrap mt-4">
-                {tags.map((tag) => (
-                  <Chip
-                    key={tag.id}
-                    label={tag.name}
-                    color={getTagColor(tag.slug)}
-                  />
-                ))}
-              </div>
-            </aside>
-            <main className="col-span-2">
-              <h1 className="text-4xl mb-8">{article.title.rendered}</h1>
-              <div
-                dangerouslySetInnerHTML={{ __html: article.content.rendered }}
-              ></div>
-              <BasicCta
-                className="mt-6 text-center"
-                button={{
-                  text: "Join Discussion",
-                }}
-              >
-                Join our community discussion on this topic
-              </BasicCta>
-            </main>
-            <aside className="col-span-1">
-              <SocialShare />
-              <BasicCta
-                className="mt-10"
-                button={{
-                  text: "Join Discussion",
-                }}
-              >
-                Join our community discussion on this topic
-              </BasicCta>
-            </aside>
-          </div>
+            <div className="flex flex-row gap-2 flex-wrap mt-4">
+              {tags.map((tag) => (
+                <Chip
+                  key={tag.id}
+                  label={tag.name}
+                  color={getTagColor(tag.slug)}
+                />
+              ))}
+            </div>
+          </aside>
+          <main className="col-span-2">
+            <h1 className="text-4xl mb-8">{article.title.rendered}</h1>
+            <div
+              dangerouslySetInnerHTML={{ __html: article.content.rendered }}
+            ></div>
+            <BasicCta
+              className="mt-6 text-center"
+              button={{
+                text: "Join Discussion",
+              }}
+            >
+              Join our community discussion on this topic
+            </BasicCta>
+          </main>
+          <aside className="col-span-1">
+            <SocialShare />
+            <BasicCta
+              className="mt-10"
+              button={{
+                text: "Join Discussion",
+              }}
+            >
+              Join our community discussion on this topic
+            </BasicCta>
+          </aside>
         </div>
       </div>
       <RelatedArticles header="Related Articles & Games" />
-    </div>
+    </>
   );
 };
 

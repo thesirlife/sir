@@ -1,6 +1,3 @@
-import { PodcastsOutlined } from "@mui/icons-material";
-import CtaBox from "../CtaBox/CtaBox";
-import brainGames from "@/app/cta-images/brain-games.jpg";
 import { FC } from "react";
 import {
   Carousel,
@@ -9,10 +6,14 @@ import {
   CarouselNext,
   CarouselItem as ShadItem,
 } from "@/components/ui/carousel";
-import CarouselItem from "./CarouselItem";
+
+type Activity = {
+  type: "video" | "trivia" | "article" | "feedback";
+};
 
 type FeaturedActivityProps = {
   activity: any;
+
   // This will need fleshed out more obviously when I build out the activity block
 };
 

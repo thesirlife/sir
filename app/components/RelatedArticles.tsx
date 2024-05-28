@@ -3,7 +3,7 @@ import brainGames from "@/app/cta-images/brain-games.jpg";
 
 type RelatedArticlesProps = {
   header: string;
-  // eventually this will be an array of articles
+  // eventually this will be an array of articles that will dynamically be fed in
   articles?: any[];
 };
 

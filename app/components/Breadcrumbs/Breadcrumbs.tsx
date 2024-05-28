@@ -10,8 +10,10 @@ import BreadcrumbsLink from "./BreadcrumbsLink";
 const Breadcrumbs: FC = () => {
   const paths = usePathname();
   const pathNames = paths.split("/").filter((path) => path);
-  // remove last item from array since we aren't putting current page in breadcrumbs
-  pathNames.pop();
+  // remove last item from array since we aren't detail pages in breadcrumbs
+  if (pathNames.length > 1) {
+    pathNames.pop();
+  }
 
   const pathsMap: Record<
     string,
