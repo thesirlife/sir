@@ -66,11 +66,13 @@ const theme = extendTheme({
           },
         }),
         outlinedPrimary: ({ theme }) => ({
-          backgroundColor: theme.vars.palette.common.background,
-          color: theme.vars.palette.common.white,
-          border: `1px solid ${theme.vars.palette.warning.main}`,
-          "&:hover": {
-            backgroundColor: theme.vars.palette.warning.main,
+          "&.MuiChip-clickable": {
+            backgroundColor: theme.vars.palette.common.background,
+            color: theme.vars.palette.common.white,
+            border: `1px solid ${theme.vars.palette.warning.main}`,
+            "&:hover": {
+              backgroundColor: theme.vars.palette.warning.main,
+            },
           },
         }),
       },
