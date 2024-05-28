@@ -1,5 +1,4 @@
 import BasicCta from "@/app/components/BasicCta";
-import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import RelatedArticles from "@/app/components/RelatedArticles";
 import SocialShare from "@/app/components/SocialShare";
 import getTagById from "@/app/data/getTagById";

@@ -7,6 +7,11 @@ const theme = extendTheme({
     light: {
       // is there a way to just use the css variables defined in globals.css? seems like MUI doesn't support that
       palette: {
+        common: {
+          black: "#000",
+          white: "#fff",
+          background: "#15253b",
+        },
         warning: {
           main: "#b6622d",
         },
@@ -44,6 +49,28 @@ const theme = extendTheme({
           "&:hover": {
             backgroundColor: theme.vars.palette.primary.main,
             color: "white",
+          },
+        }),
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        filledPrimary: ({ theme }) => ({
+          backgroundColor: theme.vars.palette.warning.main,
+          color: theme.vars.palette.common.white,
+          border: `1px solid ${theme.vars.palette.warning.main}`,
+
+          "&:hover": {
+            backgroundColor: theme.vars.palette.common.background,
+            color: theme.vars.palette.common.white,
+          },
+        }),
+        outlinedPrimary: ({ theme }) => ({
+          backgroundColor: theme.vars.palette.common.background,
+          color: theme.vars.palette.common.white,
+          border: `1px solid ${theme.vars.palette.warning.main}`,
+          "&:hover": {
+            backgroundColor: theme.vars.palette.warning.main,
           },
         }),
       },
