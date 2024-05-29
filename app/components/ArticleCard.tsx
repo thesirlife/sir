@@ -39,7 +39,6 @@ const ArticleCard = async ({
   ...props
 }: PropsWithChildren<ArticleCardProps>) => {
   const imageUrl = await getMediaById(imageId);
-  console.log(imageUrl.source_url);
   // this is gross, redo
   const Icon = icon;
   let tag;
@@ -52,7 +51,12 @@ const ArticleCard = async ({
   //
 
   return (
-    <Paper elevation={2} square {...props} className="flex flex-row gap-4  p-8">
+    <Paper
+      elevation={2}
+      square
+      {...props}
+      className="flex flex-row gap-4 min-h-[192px] p-8"
+    >
       {imageUrl.source_url !== undefined && (
         <div className="basis-1/2 relative">
           <Image

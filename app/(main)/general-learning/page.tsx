@@ -1,12 +1,20 @@
 import ArticlesList from "@/app/components/ArticlesList/ArticlesList";
-import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import RelatedArticles from "@/app/components/RelatedArticles";
 
-const GeneralLearning = () => {
+const GeneralLearning = ({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) => {
+  const query = searchParams?.query || "";
+  const page = String(searchParams?.page) || "";
   return (
     <>
       <RelatedArticles header="Related Articles" />
-      <ArticlesList />
+      <ArticlesList page={page || ""} />
     </>
   );
 };
