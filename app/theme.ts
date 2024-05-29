@@ -84,6 +84,16 @@ const theme = extendTheme({
         }),
       },
     },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.vars.palette.common.white,
+          "&.Mui-selected": {
+            backgroundColor: blueGrey[800],
+          },
+        }),
+      },
+    },
   },
 });
 

@@ -3,19 +3,16 @@ import Filters from "./Filters";
 import ArticleCard from "../ArticleCard";
 import brainGames from "@/app/cta-images/brain-games.jpg";
 import { PodcastsOutlined } from "@mui/icons-material";
+import Pagination from "./Pagination";
 
 const getArticles = async (): Promise<Post[]> => {
   const articles = await fetch(
-    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts`,
+    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?per_page=5`,
     {
       headers: {
         "Content-Type": "application/json",
         // remove once live and we're not behind wpengine login
         Authorization: "Basic ZGVtbzpiNDJjZTM1Yzg5ODM=",
-      },
-      next: {
-        // maybe we'll change, but this'll refetch content after 10 minutes, probably not necessary but a good experience if it changes in wordpress
-        revalidate: 6000,
       },
     }
   );
@@ -41,6 +38,13 @@ const ArticlesList = async () => {
               description={article.excerpt.rendered}
             />
           ))}
+          <div className="flex flex-row justify-center">
+            <Pagination
+              color="standard"
+              count={Math.ceil(articles.length / 5)}
+              page={1}
+            />
+          </div>
         </div>
       </div>
     </div>
