@@ -32,13 +32,15 @@ const ArticlesList = async () => {
             <ArticleCard
               icon={PodcastsOutlined}
               tagId={article.tags.length > 0 ? article.tags[0] : null}
-              image={
-                article._embedded &&
-                article._embedded["wp:featuredmedia"] &&
-                article._embedded["wp:featuredmedia"][0].source_url
-                  ? article._embedded["wp:featuredmedia"][0].source_url
-                  : ""
-              }
+              // Still not sure which image solution will wind up working best
+              // image={
+              //   article._embedded &&
+              //   article._embedded["wp:featuredmedia"] &&
+              //   article._embedded["wp:featuredmedia"][0].source_url
+              //     ? article._embedded["wp:featuredmedia"][0].source_url
+              //     : ""
+              // }
+              imageId={article.featured_media}
               header={article.title.rendered}
               key={article.id}
               description={article.excerpt.rendered}

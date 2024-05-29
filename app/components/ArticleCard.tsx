@@ -6,12 +6,14 @@ import { PropsWithChildren } from "react";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import Button from "./global/Button";
 import getTagById from "../data/getTagById";
+import getMediaById from "../data/getMediaById";
 
 type ArticleCardProps = PaperProps & {
   header: string;
-  image: string;
+  image?: string;
   description: string;
   tagId: number | null;
+  imageId: number;
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
   };
@@ -31,10 +33,13 @@ const ArticleCard = async ({
   header,
   image,
   description,
+  imageId,
   tagId,
   children,
   ...props
 }: PropsWithChildren<ArticleCardProps>) => {
+  const imageUrl = await getMediaById(imageId);
+  console.log(imageUrl.source_url);
   // this is gross, redo
   const Icon = icon;
   let tag;
@@ -48,10 +53,10 @@ const ArticleCard = async ({
 
   return (
     <Paper elevation={2} square {...props} className="flex flex-row gap-4  p-8">
-      {image !== "" && (
+      {imageUrl.source_url !== undefined && (
         <div className="basis-1/2 relative">
           <Image
-            src={image}
+            src={imageUrl.source_url}
             alt={header}
             width={212}
             height={144}
