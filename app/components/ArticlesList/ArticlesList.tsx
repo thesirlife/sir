@@ -2,6 +2,7 @@ import { Post } from "@/app/types/post/types";
 import Filters from "./Filters";
 import ArticleCard from "../ArticleCard";
 import brainGames from "@/app/cta-images/brain-games.jpg";
+import { PodcastsOutlined } from "@mui/icons-material";
 
 const getArticles = async (): Promise<Post[]> => {
   const articles = await fetch(
@@ -25,24 +26,24 @@ const ArticlesList = async () => {
   const articles = await getArticles();
 
   return (
-    <>
+    <div className="max-w-[662px]">
       <Filters />
       <div className="border-t-2 border-gray-600 container pt-8">
         <p className="text-center pb-8">{articles.length} Articles Found</p>
         <div className="flex flex-col gap-8">
           {articles.map((article) => (
             <ArticleCard
+              icon={PodcastsOutlined}
               tagId={article.tags.length > 0 ? article.tags[0] : null}
               image={brainGames}
               header={article.title.rendered}
               key={article.id}
-            >
-              {article.content.rendered}
-            </ArticleCard>
+              description={article.excerpt.rendered}
+            />
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

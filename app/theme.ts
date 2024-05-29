@@ -51,6 +51,13 @@ const theme = extendTheme({
             color: "white",
           },
         }),
+        text: ({ theme }) => ({
+          padding: 0,
+          "&:hover": {
+            backgroundColor: "transparent",
+            color: blueGrey[800],
+          },
+        }),
       },
     },
     MuiChip: {

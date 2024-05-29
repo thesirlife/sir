@@ -10,6 +10,7 @@ import getTagById from "../data/getTagById";
 type ArticleCardProps = PaperProps & {
   header: string;
   image: ImageProps["src"];
+  description: string;
   tagId: number | null;
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
@@ -29,10 +30,12 @@ const ArticleCard = async ({
   icon,
   header,
   image,
+  description,
   tagId,
   children,
   ...props
 }: PropsWithChildren<ArticleCardProps>) => {
+  // this is gross, redo
   const Icon = icon;
   let tag;
 
@@ -41,9 +44,10 @@ const ArticleCard = async ({
   } else {
     tag = (await getTagById(tagId)).slug;
   }
+  //
 
   return (
-    <Paper elevation={2} square {...props} className="flex flex-row gap-4">
+    <Paper elevation={2} square {...props} className="flex flex-row gap-4  p-8">
       <div className="basis-1/2 relative">
         <Image src={image} alt={header} className="w-full" />
         {Icon && (
@@ -53,13 +57,23 @@ const ArticleCard = async ({
           />
         )}
       </div>
-      <div className="basis-1/2">
-        <h3 className="text-xl">{header}</h3>
-        <p className="text-navy-secondary overflow-hidden whitespace-nowrap text-ellipsis">
-          {children}
-        </p>
-        <Button color="warning" variant="text" className="flex flex-row gap-2">
-          {ArticleTypeDictionary[tag]} <NavigateNext fontSize="medium" />
+      <div className="basis-1/2 flex flex-col justify-between items-start">
+        <div>
+          <h3 className="text-xl font-bold">{header}</h3>
+          <div
+            className="text-navy-secondary "
+            dangerouslySetInnerHTML={{ __html: description }}
+          ></div>
+        </div>
+        <Button
+          color="warning"
+          variant="text"
+          className="flex flex-row gap-2 mt-"
+        >
+          {ArticleTypeDictionary[tag]
+            ? ArticleTypeDictionary[tag]
+            : "Read Article"}
+          <NavigateNext fontSize="medium" />
         </Button>
       </div>
     </Paper>
