@@ -61,7 +61,7 @@ const theme = extendTheme({
           border: `1px solid ${theme.vars.palette.warning.main}`,
 
           "&:hover": {
-            backgroundColor: theme.vars.palette.common.background,
+            backgroundColor: theme.vars.palette.warning.main,
             color: theme.vars.palette.common.white,
           },
         }),

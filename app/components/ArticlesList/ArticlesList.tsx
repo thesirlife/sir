@@ -1,5 +1,7 @@
 import { Post } from "@/app/types/post/types";
 import Filters from "./Filters";
+import ArticleCard from "../ArticleCard";
+import brainGames from "@/app/cta-images/brain-games.jpg";
 
 const getArticles = async (): Promise<Post[]> => {
   const articles = await fetch(
@@ -21,17 +23,24 @@ const getArticles = async (): Promise<Post[]> => {
 
 const ArticlesList = async () => {
   const articles = await getArticles();
+
   return (
     <>
       <Filters />
       <div className="border-t-2 border-gray-600 container pt-8">
-        <p className="text-center">{articles.length} Articles Found</p>
-        {articles.map((article) => (
-          <div key={article.id}>
-            <h2>{article.title.rendered}</h2>
-            <p>{article.excerpt.rendered}</p>
-          </div>
-        ))}
+        <p className="text-center pb-8">{articles.length} Articles Found</p>
+        <div className="flex flex-col gap-8">
+          {articles.map((article) => (
+            <ArticleCard
+              tagId={article.tags.length > 0 ? article.tags[0] : null}
+              image={brainGames}
+              header={article.title.rendered}
+              key={article.id}
+            >
+              {article.content.rendered}
+            </ArticleCard>
+          ))}
+        </div>
       </div>
     </>
   );
