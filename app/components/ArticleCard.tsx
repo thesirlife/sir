@@ -9,7 +9,7 @@ import getTagById from "../data/getTagById";
 
 type ArticleCardProps = PaperProps & {
   header: string;
-  image: ImageProps["src"];
+  image: string;
   description: string;
   tagId: number | null;
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
@@ -48,15 +48,25 @@ const ArticleCard = async ({
 
   return (
     <Paper elevation={2} square {...props} className="flex flex-row gap-4  p-8">
-      <div className="basis-1/2 relative">
-        <Image src={image} alt={header} className="w-full" />
-        {Icon && (
-          <IconWithBackground
-            icon={PodcastsOutlined}
-            className="absolute top-2 left-2"
+      {image !== "" && (
+        <div className="basis-1/2 relative">
+          <Image
+            src={image}
+            alt={header}
+            width={212}
+            height={144}
+            className="w-full rounded"
           />
-        )}
-      </div>
+
+          {Icon && (
+            <IconWithBackground
+              icon={PodcastsOutlined}
+              className="absolute top-2 left-2"
+            />
+          )}
+        </div>
+      )}
+
       <div className="basis-1/2 flex flex-col justify-between items-start">
         <div>
           <h3 className="text-xl font-bold">{header}</h3>

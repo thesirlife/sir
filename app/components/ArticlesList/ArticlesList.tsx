@@ -7,7 +7,7 @@ import Pagination from "./Pagination";
 
 const getArticles = async (): Promise<Post[]> => {
   const articles = await fetch(
-    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?per_page=5`,
+    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?per_page=5&_embed`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,13 @@ const ArticlesList = async () => {
             <ArticleCard
               icon={PodcastsOutlined}
               tagId={article.tags.length > 0 ? article.tags[0] : null}
-              image={brainGames}
+              image={
+                article._embedded &&
+                article._embedded["wp:featuredmedia"] &&
+                article._embedded["wp:featuredmedia"][0].source_url
+                  ? article._embedded["wp:featuredmedia"][0].source_url
+                  : ""
+              }
               header={article.title.rendered}
               key={article.id}
               description={article.excerpt.rendered}
