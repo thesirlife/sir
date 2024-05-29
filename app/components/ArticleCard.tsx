@@ -1,6 +1,6 @@
 import Image, { ImageProps } from "next/image";
 import IconWithBackground from "./IconWithBackground";
-import { PodcastsOutlined } from "@mui/icons-material";
+import { PodcastsOutlined, NavigateNext } from "@mui/icons-material";
 import { Paper, PaperProps, SvgIconTypeMap } from "@mui/material";
 import { PropsWithChildren } from "react";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
@@ -36,10 +36,10 @@ const ArticleCard = async ({
   const Icon = icon;
   let tag;
 
-  if (!tagId) {
+  if (!tagId || (await getTagById(tagId)) === undefined) {
     tag = ArticleTypeDictionary.article;
   } else {
-    tag = (await getTagById(tagId)).name;
+    tag = (await getTagById(tagId)).slug;
   }
 
   return (
@@ -58,7 +58,9 @@ const ArticleCard = async ({
         <p className="text-navy-secondary overflow-hidden whitespace-nowrap text-ellipsis">
           {children}
         </p>
-        <Button variant="text">{ArticleTypeDictionary[tag]}</Button>
+        <Button color="warning" variant="text" className="flex flex-row gap-2">
+          {ArticleTypeDictionary[tag]} <NavigateNext fontSize="medium" />
+        </Button>
       </div>
     </Paper>
   );
