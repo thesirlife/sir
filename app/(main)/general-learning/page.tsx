@@ -23,6 +23,7 @@ const GeneralLearning = async ({
         headers: {
           "Content-Type": "application/json",
         },
+        cache: "no-cache",
       }
     );
     // WP exposes the total number of articles in the headers, so we can use that to calculate pagination/get total number of articles
@@ -34,7 +35,12 @@ const GeneralLearning = async ({
   return (
     <>
       <RelatedArticles header="Related Articles" />
-      <ArticlesList articles={articles} total={total} offset={offset} />
+      <ArticlesList
+        articles={articles}
+        total={total}
+        offset={offset}
+        categories={categories}
+      />
     </>
   );
 };

@@ -7,15 +7,17 @@ import Pagination from "./Pagination";
 const ArticlesList = async ({
   offset,
   articles,
+  categories,
   total,
 }: {
   offset: number;
+  categories: number;
   articles: Post[];
   total: string;
 }) => {
   return (
     <div className="max-w-[662px] w-full">
-      <Filters />
+      <Filters offset={offset} categories={categories} />
       <div className="border-t-2 border-gray-600 container pt-8">
         <p className="text-center pb-8">{total} Articles Found</p>
         <div className="flex flex-col gap-8">
@@ -30,7 +32,7 @@ const ArticlesList = async ({
             />
           ))}
           <div className="flex flex-row justify-center">
-            <Pagination total={total} offset={offset} />
+            <Pagination total={total} offset={offset} categories={categories} />
           </div>
         </div>
       </div>

@@ -8,9 +8,13 @@ import Link from "next/link";
 import getAllCategories from "@/app/data/getAllCategories";
 import { Category } from "@/app/types/category/types";
 
-const Filters = () => {
-  const [activeCategory, setActiveCategory] = useState<string>("Show All");
-  const [categories, setCategories] = useState<Category[]>([]);
+type FilterProps = {
+  offset: number;
+  categories: number;
+};
+
+const Filters = ({ offset, categories }: FilterProps) => {
+  const [activeCategories, setActiveCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   // async/client requests typically better handled by something like react query, but with everything else
@@ -18,7 +22,7 @@ const Filters = () => {
   (async () => {
     try {
       const categories = await getAllCategories();
-      setCategories(categories);
+      setActiveCategories(categories);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -30,18 +34,15 @@ const Filters = () => {
   const searchParams = useSearchParams();
 
   const createQueryString = useCallback(
-    (name: string, value: string) => {
+    (offset: number, categories: number) => {
       const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
+      params.set("offset", String(offset));
+      params.set("categories", String(categories));
 
       return params.toString();
     },
     [searchParams]
   );
-
-  const handleTagClick = (tag: string) => {
-    setActiveCategory(tag);
-  };
 
   return (
     <div className="flex flex-col items-center gap-3 pt-20 pb-8">
@@ -54,27 +55,21 @@ const Filters = () => {
             <Chip
               href={pathname}
               component={Link}
+              clickable
               scroll={false}
-              onClick={() => handleTagClick("Show All")}
               color="primary"
-              variant={activeCategory === "Show All" ? "filled" : "outlined"}
+              variant={!categories ? "filled" : "outlined"}
               label={"Show All"}
             />
-            {categories.map((category) => (
+            {activeCategories.map((category) => (
               <Chip
-                href={
-                  pathname +
-                  "?" +
-                  createQueryString("categories", String(category.id) || "")
-                }
+                href={pathname + "?" + createQueryString(0, category.id)}
                 component={Link}
                 scroll={false}
-                onClick={() => handleTagClick(category.name)}
+                clickable
                 key={category.id}
                 color="primary"
-                variant={
-                  activeCategory === category.name ? "filled" : "outlined"
-                }
+                variant={categories == category.id ? "filled" : "outlined"}
                 label={category.name}
               />
             ))}
