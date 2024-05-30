@@ -28,6 +28,7 @@ const Filters = () => {
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());

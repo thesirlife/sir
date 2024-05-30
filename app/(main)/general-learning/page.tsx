@@ -16,11 +16,9 @@ const GeneralLearning = async ({
   let total: string = "";
   const getArticles = async (): Promise<Post[]> => {
     const articles = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_WPREST_ENDPOINT
-      }/posts?per_page=5&offset=${offset}${
-        categories ? `&categories=${categories}` : ""
-      }`,
+      `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?${
+        categories ? `categories=${categories}` : ""
+      }&offset=${offset}&per_page=5`,
       {
         headers: {
           "Content-Type": "application/json",
