@@ -2,8 +2,7 @@ import { Post } from "@/app/types/post/types";
 import Filters from "./Filters";
 import ArticleCard from "../ArticleCard";
 import { PodcastsOutlined } from "@mui/icons-material";
-import { PaginationItem } from "@mui/material";
-import Link from "next/link";
+import Pagination from "./Pagination";
 
 const ArticlesList = async ({ page }: { page: number }) => {
   let total: string = "";
@@ -34,14 +33,6 @@ const ArticlesList = async ({ page }: { page: number }) => {
             <ArticleCard
               icon={PodcastsOutlined}
               tagId={article.tags.length > 0 ? article.tags[0] : null}
-              // Still not sure which image solution will wind up working best
-              // image={
-              //   article._embedded &&
-              //   article._embedded["wp:featuredmedia"] &&
-              //   article._embedded["wp:featuredmedia"][0].source_url
-              //     ? article._embedded["wp:featuredmedia"][0].source_url
-              //     : ""
-              // }
               imageId={article.featured_media}
               header={article.title.rendered}
               key={article.id}
@@ -49,33 +40,7 @@ const ArticlesList = async ({ page }: { page: number }) => {
             />
           ))}
           <div className="flex flex-row justify-center">
-            <PaginationItem
-              disabled={page <= 1}
-              type="previous"
-              component={Link}
-              scroll={false}
-              href={`/general-learning?page=${page > 1 ? page - 1 : 1}`}
-            />
-            {Array.from({ length: Math.ceil(Number(total) / 5) }).map(
-              (_, index) => (
-                <PaginationItem
-                  key={index}
-                  scroll={false}
-                  page={index + 1}
-                  component={Link}
-                  href={`/general-learning?page=${index + 1}`}
-                />
-              )
-            )}
-            <PaginationItem
-              type="next"
-              scroll={false}
-              disabled={page >= Math.ceil(Number(total) / 5)}
-              component={Link}
-              href={`/general-learning?page=${
-                page < parseInt(total) / 5 ? page + 1 : null
-              }`}
-            />
+            <Pagination total={total} page={page} />
           </div>
         </div>
       </div>
