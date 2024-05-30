@@ -5,16 +5,14 @@ const GeneralLearning = ({
   searchParams,
 }: {
   searchParams?: {
-    query?: string;
-    page?: string;
+    page?: number;
   };
 }) => {
-  const query = searchParams?.query || "";
-  const page = String(searchParams?.page) || "";
+  const page = searchParams?.page || 1;
   return (
     <>
       <RelatedArticles header="Related Articles" />
-      <ArticlesList page={page || ""} />
+      <ArticlesList page={page} />
     </>
   );
 };

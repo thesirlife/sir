@@ -5,7 +5,7 @@ import { PodcastsOutlined } from "@mui/icons-material";
 import { PaginationItem } from "@mui/material";
 import Link from "next/link";
 
-const ArticlesList = async ({ page }: { page: string }) => {
+const ArticlesList = async ({ page }: { page: number }) => {
   let total: string = "";
   const getArticles = async (): Promise<Post[]> => {
     const articles = await fetch(
@@ -50,13 +50,11 @@ const ArticlesList = async ({ page }: { page: string }) => {
           ))}
           <div className="flex flex-row justify-center">
             <PaginationItem
-              disabled={parseInt(page) <= 1}
+              disabled={page <= 1}
               type="previous"
               component={Link}
               scroll={false}
-              href={`/general-learning?page=${
-                parseInt(page) > 1 ? parseInt(page) - 1 : 1
-              }`}
+              href={`/general-learning?page=${page > 1 ? page - 1 : 1}`}
             />
             {Array.from({ length: Math.ceil(Number(total) / 5) }).map(
               (_, index) => (
@@ -72,10 +70,10 @@ const ArticlesList = async ({ page }: { page: string }) => {
             <PaginationItem
               type="next"
               scroll={false}
-              disabled={parseInt(page) >= Math.ceil(Number(total) / 5)}
+              disabled={page >= Math.ceil(Number(total) / 5)}
               component={Link}
               href={`/general-learning?page=${
-                parseInt(page) < parseInt(total) / 5 ? parseInt(page) + 1 : null
+                page < parseInt(total) / 5 ? page + 1 : null
               }`}
             />
           </div>
