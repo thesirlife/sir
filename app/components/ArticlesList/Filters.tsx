@@ -9,11 +9,10 @@ import getAllCategories from "@/app/data/getAllCategories";
 import { Category } from "@/app/types/category/types";
 
 type FilterProps = {
-  offset: number;
   categories: number;
 };
 
-const Filters = ({ offset, categories }: FilterProps) => {
+const Filters = ({ categories }: FilterProps) => {
   const [activeCategories, setActiveCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 

@@ -17,7 +17,7 @@ const ArticlesList = async ({
 }) => {
   return (
     <div className="max-w-[662px] w-full">
-      <Filters offset={offset} categories={categories} />
+      <Filters categories={categories} />
       <div className="border-t-2 border-gray-600 container pt-8">
         <p className="text-center pb-8">{total} Articles Found</p>
         <div className="flex flex-col gap-8">
