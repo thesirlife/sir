@@ -1,9 +1,8 @@
 "use client";
 
 import { Chip, CircularProgress } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-
 import Link from "next/link";
 import getAllCategories from "@/app/data/getAllCategories";
 import { Category } from "@/app/types/category/types";
@@ -18,15 +17,16 @@ const Filters = ({ categories }: FilterProps) => {
 
   // async/client requests typically better handled by something like react query, but with everything else
   // related to this being within server components, I don't think it makes sense to use it here
-  (async () => {
-    try {
-      const categories = await getAllCategories();
-      setActiveCategories(categories);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-    }
-  })();
+  useEffect(() => {
+    (async () => {
+      try {
+        setActiveCategories(await getAllCategories());
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
   //
 
   const pathname = usePathname();
