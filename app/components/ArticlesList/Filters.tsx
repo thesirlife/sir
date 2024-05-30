@@ -1,8 +1,10 @@
 "use client";
 
 import { Chip } from "@mui/material";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+
 const FiltersList: string[] = [
   "Show All",
   "History",
@@ -15,16 +17,22 @@ const FiltersList: string[] = [
 const Filters = () => {
   const [activeFilter, setActiveFilter] = useState<string>("Show All");
   const [tag, setTag] = useState<string>();
-
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   const handleTagClick = (tag: string) => {
-    setTag(tag);
-
     setActiveFilter(tag);
-    router.replace(`${window.location}?tags=${tag}`, {
-      scroll: false,
-    });
   };
 
   return (
@@ -33,6 +41,9 @@ const Filters = () => {
       <div className="flex flex-row gap-2">
         {FiltersList.map((filter) => (
           <Chip
+            href={pathname + "?" + createQueryString("tags", filter || "")}
+            component={Link}
+            scroll={false}
             onClick={() => handleTagClick(filter)}
             key={filter}
             color="primary"
