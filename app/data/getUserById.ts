@@ -6,8 +6,6 @@ const getUserById = async (id: number): Promise<User> => {
     {
       headers: {
         "Content-Type": "application/json",
-        // remove once live and we're not behind wpengine login
-        Authorization: "Basic ZGVtbzpiNDJjZTM1Yzg5ODM=",
       },
     }
   );
