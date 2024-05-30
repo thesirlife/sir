@@ -20,6 +20,7 @@ const Pagination = ({ offset, total }: PaginationProps) => {
           <PaginationItem
             key={index}
             scroll={false}
+            selected={offset / 5 === index}
             page={index + 1}
             component={Link}
             href={`/general-learning?offset=${index * 5}`}
