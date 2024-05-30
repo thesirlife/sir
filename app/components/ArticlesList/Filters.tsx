@@ -13,6 +13,8 @@ const Filters = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  // async/client requests typically better handled by something like react query, but with everything else
+  // related to this being within server components, I don't think it makes sense to use it here
   (async () => {
     try {
       const categories = await getAllCategories();
@@ -22,6 +24,7 @@ const Filters = () => {
       console.error(error);
     }
   })();
+  //
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
