@@ -3,7 +3,6 @@
 import { Chip } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 const FiltersList: string[] = [
   "Show All",
   "History",
@@ -15,17 +14,19 @@ const FiltersList: string[] = [
 
 const Filters = () => {
   const [activeFilter, setActiveFilter] = useState<string>("Show All");
-  const [tags, setTags] = useState<number[]>([]);
+  const [tag, setTag] = useState<string>();
 
   const router = useRouter();
 
   const handleTagClick = (tag: string) => {
-    // setTags([tag]);
-    router.push(`${window.location}?tags=${tags}`, {
+    setTag(tag);
+
+    setActiveFilter(tag);
+    router.replace(`${window.location}?tags=${tag}`, {
       scroll: false,
     });
-    setActiveFilter(tag);
   };
+
   return (
     <div className="flex flex-col items-center gap-3 pt-20 pb-8">
       <p>Explore:</p>

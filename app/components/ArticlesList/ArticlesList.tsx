@@ -4,25 +4,15 @@ import ArticleCard from "../ArticleCard";
 import { PodcastsOutlined } from "@mui/icons-material";
 import Pagination from "./Pagination";
 
-const ArticlesList = async ({ page }: { page: number }) => {
-  let total: string = "";
-  const getArticles = async (): Promise<Post[]> => {
-    const articles = await fetch(
-      `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?per_page=5&page=${page}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          // remove once live and we're not behind wpengine login
-          Authorization: "Basic ZGVtbzpiNDJjZTM1Yzg5ODM=",
-        },
-      }
-    );
-    // WP exposes the total number of articles in the headers, so we can use that to calculate pagination/get total number of articles
-    total = String(articles.headers.get("X-WP-Total"));
-    return await articles.json();
-  };
-  const articles = await getArticles();
-
+const ArticlesList = async ({
+  page,
+  articles,
+  total,
+}: {
+  page: number;
+  articles: Post[];
+  total: string;
+}) => {
   return (
     <div className="max-w-[662px]">
       <Filters />
