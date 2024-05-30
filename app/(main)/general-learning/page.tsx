@@ -6,15 +6,21 @@ const GeneralLearning = async ({
   searchParams,
 }: {
   searchParams?: {
-    page?: number;
+    offset?: number;
+    categories?: number;
   };
 }) => {
-  const page = searchParams?.page || 1;
+  const offset = searchParams?.offset || 0;
+  const categories = searchParams?.categories || 0;
 
   let total: string = "";
   const getArticles = async (): Promise<Post[]> => {
     const articles = await fetch(
-      `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?per_page=5&page=${page}`,
+      `${
+        process.env.NEXT_PUBLIC_WPREST_ENDPOINT
+      }/posts?per_page=5&offset=${offset}${
+        categories ? `&categories=${categories}` : ""
+      }`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -30,7 +36,7 @@ const GeneralLearning = async ({
   return (
     <>
       <RelatedArticles header="Related Articles" />
-      <ArticlesList page={page} articles={articles} total={total} />
+      <ArticlesList articles={articles} total={total} offset={offset} />
     </>
   );
 };

@@ -5,11 +5,11 @@ import { PodcastsOutlined } from "@mui/icons-material";
 import Pagination from "./Pagination";
 
 const ArticlesList = async ({
-  page,
+  offset,
   articles,
   total,
 }: {
-  page: number;
+  offset: number;
   articles: Post[];
   total: string;
 }) => {
@@ -30,7 +30,7 @@ const ArticlesList = async ({
             />
           ))}
           <div className="flex flex-row justify-center">
-            <Pagination total={total} page={page} />
+            <Pagination total={total} offset={offset} />
           </div>
         </div>
       </div>

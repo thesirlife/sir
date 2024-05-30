@@ -28,7 +28,6 @@ const Filters = () => {
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -51,6 +50,15 @@ const Filters = () => {
           <CircularProgress />
         ) : (
           <>
+            <Chip
+              href={pathname}
+              component={Link}
+              scroll={false}
+              onClick={() => handleTagClick("Show All")}
+              color="primary"
+              variant={activeCategory === "Show All" ? "filled" : "outlined"}
+              label={"Show All"}
+            />
             {categories.map((category) => (
               <Chip
                 href={
