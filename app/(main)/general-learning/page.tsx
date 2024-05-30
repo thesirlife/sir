@@ -23,7 +23,6 @@ const GeneralLearning = async ({
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "no-cache",
       }
     );
     // WP exposes the total number of articles in the headers, so we can use that to calculate pagination/get total number of articles
