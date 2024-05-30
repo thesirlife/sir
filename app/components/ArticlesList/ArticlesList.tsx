@@ -50,6 +50,7 @@ const ArticlesList = async ({ page }: { page: string }) => {
           ))}
           <div className="flex flex-row justify-center">
             <PaginationItem
+              disabled={parseInt(page) <= 1}
               type="previous"
               component={Link}
               scroll={false}
@@ -71,9 +72,10 @@ const ArticlesList = async ({ page }: { page: string }) => {
             <PaginationItem
               type="next"
               scroll={false}
+              disabled={parseInt(page) >= Math.ceil(Number(total) / 5)}
               component={Link}
               href={`/general-learning?page=${
-                parseInt(page) < parseInt(total) / 5 ? parseInt(page) + 1 : 1
+                parseInt(page) < parseInt(total) / 5 ? parseInt(page) + 1 : null
               }`}
             />
           </div>
