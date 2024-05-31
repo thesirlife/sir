@@ -10,7 +10,7 @@ import LinkWithIcon from "../LinkWithIcon";
 
 type CtaBoxProps = PaperProps & {
   image: ImageProps["src"];
-  header: string;
+  header?: string;
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
   };
@@ -19,6 +19,8 @@ type CtaBoxProps = PaperProps & {
     label?: string;
     isExternal?: boolean;
   };
+  narrow?: boolean;
+  altBodyText?: boolean;
   boxLink?: string;
   imageOnTop?: boolean;
 };
@@ -29,19 +31,25 @@ const CtaBox = ({
   icon,
   link,
   imageOnTop = true,
+  narrow,
   children,
+  altBodyText = false,
   ...props
 }: PropsWithChildren<CtaBoxProps>) => {
   const Icon = icon;
   return (
     <Paper elevation={2} square {...props}>
-      <div className="flex flex-col gap-4  p-6 max-w-[442px]">
+      <div
+        className={`flex flex-col gap-4 ${
+          narrow ? "p-4" : "p-6"
+        } max-w-[442px]`}
+      >
         <div
           className={`basis-1/2 relative ${
             imageOnTop ? "order-first" : "order-last"
           }`}
         >
-          <Image src={image} alt={header} className="w-full" />
+          <Image src={image} alt={header || ""} className="w-full" />
           {Icon && (
             <IconWithBackground
               icon={PodcastsOutlined}
@@ -51,7 +59,13 @@ const CtaBox = ({
         </div>
         <div className="flex flex-col basis-1/2  overflow-x-hidden">
           <h3 className="text-xl">{header}</h3>
-          <p className="text-navy-secondary overflow-hidden whitespace-nowrap text-ellipsis">
+          <p
+            className={`${
+              altBodyText
+                ? "text-navy-primary text-lg"
+                : "text-navy-secondary overflow-hidden whitespace-nowrap text-ellipsis"
+            }`}
+          >
             {children}
           </p>
           {link ? (

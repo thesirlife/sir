@@ -1,5 +1,6 @@
 import BasicCta from "@/app/components/BasicCta";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import CtaBox from "@/app/components/CtaBox/CtaBox";
 import RelatedArticles from "@/app/components/RelatedArticles";
 import SocialShare from "@/app/components/SocialShare";
 import { getPost } from "@/app/data/getPost";
@@ -8,6 +9,7 @@ import getUserById from "@/app/data/getUserById";
 import { getTagColor } from "@/app/util/getTagColor";
 import { auth } from "@/auth";
 import { Chip } from "@mui/material";
+import Hat from "@/app/cta-images/hat.jpg";
 
 const GeneralLearningArticle = async () => {
   const session = await auth();
@@ -89,7 +91,22 @@ const GeneralLearningArticle = async () => {
                   Join our community discussion on this topic
                 </BasicCta>
               </>
-            ) : null}
+            ) : (
+              <CtaBox
+                image={Hat}
+                link={{
+                  href: "/signup",
+                  label: "Learn More",
+                  isExternal: true,
+                }}
+                imageOnTop
+                className="mt-20"
+                altBodyText
+                narrow
+              >
+                Join SIR for monthly boxes delivered right to your door
+              </CtaBox>
+            )}
           </aside>
         </div>
       </div>
