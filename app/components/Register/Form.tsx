@@ -1,32 +1,52 @@
+"use client";
+
 import { TextField, Divider } from "@mui/material";
-import Button from "../global/Button";
+import { submitForm } from "@/app/actions/submitForm";
+import SubmitButton from "./Form/SubmitButton";
+import { useFormState } from "react-dom";
 
 const RegisterForm = () => {
+  const [formState, action] = useFormState(submitForm, {
+    email: "",
+    username: "",
+    password: "",
+  });
   return (
     <div>
-      <form className="flex flex-col items-center justify-center">
-        <div className="flex flex-col gap-3 [&>*]:max-w-[260px]">
+      <form
+        action={action}
+        className="flex flex-col items-center justify-center"
+      >
+        <div className="flex flex-col gap-4 [&>*]:max-w-[260px]">
           <TextField
-            id="outlined-basic"
+            name="email"
+            id="email"
+            inputMode="email"
             label="Email Address"
             placeholder="enter email"
+            required
+            type="email"
           />
           <TextField
-            id="outlined-basic"
+            name="username"
+            id="username"
             label="First Name"
             placeholder="enter first name"
+            type="text"
+            required
           />
           <TextField
-            id="outlined-basic"
+            id="password"
+            name="password"
             label="New Password"
             placeholder="create your password"
             helperText="At least 8 characters, more is better."
+            required
+            type="password"
           />
         </div>
         <Divider className="my-8" flexItem />
-        <Button variant="contained" color="warning">
-          Finish Setup
-        </Button>
+        <SubmitButton>Finish Setup</SubmitButton>
       </form>
     </div>
   );
