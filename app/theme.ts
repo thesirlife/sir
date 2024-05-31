@@ -41,8 +41,8 @@ const theme = extendTheme({
         }),
         containedWarning: ({ theme }) => ({
           borderTopLeftRadius: "0.15rem",
-          borderBottomLeftRadius: "0.75rem",
-          borderTopRightRadius: "0.75rem",
+          borderBottomLeftRadius: "1rem",
+          borderTopRightRadius: "1rem",
           borderBottomRightRadius: "0.15rem",
         }),
         containedSecondary: ({ theme }) => ({
