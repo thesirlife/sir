@@ -14,12 +14,14 @@ const theme = extendTheme({
         },
         warning: {
           main: "#b6622d",
+          light: "#C96C32",
         },
         info: {
           main: "#0288d1",
         },
         primary: {
           main: "#405444",
+          light: "#8c988f",
         },
         background: {
           default: blueGrey[50],
