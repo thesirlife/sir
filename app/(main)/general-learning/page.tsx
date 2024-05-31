@@ -1,4 +1,5 @@
 import ArticlesList from "@/app/components/ArticlesList/ArticlesList";
+import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import RelatedArticles from "@/app/components/RelatedArticles";
 import { Post } from "@/app/types/post/types";
 
@@ -32,7 +33,12 @@ const GeneralLearning = async ({
 
   const articles = await getArticles();
   return (
-    <>
+    <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
+      <div className="container">
+        <div className="py-10">
+          <Breadcrumbs />
+        </div>
+      </div>
       <RelatedArticles header="Related Articles" />
       <ArticlesList
         articles={articles}
@@ -40,7 +46,7 @@ const GeneralLearning = async ({
         offset={offset}
         categories={categories}
       />
-    </>
+    </div>
   );
 };
 

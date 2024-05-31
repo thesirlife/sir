@@ -21,6 +21,9 @@ const theme = extendTheme({
         primary: {
           main: "#405444",
         },
+        background: {
+          default: blueGrey[50],
+        },
       },
     },
   },

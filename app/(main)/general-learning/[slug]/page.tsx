@@ -1,35 +1,18 @@
 import BasicCta from "@/app/components/BasicCta";
+import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import RelatedArticles from "@/app/components/RelatedArticles";
 import SocialShare from "@/app/components/SocialShare";
+import { getPost } from "@/app/data/getPost";
 import getTagById from "@/app/data/getTagById";
 import getUserById from "@/app/data/getUserById";
-import { Post } from "@/app/types/post/types";
 import { getTagColor } from "@/app/util/getTagColor";
+import { auth } from "@/auth";
 import { Chip } from "@mui/material";
 
-const getGeneralLearningArticle = async (id: string): Promise<Post> => {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts/${id}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        // remove once live and we're not behind wpengine login
-        Authorization: "Basic ZGVtbzpiNDJjZTM1Yzg5ODM=",
-      },
-      next: {
-        // maybe we'll change, but this'll refetch content after 10 minutes, probably not necessary but a good experience if it changes in wordpress
-        revalidate: 6000,
-      },
-    }
-  );
-
-  return await data.json();
-};
-
 const GeneralLearningArticle = async () => {
-  // IDK if this makes sense to keep in this file, or parse out
-  // my gut tells me move it out but with new server component paradigms, maybe it's fine
-  const article = await getGeneralLearningArticle("1");
+  const session = await auth();
+  const isLoggedIn = session?.user.email;
+  const article = await getPost("1");
   const author = await getUserById(article.author);
 
   const getTags = async () => {
@@ -41,12 +24,25 @@ const GeneralLearningArticle = async () => {
   const tags = await getTags();
 
   return (
-    <>
-      <div className="border-t-2 border-gray-600 mb-10 container">
+    <div
+      className={`${
+        isLoggedIn ? " bg-navy-primary" : "bg-blueGrey-50"
+      } h-full flex flex-col items-center justify-center`}
+    >
+      <div className="container">
+        {isLoggedIn && (
+          <div className="py-10 border-b-2 border-gray-600">
+            <Breadcrumbs />
+          </div>
+        )}
+      </div>
+      <div className=" mb-10 container">
         <div className="grid grid-cols-4 gap-16 mt-10">
           <aside className="col-span-1">
             <div>
-              <p>{author.name}</p>
+              <p className={`${isLoggedIn ? "" : "text-navy-primary"}`}>
+                {author.name}
+              </p>
             </div>
 
             <div className="flex flex-row gap-2 flex-wrap mt-4">
@@ -60,8 +56,15 @@ const GeneralLearningArticle = async () => {
             </div>
           </aside>
           <main className="col-span-2">
-            <h1 className="text-4xl mb-8">{article.title.rendered}</h1>
+            <h1
+              className={`${
+                isLoggedIn ? "" : "text-navy-primary"
+              } text-4xl mb-8`}
+            >
+              {article.title.rendered}
+            </h1>
             <div
+              className={`${isLoggedIn ? "" : "[&>p]:text-navy-primary"}`}
               dangerouslySetInnerHTML={{ __html: article.content.rendered }}
             ></div>
             <BasicCta
@@ -74,20 +77,24 @@ const GeneralLearningArticle = async () => {
             </BasicCta>
           </main>
           <aside className="col-span-1">
-            <SocialShare />
-            <BasicCta
-              className="mt-10"
-              button={{
-                text: "Join Discussion",
-              }}
-            >
-              Join our community discussion on this topic
-            </BasicCta>
+            {isLoggedIn ? (
+              <>
+                <SocialShare />
+                <BasicCta
+                  className="mt-10"
+                  button={{
+                    text: "Join Discussion",
+                  }}
+                >
+                  Join our community discussion on this topic
+                </BasicCta>
+              </>
+            ) : null}
           </aside>
         </div>
       </div>
       <RelatedArticles header="Related Articles & Games" />
-    </>
+    </div>
   );
 };
 

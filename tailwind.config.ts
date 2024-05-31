@@ -33,6 +33,7 @@ const config: Config = {
         },
         blueGrey: {
           primary: blueGrey[800],
+          50: blueGrey[50],
         },
         orange: {
           primary: "var(--orange-primary)",
