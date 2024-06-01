@@ -4,18 +4,24 @@ import { TextField, Divider } from "@mui/material";
 import { submitForm } from "@/app/actions/submitForm";
 import SubmitButton from "./Form/SubmitButton";
 import { useFormState } from "react-dom";
+import UserExists from "./UserExists";
 
 const RegisterForm = () => {
   const [formState, action] = useFormState(submitForm, {
     status: "",
   });
 
-  console.log(formState.status);
-  if (formState.status) {
-    return <div>lit mane</div>;
+  if (formState.status === "exists") {
+    return <UserExists status={formState.status} />;
   }
   return (
     <div>
+      <div className="flex flex-col items-center">
+        <h2 className="font-bold">Setup Your Account</h2>
+        <p className="text-lg mb-4 opacity-60">
+          Enter your information below to finish setting up your SIR account.
+        </p>
+      </div>
       <form
         action={action}
         className="flex flex-col items-center justify-center"

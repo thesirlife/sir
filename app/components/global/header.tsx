@@ -3,7 +3,7 @@ import Link from "next/link";
 import Logo from "@/app/sir-header-logo.svg";
 import { FC } from "react";
 import Button from "./Button";
-import { ArrowForward, ArrowRight } from "@mui/icons-material";
+import { ArrowForward } from "@mui/icons-material";
 
 type HeaderProps = {
   isLoggedIn?: boolean;
