@@ -11,9 +11,7 @@ const newUserSchema = z.object({
 });
 
 type FormState = {
-  email: string;
-  username: string;
-  password: string;
+  status: "created" | "exists" | "error" | string;
 };
 
 export const submitForm = async (formState: FormState, formData: FormData) => {
@@ -24,7 +22,21 @@ export const submitForm = async (formState: FormState, formData: FormData) => {
       password: formData.get("password"),
     });
 
-    await postUser({ email, username, password });
+    const response = await postUser({ email, username, password });
+
+    // test to see if we get a response.code, which means the user wasn't returned and there's an error
+    if (response.code) {
+      // test to see if the error is due to an existing email existing
+      if (response.code === "existing_user_email") {
+        formState.status = "exists";
+      } else {
+        // all other potential errors
+        formState.status = "error";
+      }
+      // successful user creation
+    } else {
+      formState.status = "created";
+    }
   } catch {
     throw new Error("Failed to create user, please refresh and try again.");
   }
@@ -32,8 +44,6 @@ export const submitForm = async (formState: FormState, formData: FormData) => {
   revalidatePath("/");
 
   return {
-    email: formState.email,
-    username: formState.username,
-    password: formState.password,
+    status: formState.status,
   };
 };

@@ -1,30 +1,30 @@
+import { User } from "../types/user/types";
+
 type PostUserProps = {
   username: string;
   email: string;
   password: string;
 };
 
+type PostUserReturn = User & {
+  code: string;
+  message: string;
+  data: string;
+} & Error;
+
 export const postUser = async ({
   username,
   email,
   password,
-}: PostUserProps) => {
-  console.log(username);
-
-  try {
-    const data = await fetch(
-      `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/users?username=${username}&email=${email}&password=${password}`,
-      {
-        method: "POST",
-        headers: {
-          Authorization:
-            "Basic c2lyZGV2OnJVU1MgYURLMCBCelk3IGx1Q00geDhNSyBhcEFa",
-        },
-      }
-    );
-    console.log(data.json);
-    return await data.json();
-  } catch {
-    console.log("error");
-  }
+}: PostUserProps): Promise<PostUserReturn> => {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/users?username=${email}&email=${email}&password=${password}&first_name=${username}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: "Basic c2lyZGV2OnJVU1MgYURLMCBCelk3IGx1Q00geDhNSyBhcEFa",
+      },
+    }
+  );
+  return await data.json();
 };

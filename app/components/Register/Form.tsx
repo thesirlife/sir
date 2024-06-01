@@ -7,10 +7,13 @@ import { useFormState } from "react-dom";
 
 const RegisterForm = () => {
   const [formState, action] = useFormState(submitForm, {
-    email: "",
-    username: "",
-    password: "",
+    status: "",
   });
+
+  console.log(formState.status);
+  if (formState.status) {
+    return <div>lit mane</div>;
+  }
   return (
     <div>
       <form
