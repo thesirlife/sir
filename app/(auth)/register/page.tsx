@@ -1,5 +1,5 @@
 import { Paper } from "@mui/material";
-import RegisterForm from "../components/Register/Form";
+import RegisterForm from "../../components/Register/Form";
 
 const LoggedOutPage = () => {
   return (

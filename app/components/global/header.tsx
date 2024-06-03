@@ -33,6 +33,7 @@ const Header: FC<HeaderProps> = ({ isLoggedIn }: HeaderProps) => {
           <Button
             variant="contained"
             color="warning"
+            href="/login"
             endIcon={<ArrowForward fontSize="medium" />}
           >
             Log In
