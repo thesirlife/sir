@@ -5,6 +5,7 @@ import { submitForm } from "@/app/actions/submitForm";
 import SubmitButton from "./Form/SubmitButton";
 import { useFormState } from "react-dom";
 import UserExists from "./UserExists";
+import { z } from "zod";
 
 const RegisterForm = () => {
   const [formState, action] = useFormState(submitForm, {
@@ -47,6 +48,7 @@ const RegisterForm = () => {
           <TextField
             id="password"
             name="password"
+            inputProps={{ minLength: 8 }}
             label="New Password"
             placeholder="create your password"
             helperText="At least 8 characters, more is better."
