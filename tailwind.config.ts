@@ -23,6 +23,7 @@ const config: Config = {
       colors: {
         green: {
           primary: "var(--green-primary)",
+          secondary: "var(--green-secondary)",
         },
         navy: {
           primary: "var(--navy-primary)",
@@ -37,6 +38,7 @@ const config: Config = {
         },
         orange: {
           primary: "var(--orange-primary)",
+          light: "var(--orange-light)",
         },
       },
       fontFamily: {

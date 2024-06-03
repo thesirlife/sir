@@ -5,6 +5,7 @@
 @layer base {
   :root {
     --green-primary: #405444;
+    --green-secondary: #8c988f;
 
     --navy-primary: #15253b;
     --navy-secondary: #15253b60;
@@ -12,6 +13,7 @@
     --blue-primary: #0288d1;
 
     --orange-primary: #b6622d;
+    --orange-light: #c96c32;
   }
 }
 

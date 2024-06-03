@@ -14,12 +14,14 @@ const theme = extendTheme({
         },
         warning: {
           main: "#b6622d",
+          light: "#C96C32",
         },
         info: {
           main: "#0288d1",
         },
         primary: {
           main: "#405444",
+          light: "#8c988f",
         },
         background: {
           default: blueGrey[50],
@@ -41,8 +43,8 @@ const theme = extendTheme({
         }),
         containedWarning: ({ theme }) => ({
           borderTopLeftRadius: "0.15rem",
-          borderBottomLeftRadius: "0.75rem",
-          borderTopRightRadius: "0.75rem",
+          borderBottomLeftRadius: "1rem",
+          borderTopRightRadius: "1rem",
           borderBottomRightRadius: "0.15rem",
         }),
         containedSecondary: ({ theme }) => ({
