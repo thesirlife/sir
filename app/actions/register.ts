@@ -14,7 +14,7 @@ type FormState = {
   status: "created" | "exists" | "error" | string;
 };
 
-export const submitForm = async (formState: FormState, formData: FormData) => {
+export const register = async (formState: FormState, formData: FormData) => {
   try {
     const { email, username, password } = newUserSchema.parse({
       email: formData.get("email"),

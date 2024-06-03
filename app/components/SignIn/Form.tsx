@@ -10,6 +10,8 @@ const SignInForm = () => {
     status: "",
   });
 
+  console.log(formState);
+
   return (
     <div>
       <div className="flex flex-col items-center">
@@ -42,6 +44,11 @@ const SignInForm = () => {
             type="password"
           />
           <SubmitButton>Log In</SubmitButton>
+          {formState.status === "error" && (
+            <p className="text-red-500 font-semibold text-center">
+              Your credentials are invalid, please try again.
+            </p>
+          )}
         </div>
       </form>
     </div>

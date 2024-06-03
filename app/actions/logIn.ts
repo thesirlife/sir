@@ -13,7 +13,6 @@ export const login = async (formState: FormState, formData: FormData) => {
     await signIn("credentials", formData);
   } catch (error) {
     if (error instanceof AuthError) formState.status = "error";
-    throw error; // Rethrow all other errors
   }
 
   revalidatePath("/");

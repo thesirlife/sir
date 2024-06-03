@@ -35,7 +35,6 @@ export const authOptions: NextAuthConfig = {
           }
 
           const parsedResponse = await res.json();
-          console.log(parsedResponse);
 
           // accessing the jwt returned by server
           const jwt = parsedResponse.access_token;

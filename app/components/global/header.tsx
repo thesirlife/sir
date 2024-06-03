@@ -13,7 +13,9 @@ const Header: FC<HeaderProps> = ({ isLoggedIn }: HeaderProps) => {
   return (
     <header className="bg-green-primary flex flex-row justify-between h-[72px] align-center ">
       <div className="pl-4 items-center flex">
-        <Image src={Logo} alt="SIR Header Logo" />
+        <Link href="/">
+          <Image src={Logo} alt="SIR Header Logo" />
+        </Link>
       </div>
       {isLoggedIn ? (
         <nav className="flex gap-4 flex-row items-center pr-4">

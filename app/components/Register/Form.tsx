@@ -1,13 +1,13 @@
 "use client";
 
 import { TextField, Divider } from "@mui/material";
-import { submitForm } from "@/app/actions/submitForm";
+import { register } from "@/app/actions/register";
 import SubmitButton from "./Form/SubmitButton";
 import { useFormState } from "react-dom";
 import UserExists from "./UserExists";
 
 const RegisterForm = () => {
-  const [formState, action] = useFormState(submitForm, {
+  const [formState, action] = useFormState(register, {
     status: "",
   });
 
