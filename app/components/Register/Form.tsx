@@ -5,7 +5,6 @@ import { submitForm } from "@/app/actions/submitForm";
 import SubmitButton from "./Form/SubmitButton";
 import { useFormState } from "react-dom";
 import UserExists from "./UserExists";
-import { z } from "zod";
 
 const RegisterForm = () => {
   const [formState, action] = useFormState(submitForm, {
@@ -33,6 +32,7 @@ const RegisterForm = () => {
             id="email"
             inputMode="email"
             label="Email Address"
+            InputLabelProps={{ shrink: true }}
             placeholder="enter email"
             required
             type="email"
@@ -41,6 +41,7 @@ const RegisterForm = () => {
             name="username"
             id="username"
             label="First Name"
+            InputLabelProps={{ shrink: true }}
             placeholder="enter first name"
             type="text"
             required
@@ -48,6 +49,7 @@ const RegisterForm = () => {
           <TextField
             id="password"
             name="password"
+            InputLabelProps={{ shrink: true }}
             inputProps={{ minLength: 8 }}
             label="New Password"
             placeholder="create your password"
