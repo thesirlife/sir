@@ -1,14 +1,15 @@
 "use client";
 
 import { TextField, Divider } from "@mui/material";
-import { register } from "@/app/actions/register";
+import { FormState, register } from "@/app/actions/register";
 import SubmitButton from "./Form/SubmitButton";
 import { useFormState } from "react-dom";
 import UserExists from "./UserExists";
+import { redirect } from "next/navigation";
 
 const RegisterForm = () => {
   const [formState, action] = useFormState(register, {
-    status: "",
+    status: "pending" as FormState["status"],
   });
 
   if (formState.status === "exists") {
@@ -27,6 +28,12 @@ const RegisterForm = () => {
       </div>
     );
   }
+
+  if (formState.status === "created") {
+    redirect(`/login`);
+  }
+
+  console.log(formState.status);
   return (
     <div>
       <div className="flex flex-col items-center">

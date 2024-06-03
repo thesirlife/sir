@@ -10,8 +10,8 @@ const newUserSchema = z.object({
   password: z.string().min(8).max(40),
 });
 
-type FormState = {
-  status: "created" | "exists" | "error" | string;
+export type FormState = {
+  status: "created" | "exists" | "error" | "pending";
 };
 
 export const register = async (formState: FormState, formData: FormData) => {
