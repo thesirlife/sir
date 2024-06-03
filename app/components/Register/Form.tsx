@@ -14,6 +14,19 @@ const RegisterForm = () => {
   if (formState.status === "exists") {
     return <UserExists status={formState.status} />;
   }
+
+  if (formState.status === "error") {
+    return (
+      <div className="flex flex-col items-center">
+        <h2 className="font-bold">
+          There was an error with your registration.
+        </h2>
+        <p className="text-lg mb-4 opacity-60">
+          Please refresh the page and try again.
+        </p>
+      </div>
+    );
+  }
   return (
     <div>
       <div className="flex flex-col items-center">
