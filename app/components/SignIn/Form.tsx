@@ -2,12 +2,12 @@
 
 import { TextField } from "@mui/material";
 import SubmitButton from "../Register/Form/SubmitButton";
-import { login } from "@/app/actions/logIn";
+import { FormState, login } from "@/app/actions/logIn";
 import { useFormState } from "react-dom";
 
 const SignInForm = () => {
   const [formState, action] = useFormState(login, {
-    status: "",
+    status: "pending" as FormState["status"],
   });
 
   return (

@@ -26,7 +26,7 @@ export const register = async (formState: FormState, formData: FormData) => {
 
     // test to see if we get a response.code, which means the user wasn't returned and there's an error
     if (response.code) {
-      // test to see if the error is due to an existing email existing
+      // test to see if the error is due to an email already existing w/ a user
       if (response.code === "existing_user_email") {
         formState.status = "exists";
       } else {
@@ -38,7 +38,8 @@ export const register = async (formState: FormState, formData: FormData) => {
       formState.status = "created";
     }
   } catch {
-    throw new Error("Failed to create user, please refresh and try again.");
+    // if our fetch straight up fails, show the default error message
+    formState.status = "error";
   }
 
   revalidatePath("/");
