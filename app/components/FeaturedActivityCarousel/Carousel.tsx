@@ -29,6 +29,7 @@ const FeaturedActivityCarousel: FC = () => {
   return (
     <div className="relative">
       <DailyChecklist
+        currentSlide={currentSlide}
         setCurrentSlide={handleFocus}
         className="absolute -translate-y-1/2 left-1/2 -translate-x-1/2"
       />
