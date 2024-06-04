@@ -9,6 +9,7 @@ export const authOptions: NextAuthConfig = {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
+      // this is where we sign in and get the JWT
       async authorize(credentials, req): Promise<User | null> {
         try {
           const res = await fetch(

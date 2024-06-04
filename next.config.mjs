@@ -5,6 +5,9 @@ const nextConfig = {
       {
         hostname: "sirboxdev.wpenginepowered.com",
       },
+      {
+        hostname: "upload.wikimedia.org",
+      },
     ],
   },
 };

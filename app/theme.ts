@@ -67,7 +67,7 @@ const theme = extendTheme({
     },
     MuiChip: {
       styleOverrides: {
-        filledPrimary: ({ theme }) => ({
+        filledSecondary: ({ theme }) => ({
           backgroundColor: theme.vars.palette.warning.main,
           color: theme.vars.palette.common.white,
           border: `1px solid ${theme.vars.palette.warning.main}`,
@@ -77,7 +77,12 @@ const theme = extendTheme({
             color: theme.vars.palette.common.white,
           },
         }),
-        outlinedPrimary: ({ theme }) => ({
+        filledPrimary: ({ theme }) => ({
+          backgroundColor: theme.vars.palette.primary.main,
+          color: theme.vars.palette.common.white,
+        }),
+
+        outlinedSecondary: ({ theme }) => ({
           "&.MuiChip-clickable": {
             backgroundColor: theme.vars.palette.common.background,
             color: theme.vars.palette.common.white,

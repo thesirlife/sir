@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { FC, Fragment } from "react";
+import { FC, Fragment, useState } from "react";
 import { Home, ViewModule } from "@mui/icons-material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { SvgIconTypeMap } from "@mui/material";
@@ -9,9 +9,11 @@ import BreadcrumbsLink from "./BreadcrumbsLink";
 
 const Breadcrumbs: FC = () => {
   const paths = usePathname();
+  const [onDetailPage, setOnDetailPage] = useState(false);
   const pathNames = paths.split("/").filter((path) => path);
   // remove last item from array since we aren't detail pages in breadcrumbs
   if (pathNames.length > 1) {
+    setOnDetailPage(true);
     pathNames.pop();
   }
 
@@ -21,7 +23,7 @@ const Breadcrumbs: FC = () => {
       muiName: string;
     }
   > = {
-    "general-learning": ViewModule,
+    posts: ViewModule,
     // eventually need to add whatever other pages/icons there are to this pathsMap dictionary
   };
 
@@ -32,7 +34,7 @@ const Breadcrumbs: FC = () => {
       <ul className="flex flex-row">
         <li>
           <BreadcrumbsLink href="/" icon={Home}>
-            My Hub
+            My Dashboard
           </BreadcrumbsLink>
         </li>
         {pathNames.length > 0 && <Seperator />}
@@ -41,11 +43,10 @@ const Breadcrumbs: FC = () => {
 
           return (
             <Fragment key={index}>
-              <li>
-                <BreadcrumbsLink
-                  href={href}
-                  icon={pathsMap["general-learning"]}
-                >
+              <li
+                className={index + 1 === pathNames.length ? "opacity-70" : ""}
+              >
+                <BreadcrumbsLink href={href} icon={pathsMap["posts"]}>
                   {link
                     .replace(/-/g, " ")
                     .replace(/\b\w/g, (char) => char.toUpperCase())}

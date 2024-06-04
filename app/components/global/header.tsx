@@ -11,14 +11,14 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({ isLoggedIn }: HeaderProps) => {
   return (
-    <header className="bg-green-primary flex flex-row justify-between h-[72px] align-center ">
-      <div className="pl-4 items-center flex">
+    <header className="bg-green-primary flex px-12 flex-row justify-between h-[72px] align-center ">
+      <div className="items-center flex">
         <Link href="/">
           <Image src={Logo} alt="SIR Header Logo" />
         </Link>
       </div>
       {isLoggedIn ? (
-        <nav className="flex gap-4 flex-row items-center pr-4">
+        <nav className="flex gap-4 flex-row items-center">
           <Link className="underline" href="/dashboard">
             My Hub
           </Link>
@@ -30,7 +30,7 @@ const Header: FC<HeaderProps> = ({ isLoggedIn }: HeaderProps) => {
           </Link>
         </nav>
       ) : (
-        <div className="flex flex-row gap-4 items-center pr-4">
+        <div className="flex flex-row gap-4 items-center">
           <p>Already created your account?</p>
           <Button
             variant="contained"

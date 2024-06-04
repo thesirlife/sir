@@ -4,8 +4,8 @@ import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 
-type FormState = {
-  status: "success" | "error" | string;
+export type FormState = {
+  status: "success" | "error" | "pending";
 };
 
 export const login = async (formState: FormState, formData: FormData) => {
