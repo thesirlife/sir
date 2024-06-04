@@ -1,9 +1,24 @@
 import { Post } from "../types/post/types";
 
+type Articles = {
+  total: string;
+  articles: Post[];
+};
+
+type getPostsProps = {
+  categories?: number;
+  offset: number;
+};
+
 let total: string = "";
-const getPosts = async (): Promise<Post[]> => {
-  const articles = await fetch(
-    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?_embed`,
+const getPosts = async ({
+  categories,
+  offset,
+}: getPostsProps): Promise<Articles> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?${
+      categories ? `categories=${categories}` : ""
+    }&offset=${offset}&per_page=5`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -11,8 +26,9 @@ const getPosts = async (): Promise<Post[]> => {
     }
   );
   // WP exposes the total number of articles in the headers, so we can use that to calculate pagination/get total number of articles
-  // total = String(articles.headers.get("X-WP-Total"));
-  return await articles.json();
+  total = String(response.headers.get("X-WP-Total"));
+  const articles = await response.json();
+  return { total, articles };
 };
 
 export default getPosts;
