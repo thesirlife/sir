@@ -3,6 +3,8 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { postUser } from "../data/postUser";
+import { signIn } from "@/auth";
+import { red } from "@mui/material/colors";
 
 const newUserSchema = z.object({
   email: z.string().email(),
@@ -15,15 +17,13 @@ export type FormState = {
 };
 
 export const register = async (formState: FormState, formData: FormData) => {
+  const { email, username, password } = newUserSchema.parse({
+    email: formData.get("email"),
+    username: formData.get("username"),
+    password: formData.get("password"),
+  });
   try {
-    const { email, username, password } = newUserSchema.parse({
-      email: formData.get("email"),
-      username: formData.get("username"),
-      password: formData.get("password"),
-    });
-
     const response = await postUser({ email, username, password });
-
     // test to see if we get a response.code, which means the user wasn't returned and there's an error
     if (response.code) {
       // test to see if the error is due to an email already existing w/ a user
@@ -41,6 +41,14 @@ export const register = async (formState: FormState, formData: FormData) => {
     // if our fetch straight up fails, show the default error message
     formState.status = "error";
   }
+
+  // AuthJs's documentation is really bad here, and the types are not helpful
+  // you can pass formData as the options param by itself, or an object with form values + redirectTo or redirect properties
+  await signIn("credentials", {
+    email,
+    password,
+    redirectTo: "/?newUser=true",
+  });
 
   revalidatePath("/");
 

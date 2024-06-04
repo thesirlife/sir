@@ -3,13 +3,24 @@ import Explore from "@/app/components/Explore";
 import FeaturedActivityCarousel from "@/app/components/FeaturedActivityCarousel/Carousel";
 import { FC, Suspense } from "react";
 import RelatedArticles from "../components/RelatedArticles";
-import DailyChecklist from "../components/DailyChecklist";
 import { CircularProgress } from "@mui/material";
+import { auth } from "@/auth";
+import OnboardingModal from "../components/OnboardingModal";
 
-const Dashboard: FC = async () => {
+const Dashboard = async ({
+  searchParams,
+}: {
+  searchParams?: {
+    newUser?: boolean;
+  };
+}) => {
+  const session = await auth();
+  const firstLogin = searchParams?.newUser;
+
   return (
     <div>
-      <WelcomeBanner user="Gavin" />
+      {firstLogin ? <OnboardingModal /> : null}
+      <WelcomeBanner user={session?.user.name as string} />
       <FeaturedActivityCarousel />
       <Explore />
       <Suspense fallback={<CircularProgress />}>
