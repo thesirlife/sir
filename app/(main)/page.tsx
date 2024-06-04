@@ -10,10 +10,7 @@ const Dashboard: FC = async () => {
   return (
     <div>
       <WelcomeBanner user="Gavin" />
-      <div className="relative">
-        <DailyChecklist className="absolute -translate-y-1/2 left-1/2 -translate-x-1/2" />
-        <FeaturedActivityCarousel />
-      </div>
+      <FeaturedActivityCarousel />
       <Explore />
       <Suspense fallback={<CircularProgress />}>
         <RelatedArticles header="Summer Box" />
