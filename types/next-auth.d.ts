@@ -19,8 +19,9 @@ declare module "next-auth" {
 
     user: {
       email: string;
-      // ...user data you with to
-      // pass to the client
+      name: string;
+      lastName: string;
+      displayName: string;
     };
   }
 }

@@ -31,6 +31,7 @@ export const authOptions: NextAuthConfig = {
 
           return {
             ...credentials,
+            name: parsedResponse.firstName,
             jwt,
           } as User;
         } catch (e) {

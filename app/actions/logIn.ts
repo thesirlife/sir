@@ -10,7 +10,13 @@ export type FormState = {
 
 export const login = async (formState: FormState, formData: FormData) => {
   try {
-    await signIn("credentials", formData);
+    await signIn("credentials", formData)
+      .then(() => {
+        formState.status = "success";
+      })
+      .catch(() => {
+        formState.status = "error";
+      });
   } catch (error) {
     if (error instanceof AuthError) formState.status = "error";
   }

@@ -5,7 +5,6 @@ import { FormState, register } from "@/app/actions/register";
 import SubmitButton from "./Form/SubmitButton";
 import { useFormState } from "react-dom";
 import UserExists from "./UserExists";
-import { redirect } from "next/navigation";
 
 const RegisterForm = () => {
   const [formState, action] = useFormState(register, {
@@ -19,7 +18,7 @@ const RegisterForm = () => {
   if (formState.status === "error") {
     return (
       <div className="flex flex-col items-center">
-        <h2 className="font-bold">
+        <h2 className="font-bold  text-center">
           There was an error with your registration.
         </h2>
         <p className="text-lg mb-4 opacity-60">
@@ -29,9 +28,9 @@ const RegisterForm = () => {
     );
   }
 
-  if (formState.status === "created") {
-    redirect(`/login`);
-  }
+  // if (formState.status === "created") {
+  //   redirect(`/?created=true`);
+  // }
 
   console.log(formState.status);
   return (
