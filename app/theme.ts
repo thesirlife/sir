@@ -40,6 +40,10 @@ const theme = extendTheme({
         }),
         contained: ({ theme }) => ({
           padding: "0.5rem 1rem",
+          "&:focus": {
+            backgroundColor: theme.vars.palette.primary.main,
+            color: "white",
+          },
         }),
         containedWarning: ({ theme }) => ({
           borderTopLeftRadius: "0.15rem",
