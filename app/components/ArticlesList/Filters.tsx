@@ -56,7 +56,7 @@ const Filters = ({ categories }: FilterProps) => {
               component={Link}
               clickable
               scroll={false}
-              color="primary"
+              color="secondary"
               variant={!categories ? "filled" : "outlined"}
               label={"Show All"}
             />
@@ -67,7 +67,7 @@ const Filters = ({ categories }: FilterProps) => {
                 scroll={false}
                 clickable
                 key={category.id}
-                color="primary"
+                color="secondary"
                 variant={categories == category.id ? "filled" : "outlined"}
                 label={category.name}
               />

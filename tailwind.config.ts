@@ -20,6 +20,11 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "pattern-green": "url('./green-background.jpg')",
       },
+      container: {
+        screens: {
+          xl: "1152px",
+        },
+      },
       colors: {
         green: {
           primary: "var(--green-primary)",
