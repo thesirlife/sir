@@ -7,11 +7,13 @@ import { OverridableComponent } from "@mui/material/OverridableComponent";
 import Button from "./global/Button";
 import getTagById from "../data/getTagById";
 import getMediaById from "../data/getMediaById";
+import Link from "next/link";
 
 type ArticleCardProps = PaperProps & {
   header: string;
   image?: string;
   description: string;
+  url: string;
   tagId?: number | null;
   isGame?: boolean;
   imageId: number;
@@ -33,6 +35,7 @@ const ArticleTypeDictionary: Record<string, string> = {
 const ArticleCard = async ({
   icon,
   header,
+  url,
   image,
   isGame,
   description,
@@ -55,6 +58,10 @@ const ArticleCard = async ({
   if (isGame) {
     tag = "game";
   }
+
+  const articleUrl = isGame
+    ? `/brain-games/${url}`
+    : `/general-learning/${url}`;
 
   return (
     <Paper
@@ -94,6 +101,7 @@ const ArticleCard = async ({
           color="warning"
           variant="text"
           className="flex flex-row gap-2 mt-"
+          href={articleUrl}
         >
           {ArticleTypeDictionary[tag]
             ? ArticleTypeDictionary[tag]

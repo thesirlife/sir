@@ -7,15 +7,13 @@ import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { SvgIconTypeMap } from "@mui/material";
 import BreadcrumbsLink from "./BreadcrumbsLink";
 
-const Breadcrumbs: FC = () => {
+type BreadcrumbsProps = {
+  title?: string;
+};
+
+const Breadcrumbs = ({ title = "" }: BreadcrumbsProps) => {
   const paths = usePathname();
-  const [onDetailPage, setOnDetailPage] = useState(false);
   const pathNames = paths.split("/").filter((path) => path);
-  // remove last item from array since we aren't detail pages in breadcrumbs
-  if (pathNames.length > 1) {
-    setOnDetailPage(true);
-    pathNames.pop();
-  }
 
   const pathsMap: Record<
     string,
@@ -26,6 +24,12 @@ const Breadcrumbs: FC = () => {
     posts: ViewModule,
     // eventually need to add whatever other pages/icons there are to this pathsMap dictionary
   };
+
+  // this is hacky, fix
+  if (pathNames.length > 2) {
+    pathNames.pop();
+    pathNames.unshift(title);
+  }
 
   const Seperator: FC = () => <span className="px-2"> / </span>;
 

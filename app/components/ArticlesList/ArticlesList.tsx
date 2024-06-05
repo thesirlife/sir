@@ -47,6 +47,7 @@ const ArticlesList = async ({
                     ? article.tags[0]
                     : null
                 }
+                url={article.slug}
                 imageId={article.featured_media}
                 header={article.title.rendered}
                 key={article.id}

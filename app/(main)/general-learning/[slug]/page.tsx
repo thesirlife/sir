@@ -11,15 +11,19 @@ import { auth } from "@/auth";
 import { Chip } from "@mui/material";
 import Hat from "@/app/cta-images/hat.jpg";
 
-const GeneralLearningArticle = async () => {
+const GeneralLearningArticle = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
   const session = await auth();
   const isLoggedIn = session?.user.email;
-  const article = await getPost("1");
-  const author = await getUserById(article.author);
+  const article = await getPost(params?.slug);
+  const author = await getUserById(Number(article?.author));
 
   const getTags = async () => {
     const tagData = await Promise.all(
-      article.tags.map((tagId) => getTagById(tagId))
+      (article?.tags ?? []).map((tagId) => getTagById(tagId))
     );
     return tagData;
   };
@@ -34,7 +38,7 @@ const GeneralLearningArticle = async () => {
       <div className="container">
         {isLoggedIn && (
           <div className="py-10 border-b-2 border-gray-600">
-            <Breadcrumbs />
+            <Breadcrumbs title={article?.title?.rendered} />
           </div>
         )}
       </div>
@@ -63,11 +67,13 @@ const GeneralLearningArticle = async () => {
                 isLoggedIn ? "" : "text-navy-primary"
               } text-4xl mb-8`}
             >
-              {article.title.rendered}
+              {article?.title?.rendered}
             </h1>
             <div
               className={`${isLoggedIn ? "" : "[&>p]:text-navy-primary"}`}
-              dangerouslySetInnerHTML={{ __html: article.content.rendered }}
+              dangerouslySetInnerHTML={{
+                __html: String(article?.content?.rendered),
+              }}
             ></div>
             <BasicCta
               className="mt-6 text-center"
