@@ -12,7 +12,8 @@ type ArticleCardProps = PaperProps & {
   header: string;
   image?: string;
   description: string;
-  tagId: number | null;
+  tagId?: number | null;
+  isGame?: boolean;
   imageId: number;
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
@@ -23,6 +24,7 @@ const ArticleTypeDictionary: Record<string, string> = {
   trivia: "Play Trivia",
   article: "Read Article",
   video: "Watch Video",
+  game: "Play Game",
 };
 
 // I want to maybe consolidate this component with CtaBox, but they're almost different enough to warrant keeping separate
@@ -32,6 +34,7 @@ const ArticleCard = async ({
   icon,
   header,
   image,
+  isGame,
   description,
   imageId,
   tagId,
@@ -39,8 +42,8 @@ const ArticleCard = async ({
   ...props
 }: PropsWithChildren<ArticleCardProps>) => {
   const imageUrl = await getMediaById(imageId);
-  // this is gross, redo
   const Icon = icon;
+
   let tag;
 
   if (!tagId || (await getTagById(tagId)) === undefined) {
@@ -48,7 +51,10 @@ const ArticleCard = async ({
   } else {
     tag = (await getTagById(tagId)).slug;
   }
-  //
+
+  if (isGame) {
+    tag = "game";
+  }
 
   return (
     <Paper

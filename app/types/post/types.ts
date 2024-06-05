@@ -49,5 +49,16 @@ export type Post = {
   sticky: boolean;
   template: string;
   categories: number[];
-  tags: number[];
+  tags?: number[];
+  "game-categories"?: number[];
+};
+
+export type Articles<T> = {
+  total: string;
+  articles: T[];
+};
+
+export type getPostsProps = {
+  categories?: number;
+  offset: number;
 };
