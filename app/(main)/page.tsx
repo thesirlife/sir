@@ -17,10 +17,14 @@ const Dashboard = async ({
   const session = await auth();
   const firstLogin = searchParams?.newUser;
 
+  const name = session?.user.name
+    ? session?.user.name
+    : session?.user.email || "";
+
   return (
     <div>
       {firstLogin ? <OnboardingModal /> : null}
-      <WelcomeBanner user={session?.user.name as string} />
+      <WelcomeBanner user={name} />
       <FeaturedActivityCarousel />
       <Explore />
       <Suspense fallback={<CircularProgress />}>

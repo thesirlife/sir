@@ -6,7 +6,7 @@ import {
   CarouselContent,
   CarouselPrevious,
   CarouselNext,
-  CarouselItem as ShadItem,
+  CarouselItem,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import DailyChecklist from "../DailyChecklist";
@@ -37,10 +37,17 @@ const FeaturedActivityCarousel: FC = () => {
         <div className="flex flex-row gap-5 container px-4  items-center">
           <Carousel className="w-full" setApi={setApi}>
             <CarouselContent>
-              <ShadItem>GAVIN</ShadItem>
-              <ShadItem>TEST</ShadItem>
-              <ShadItem>ANOTHER</ShadItem>
-              <ShadItem>BLAH</ShadItem>
+              <CarouselItem className="flex justify-center">
+                <div className="max-w-[956px] flex flex-row justify-between gap-20">
+                  <h2 className=" mb-4 text-4xl font-bold w-1/2">
+                    Test Your Knowledge With Some Quick Trivia!
+                  </h2>
+                  <div className="flex flex-col w-1/2"></div>
+                </div>
+              </CarouselItem>
+              <CarouselItem>Article</CarouselItem>
+              <CarouselItem>Video</CarouselItem>
+              <CarouselItem>Feedback</CarouselItem>
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
