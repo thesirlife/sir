@@ -13,7 +13,8 @@ type ArticleCardProps = PaperProps & {
   header: string;
   image?: string;
   description: string;
-  url: string;
+  url?: string;
+  gameUrl?: string;
   tagId?: number | null;
   isGame?: boolean;
   imageId: number;
@@ -40,6 +41,7 @@ const ArticleCard = async ({
   isGame,
   description,
   imageId,
+  gameUrl,
   tagId,
   children,
   ...props
@@ -101,7 +103,7 @@ const ArticleCard = async ({
           color="warning"
           variant="text"
           className="flex flex-row gap-2 mt-"
-          href={articleUrl}
+          href={isGame ? gameUrl : articleUrl}
         >
           {ArticleTypeDictionary[tag]
             ? ArticleTypeDictionary[tag]

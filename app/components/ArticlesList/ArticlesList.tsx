@@ -42,6 +42,7 @@ const ArticlesList = async ({
               <ArticleCard
                 icon={PodcastsOutlined}
                 isGame={isGame}
+                gameUrl={article["game_link"] || ""}
                 tagId={
                   article.tags?.length && article.tags?.length > 0
                     ? article.tags[0]

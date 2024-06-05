@@ -5,10 +5,9 @@ const getPosts = async ({
   categories,
   offset,
 }: getPostsProps): Promise<Articles<Post>> => {
+  const postCategories = categories ? `categories=${categories}` : "";
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?${
-      categories ? `categories=${categories}` : ""
-    }&offset=${offset}&per_page=5`,
+    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?${postCategories}&offset=${offset}&per_page=5`,
     {
       headers: {
         "Content-Type": "application/json",

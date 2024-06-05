@@ -51,6 +51,7 @@ export type Post = {
   categories: number[];
   tags?: number[];
   "game-categories"?: number[];
+  game_link?: string;
 };
 
 export type Articles<T> = {
