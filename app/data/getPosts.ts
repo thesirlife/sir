@@ -1,20 +1,10 @@
-import { Post } from "../types/post/types";
-
-type Articles = {
-  total: string;
-  articles: Post[];
-};
-
-type getPostsProps = {
-  categories?: number;
-  offset: number;
-};
+import { Articles, Post, getPostsProps } from "../types/post/types";
 
 let total: string = "";
 const getPosts = async ({
   categories,
   offset,
-}: getPostsProps): Promise<Articles> => {
+}: getPostsProps): Promise<Articles<Post>> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?${
       categories ? `categories=${categories}` : ""
