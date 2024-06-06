@@ -10,6 +10,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import DailyChecklist from "../DailyChecklist";
+import SuperBowl from "../HardCodedForms/SuperBowl";
 
 const FeaturedActivityCarousel: FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -33,16 +34,18 @@ const FeaturedActivityCarousel: FC = () => {
         setCurrentSlide={handleFocus}
         className="absolute -translate-y-1/2 left-1/2 -translate-x-1/2"
       />
-      <div className="bg-pattern-green h-[424px] flex items-center justify-center pt-8">
+      <div className="bg-pattern-green  flex items-center justify-center py-16">
         <div className="flex flex-row gap-5 container px-4  items-center">
           <Carousel className="w-full" setApi={setApi}>
             <CarouselContent>
               <CarouselItem className="flex justify-center">
-                <div className="max-w-[956px] flex flex-row justify-between gap-20">
+                <div className="max-w-[956px] flex flex-row items-center justify-between gap-20">
                   <h2 className=" mb-4 text-4xl font-bold w-1/2">
                     Test Your Knowledge With Some Quick Trivia!
                   </h2>
-                  <div className="flex flex-col w-1/2"></div>
+                  <div className="flex flex-col w-1/2">
+                    <SuperBowl />
+                  </div>
                 </div>
               </CarouselItem>
               <CarouselItem>Article</CarouselItem>
