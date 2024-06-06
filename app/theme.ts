@@ -94,6 +94,16 @@ const theme = extendTheme({
         }),
       },
     },
+    MuiInputBase: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "& > .MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.vars.palette.warning.main,
+            borderWidth: "2px",
+          },
+        }),
+      },
+    },
     MuiPaginationItem: {
       styleOverrides: {
         root: ({ theme }) => ({

@@ -1,8 +1,12 @@
 import { useFormStatus } from "react-dom";
 import Button from "../../global/Button";
-import { PropsWithChildren } from "react";
+import { ButtonProps } from "@mui/material";
 
-const SubmitButton = ({ children }: PropsWithChildren) => {
+type SubmitButtonProps = ButtonProps & {
+  children: React.ReactNode;
+};
+
+const SubmitButton = ({ children, ...props }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
   return (
@@ -11,6 +15,7 @@ const SubmitButton = ({ children }: PropsWithChildren) => {
       variant="contained"
       color="warning"
       type="submit"
+      {...props}
     >
       {pending ? "Submitting..." : children}
     </Button>
