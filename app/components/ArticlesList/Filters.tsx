@@ -1,7 +1,7 @@
 "use client";
 
-import { Chip, CircularProgress } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
+import { Chip } from "@mui/material";
+import { useCallback } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Category, GameCategory } from "@/app/types/category/types";

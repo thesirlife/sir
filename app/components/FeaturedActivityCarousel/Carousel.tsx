@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -11,8 +11,17 @@ import {
 } from "@/components/ui/carousel";
 import DailyChecklist from "../DailyChecklist";
 import SuperBowl from "../HardCodedForms/SuperBowl";
+import { Post } from "@/app/types/post/types";
+import ArticleCard from "../ArticleCard";
+import Link from "next/link";
 
-const FeaturedActivityCarousel: FC = () => {
+type FeaturedActivityCarouselProps = {
+  article: Post;
+};
+
+const FeaturedActivityCarousel = ({
+  article,
+}: FeaturedActivityCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
 
@@ -39,7 +48,7 @@ const FeaturedActivityCarousel: FC = () => {
           <Carousel className="w-full" setApi={setApi}>
             <CarouselContent>
               <CarouselItem className="flex justify-center">
-                <div className="max-w-[956px] flex flex-row items-center justify-between gap-20">
+                <div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full">
                   <h2 className=" mb-4 text-4xl font-bold w-1/2">
                     Test Your Knowledge With Some Quick Trivia!
                   </h2>
@@ -48,7 +57,23 @@ const FeaturedActivityCarousel: FC = () => {
                   </div>
                 </div>
               </CarouselItem>
-              <CarouselItem>Article</CarouselItem>
+              <CarouselItem>
+                <div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full">
+                  <h2 className="text-4xl font-bold w-1/2">
+                    {article.title.rendered}
+                  </h2>
+                  <p>{article.excerpt.rendered}</p>
+                  <div className="flex flex-col w-1/2">
+                    <Link href={article.slug}>
+                      <ArticleCard
+                        header={article.title.rendered}
+                        description={article.excerpt.rendered}
+                        imageId={article.featured_media}
+                      />
+                    </Link>
+                  </div>
+                </div>
+              </CarouselItem>
               <CarouselItem>Video</CarouselItem>
               <CarouselItem>Feedback</CarouselItem>
             </CarouselContent>

@@ -3,7 +3,6 @@
 import { Chip, Divider, Paper } from "@mui/material";
 import { PropsWithChildren, useState } from "react";
 import SubmitButton from "../Register/Form/SubmitButton";
-import { set } from "zod";
 
 export type Choice = {
   text: string;
@@ -20,6 +19,7 @@ const HardCodedForm = ({
 }: PropsWithChildren<HardCodedFormProps>) => {
   const [currentChoice, setCurrentChoice] = useState<Choice>();
   const [isCorrect, setIsCorrect] = useState<boolean>();
+  const [submitted, setSubmittted] = useState<boolean>();
 
   const checkAnswer = (choice: Choice) => {
     if (choice.isAnswer) {
@@ -27,6 +27,7 @@ const HardCodedForm = ({
     } else {
       setIsCorrect(false);
     }
+    setSubmittted(true);
   };
 
   return (
@@ -37,8 +38,10 @@ const HardCodedForm = ({
         {choices.map((choice) => {
           return (
             <Chip
-              className={`cursor-pointer flex justify-start text-lg text-navy-primary border-navy-secondary py-3 px-4 rounded-full h-full leading-4 ${
-                choice === currentChoice ? "bg-green-primary text-white" : ""
+              className={`hover:border-orange-primary cursor-pointer flex justify-start text-lg  border-navy-secondary py-3 px-4 rounded-full h-full leading-4 ${
+                choice === currentChoice
+                  ? "border-green-primary text-green-primary"
+                  : "text-navy-primary"
               }`}
               key={choice.text}
               variant="outlined"
@@ -50,15 +53,20 @@ const HardCodedForm = ({
         })}
       </div>
       <Divider className="my-4" />
-      <SubmitButton
-        onClick={() => checkAnswer(currentChoice as Choice)}
-        disabled={!currentChoice?.text}
-      >
-        Check Answer
-      </SubmitButton>
 
-      {isCorrect !== undefined && (
-        <div className="mt-4">{isCorrect ? "Correct!" : "Incorrect!"}</div>
+      {!submitted ? (
+        <SubmitButton
+          onClick={() => checkAnswer(currentChoice as Choice)}
+          disabled={!currentChoice?.text}
+        >
+          Check Answer
+        </SubmitButton>
+      ) : (
+        isCorrect !== undefined && (
+          <div className="mt-4 font-semibold text-lg">
+            {isCorrect ? "Correct!" : "Incorrect!"}
+          </div>
+        )
       )}
     </Paper>
   );

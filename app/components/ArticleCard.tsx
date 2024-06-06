@@ -1,13 +1,15 @@
-import Image, { ImageProps } from "next/image";
+"use client";
+
+import Image from "next/image";
 import IconWithBackground from "./IconWithBackground";
 import { PodcastsOutlined, NavigateNext } from "@mui/icons-material";
 import { Paper, PaperProps, SvgIconTypeMap } from "@mui/material";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import Button from "./global/Button";
 import getTagById from "../data/getTagById";
 import getMediaById from "../data/getMediaById";
-import Link from "next/link";
+import { Media } from "../types/media/types";
 
 type ArticleCardProps = PaperProps & {
   header: string;
@@ -33,7 +35,7 @@ const ArticleTypeDictionary: Record<string, string> = {
 // I want to maybe consolidate this component with CtaBox, but they're almost different enough to warrant keeping separate
 // I think there'd be a lot of conditional CSS if I tried to combine them, which could be confusing
 
-const ArticleCard = async ({
+const ArticleCard = ({
   icon,
   header,
   url,
@@ -46,24 +48,31 @@ const ArticleCard = async ({
   children,
   ...props
 }: PropsWithChildren<ArticleCardProps>) => {
-  const imageUrl = await getMediaById(imageId);
+  const [imageUrl, setImageUrl] = useState<Media>();
+  const [tag, setTag] = useState<string>("");
+  const [articleUrl, setArticleUrl] = useState<string>("");
+
+  useEffect(() => {
+    (async () => {
+      setImageUrl(await getMediaById(imageId));
+    })();
+
+    (async () => {
+      if (!tagId || (await getTagById(tagId)) === undefined) {
+        setTag(ArticleTypeDictionary.article);
+      } else {
+        setTag((await getTagById(tagId)).slug);
+      }
+    })();
+    if (isGame) {
+      setTag("game");
+      setArticleUrl(`/brain-games/${url}`);
+    } else {
+      setArticleUrl(`/general-learning/${url}`);
+    }
+  }, [imageId, isGame, tagId, url]);
+
   const Icon = icon;
-
-  let tag;
-
-  if (!tagId || (await getTagById(tagId)) === undefined) {
-    tag = ArticleTypeDictionary.article;
-  } else {
-    tag = (await getTagById(tagId)).slug;
-  }
-
-  if (isGame) {
-    tag = "game";
-  }
-
-  const articleUrl = isGame
-    ? `/brain-games/${url}`
-    : `/general-learning/${url}`;
 
   return (
     <Paper
@@ -72,7 +81,7 @@ const ArticleCard = async ({
       {...props}
       className="flex flex-row gap-4 min-h-[192px] p-8"
     >
-      {imageUrl.source_url !== undefined && (
+      {imageUrl !== undefined && (
         <div className="basis-1/2 relative">
           <Image
             src={imageUrl.source_url}

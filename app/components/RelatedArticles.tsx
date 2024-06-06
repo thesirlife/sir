@@ -7,7 +7,7 @@ type RelatedArticlesProps = {
   articles?: any[];
 };
 
-const RelatedArticles = ({ header }: RelatedArticlesProps) => {
+const RelatedArticles = async ({ header }: RelatedArticlesProps) => {
   return (
     <div className="py-20 bg-green-primary w-full">
       <div className="flex flex-col items-center">

@@ -1,8 +1,7 @@
 import { X, Facebook, Email } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
-import { FC } from "react";
 
-const SocialShare: FC = () => {
+const SocialShare = () => {
   return (
     <div className="flex flex-col gap-2">
       <p className="drop-shadow-sm font-medium">Share this article:</p>

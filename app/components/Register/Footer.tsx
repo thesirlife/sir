@@ -1,8 +1,7 @@
 import { Divider } from "@mui/material";
 import Link from "next/link";
-import { FC } from "react";
 
-const LoggedOutFooter: FC = () => {
+const LoggedOutFooter = () => {
   return (
     <footer className="bg-green-primary flex flex-row justify-between h-[72px] align-center px-8 ">
       <p className="items-center flex">&copy; SIR 2024</p>

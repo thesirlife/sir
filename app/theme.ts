@@ -81,7 +81,6 @@ const theme = extendTheme({
           backgroundColor: theme.vars.palette.primary.main,
           color: theme.vars.palette.common.white,
         }),
-
         outlinedSecondary: ({ theme }) => ({
           "&.MuiChip-clickable": {
             backgroundColor: theme.vars.palette.common.background,

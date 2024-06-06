@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/app/sir-header-logo.svg";
-import { FC } from "react";
 import Button from "./Button";
 import { ArrowForward } from "@mui/icons-material";
 
@@ -9,7 +8,7 @@ type HeaderProps = {
   isLoggedIn?: boolean;
 };
 
-const Header: FC<HeaderProps> = ({ isLoggedIn }: HeaderProps) => {
+const Header = ({ isLoggedIn }: HeaderProps) => {
   return (
     <header className="bg-green-primary flex px-12 flex-row justify-between h-[72px] align-center ">
       <div className="items-center flex">

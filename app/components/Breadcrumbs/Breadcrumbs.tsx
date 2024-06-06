@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { FC, Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Home, ViewModule } from "@mui/icons-material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { SvgIconTypeMap } from "@mui/material";
@@ -31,7 +31,7 @@ const Breadcrumbs = ({ title = "" }: BreadcrumbsProps) => {
     pathNames.unshift(title);
   }
 
-  const Seperator: FC = () => <span className="px-2"> / </span>;
+  const Seperator = () => <span className="px-2"> / </span>;
 
   return (
     <div>

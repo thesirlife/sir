@@ -29,6 +29,9 @@ const ArticlesList = async ({
 
   const categoryList = await getCategories();
 
+  // should we lift up the fethches from articlecard to here and homepage?
+  // would need to somehow pass the imageId to the articlecard
+
   return (
     <div className="max-w-[662px] w-full">
       <Filters categories={categories} categoryList={categoryList} />

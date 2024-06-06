@@ -1,6 +1,5 @@
 import { Paper, Chip } from "@mui/material";
 import Image from "next/image";
-import { FC } from "react";
 import { CheckCircle } from "@mui/icons-material";
 
 // this will change eventually when we get the response from the server
