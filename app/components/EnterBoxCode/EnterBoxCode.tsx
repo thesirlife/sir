@@ -1,14 +1,15 @@
 "use client";
 
 import SubmitButton from "../Register/Form/SubmitButton";
-import { FormState, login } from "@/app/actions/logIn";
 import { useFormState } from "react-dom";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { SetStateAction, useRef, useState } from "react";
+import { Divider } from "@mui/material";
+import { checkBoxNumber, FormState } from "@/app/actions/checkBoxNumber";
 
 const EnterBoxCodeForm = () => {
-  const [formState, action] = useFormState(login, {
-    status: "pending" as FormState["status"],
+  const [formState, action] = useFormState(checkBoxNumber, {
+    verified: false as FormState["verified"],
   });
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [otp, setOtp] = useState("");
@@ -31,11 +32,14 @@ const EnterBoxCodeForm = () => {
   return (
     <div>
       <div className="flex flex-col items-center">
-        <h2 className="font-bold">Welcome to the SIR Online Experience</h2>
-        <p className="text-lg mb-4 opacity-60">
+        <h2 className="font-bold text-center text-navy-primary mb-1">
+          Welcome to the SIR Online Experience
+        </h2>
+        <p className="text-lg opacity-60">
           Sign in to access your SIR Community, games, and more.
         </p>
       </div>
+      <Divider className="my-8" flexItem />
       <form action={action}>
         <div className="flex flex-col gap-4 [&>*]:max-w-[400px] items-center">
           <MuiOtpInput
@@ -45,15 +49,18 @@ const EnterBoxCodeForm = () => {
             onChange={handleCodeEnter}
             onComplete={handleCompleted}
             validateChar={validateChar}
-            className="gap-2 border-orange-primary"
+            className="gap-3 border-orange-primary"
             TextFieldsProps={{ placeholder: "-" }}
           />
-          <SubmitButton>Log In</SubmitButton>
-          {formState.status === "error" && (
-            <p className="text-red-500 font-semibold text-center">
-              Your credentials are invalid, please try again.
-            </p>
-          )}
+          <SubmitButton>Continue</SubmitButton>
+          {
+            (formState.verified = false && (
+              <p className="text-red-500 font-semibold text-center">
+                Sorry, we don&apos;t recognize the number you entered. Please
+                check your box code and try again.
+              </p>
+            ))
+          }
         </div>
       </form>
     </div>

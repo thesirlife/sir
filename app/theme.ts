@@ -98,7 +98,8 @@ const theme = extendTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           "& > .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.vars.palette.warning.light,
+            borderColor: theme.vars.palette.warning.main,
+            borderWidth: "2px",
           },
         }),
       },
