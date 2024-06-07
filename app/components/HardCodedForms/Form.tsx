@@ -30,6 +30,7 @@ const HardCodedForm = ({
     setSubmittted(true);
   };
 
+  console.log(currentChoice);
   return (
     <Paper elevation={2} className="p-6" square>
       <h2 className="text-navy-primary text-xl font-bold">{children}</h2>
@@ -40,7 +41,7 @@ const HardCodedForm = ({
             <Chip
               className={`hover:border-orange-primary cursor-pointer flex justify-start text-lg  border-navy-secondary py-3 px-4 rounded-full h-full leading-4 ${
                 choice === currentChoice
-                  ? "border-green-primary text-green-primary"
+                  ? "bg-green-primary text-white"
                   : "text-navy-primary"
               }`}
               key={choice.text}

@@ -1,4 +1,4 @@
-export type Post = {
+export type Page = {
   date: string;
   date_gmt: string;
   guid: {
@@ -77,11 +77,12 @@ export type Post = {
   modified: string;
   modified_gmt: string;
   slug: string;
-  status: "publish" | "draft" | "pending" | "private";
+  status: string;
   type: string;
-  password?: string;
+  password: string;
   permalink_template: string;
   generated_slug: string;
+  parent: number;
   title: {
     raw: string;
     rendered: string;
@@ -99,27 +100,11 @@ export type Post = {
     protected: boolean;
   };
   featured_media: number;
-  comment_status: "open" | "closed";
-  ping_status: "open" | "closed";
-  format: "standard";
+  comment_status: string;
+  ping_status: string;
+  menu_order: number;
   meta: {
-    _genesis_block_theme_hide_title: boolean;
     footnotes: string;
   };
-  sticky: boolean;
   template: string;
-  categories: number[];
-  tags?: number[];
-  "game-categories"?: number[];
-  game_link?: string;
-};
-
-export type Articles<T> = {
-  total: string;
-  articles: T[];
-};
-
-export type getPostsProps = {
-  categories?: number;
-  offset: number;
 };

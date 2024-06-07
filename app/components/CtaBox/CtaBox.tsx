@@ -10,6 +10,8 @@ import LinkWithIcon from "../LinkWithIcon";
 
 type CtaBoxProps = PaperProps & {
   image: ImageProps["src"];
+  imageWidth?: number;
+  imageHeight?: number;
   header?: string;
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
@@ -30,6 +32,8 @@ const CtaBox = ({
   header,
   icon,
   link,
+  imageHeight,
+  imageWidth,
   imageOnTop = true,
   narrow,
   children,
@@ -49,7 +53,13 @@ const CtaBox = ({
             imageOnTop ? "order-first" : "order-last"
           }`}
         >
-          <Image src={image} alt={header || ""} className="w-full" />
+          <Image
+            src={image}
+            alt={header || ""}
+            width={imageWidth}
+            height={imageHeight}
+            className="w-full"
+          />
           {Icon && (
             <IconWithBackground
               icon={PodcastsOutlined}
@@ -58,16 +68,17 @@ const CtaBox = ({
           )}
         </div>
         <div className="flex flex-col basis-1/2  overflow-x-hidden">
-          <h3 className="text-xl">{header}</h3>
-          <p
+          <h3 className="text-xl font-bold mb-3">{header}</h3>
+          <div
             className={`${
               altBodyText
                 ? "text-navy-primary text-lg"
                 : "text-navy-secondary overflow-hidden whitespace-nowrap text-ellipsis"
             }`}
-          >
-            {children}
-          </p>
+            dangerouslySetInnerHTML={{
+              __html: children as string,
+            }}
+          ></div>
           {link ? (
             <div className="text-orange-primary text-sm uppercase mt-8">
               <LinkWithIcon

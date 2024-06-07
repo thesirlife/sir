@@ -4,7 +4,6 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { postUser } from "../data/postUser";
 import { signIn } from "@/auth";
-import { red } from "@mui/material/colors";
 
 const newUserSchema = z.object({
   email: z.string().email(),

@@ -10,6 +10,7 @@ import getRandomArticle from "../data/getRandomArticle";
 import getMediaById from "../data/getMediaById";
 import getTagById from "../data/getTagById";
 import getRandomVideo from "../data/getRandomVideo";
+import getPage from "../data/getPage";
 
 const Dashboard = async ({
   searchParams,
@@ -27,16 +28,17 @@ const Dashboard = async ({
 
   const article = await getRandomArticle();
   const video = await getRandomVideo();
+  const brainGamesPage = await getPage("29");
+  const generalLearningPage = await getPage("27");
+  const aiPage = await getPage("31");
 
   return (
     <div>
       {firstLogin ? <OnboardingModal /> : null}
       <WelcomeBanner user={name} />
       <FeaturedActivityCarousel article={article} video={video} />
-      <Suspense fallback={<CircularProgress />}>
-        <Explore />
-        <RelatedArticles header="Summer Box" />
-      </Suspense>
+      <Explore topPages={[brainGamesPage, generalLearningPage, aiPage]} />
+      <RelatedArticles header="Summer Box" />
     </div>
   );
 };
