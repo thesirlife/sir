@@ -1,14 +1,10 @@
 import WelcomeBanner from "@/app/components/WelcomeBanner";
 import Explore from "@/app/components/Explore";
 import FeaturedActivityCarousel from "@/app/components/FeaturedActivityCarousel/Carousel";
-import { Suspense } from "react";
 import RelatedArticles from "../components/RelatedArticles";
-import { CircularProgress } from "@mui/material";
 import { auth } from "@/auth";
 import OnboardingModal from "../components/OnboardingModal";
 import getRandomArticle from "../data/getRandomArticle";
-import getMediaById from "../data/getMediaById";
-import getTagById from "../data/getTagById";
 import getRandomVideo from "../data/getRandomVideo";
 import getPage from "../data/getPage";
 

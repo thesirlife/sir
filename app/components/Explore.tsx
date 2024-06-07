@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Page } from "../types/page/types";
 import CtaBox from "./CtaBox/CtaBox";
-import brainGames from "@/app/cta-images/brain-games.jpg";
+import community from "@/app/cta-images/community.jpg";
+import badges from "@/app/cta-images/badges.jpg";
+import CtaBoxWide from "./CtaBox/CtaBoxWide";
 
 type ExploreProps = {
   // i suck at ts
@@ -10,8 +12,10 @@ type ExploreProps = {
 
 const Explore = ({ topPages }: ExploreProps) => {
   return (
-    <div className="bg-navy-primary pb-8 flex flex-col items-center justify-center">
-      <h2 className="text-center py-10">Explore Something New:</h2>
+    <div className="bg-navy-primary pb-14 flex flex-col items-center justify-center">
+      <h2 className="text-center pb-8 pt-12 font-bold">
+        Explore Something New:
+      </h2>
       <div className="grid grid-cols-6 gap-6 container">
         {topPages.map((page: Page) => {
           return (
@@ -40,28 +44,35 @@ const Explore = ({ topPages }: ExploreProps) => {
         })}
 
         <div className="col-span-3 row-span-1">
-          <CtaBox image={brainGames} header="Target Tracker">
-            When you&apos;re driving through a busy intersection, how well can
-            you track other cars, pedestrians, and everything else moving around
-            you? Or if you&apos;re chaperoning a field trip and you&apos;re
-            responsible for several children, how easy is it for you to keep an
-            eye on all of them at the same time, and make sure none gets into
-            too much trouble? Or if you&apos;re playing basketball, soccer, or
-            another sport, how well can you keep your eye on the ball and the
-            other players all at once?
-          </CtaBox>
+          <CtaBoxWide
+            image={community}
+            header="SIR Facebook Community"
+            link={{
+              href: "",
+              label: "Open Community",
+              isExternal: true,
+            }}
+            imageHeight={152}
+            imageWidth={152}
+          >
+            Join other SIR members to discuss the box activities, brain games
+            and general learning.
+          </CtaBoxWide>
         </div>
         <div className="col-span-3 row-span-1">
-          <CtaBox image={brainGames} header="Target Tracker">
-            When you&apos;re driving through a busy intersection, how well can
-            you track other cars, pedestrians, and everything else moving around
-            you? Or if you&apos;re chaperoning a field trip and you&apos;re
-            responsible for several children, how easy is it for you to keep an
-            eye on all of them at the same time, and make sure none gets into
-            too much trouble? Or if you&apos;re playing basketball, soccer, or
-            another sport, how well can you keep your eye on the ball and the
-            other players all at once?
-          </CtaBox>
+          <CtaBoxWide
+            image={badges}
+            header="My Badges"
+            link={{
+              href: "/my-badges",
+              label: "View Badges",
+            }}
+            imageHeight={152}
+            imageWidth={152}
+          >
+            Explore the badges that you’ve earned by completing games and
+            challenges.
+          </CtaBoxWide>
         </div>
       </div>
     </div>
