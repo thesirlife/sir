@@ -9,6 +9,7 @@ import OnboardingModal from "../components/OnboardingModal";
 import getRandomArticle from "../data/getRandomArticle";
 import getMediaById from "../data/getMediaById";
 import getTagById from "../data/getTagById";
+import getRandomVideo from "../data/getRandomVideo";
 
 const Dashboard = async ({
   searchParams,
@@ -25,14 +26,15 @@ const Dashboard = async ({
     : session?.user.email || "";
 
   const article = await getRandomArticle();
+  const video = await getRandomVideo();
 
   return (
     <div>
       {firstLogin ? <OnboardingModal /> : null}
       <WelcomeBanner user={name} />
-      <FeaturedActivityCarousel article={article} />
-      <Explore />
+      <FeaturedActivityCarousel article={article} video={video} />
       <Suspense fallback={<CircularProgress />}>
+        <Explore />
         <RelatedArticles header="Summer Box" />
       </Suspense>
     </div>
