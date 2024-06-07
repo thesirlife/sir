@@ -113,11 +113,11 @@ const ArticleCard = ({
           variant="text"
           className="flex flex-row gap-2 mt-"
           href={isGame ? gameUrl : articleUrl}
+          endIcon={<NavigateNext fontSize="medium" />}
         >
           {ArticleTypeDictionary[tag]
             ? ArticleTypeDictionary[tag]
             : "Read Article"}
-          <NavigateNext fontSize="medium" />
         </Button>
       </div>
     </Paper>

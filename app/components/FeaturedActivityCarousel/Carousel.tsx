@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -25,9 +25,21 @@ const FeaturedActivityCarousel = ({
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
 
+  console.log(currentSlide);
+
   const handleFocus = (slide?: number) => {
     setCurrentSlide(slide || 0);
   };
+
+  const scrollPrev = useCallback(() => {
+    setCurrentSlide((prev) => prev - 1);
+    if (api) api.scrollPrev();
+  }, [api]);
+  const scrollNext = useCallback(() => {
+    setCurrentSlide((next) => next + 1);
+
+    if (api) api.scrollNext();
+  }, [api]);
 
   useEffect(() => {
     if (!api) {
@@ -77,8 +89,8 @@ const FeaturedActivityCarousel = ({
               <CarouselItem>Video</CarouselItem>
               <CarouselItem>Feedback</CarouselItem>
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious onClick={scrollPrev} />
+            <CarouselNext onClick={scrollNext} />
           </Carousel>
         </div>
       </div>
