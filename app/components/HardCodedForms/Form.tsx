@@ -11,10 +11,12 @@ export type Choice = {
 
 type HardCodedFormProps = {
   choices: Choice[];
+  explanation: string;
 };
 
 const HardCodedForm = ({
   children,
+  explanation,
   choices,
 }: PropsWithChildren<HardCodedFormProps>) => {
   const [currentChoice, setCurrentChoice] = useState<Choice>();
@@ -30,7 +32,6 @@ const HardCodedForm = ({
     setSubmittted(true);
   };
 
-  console.log(currentChoice);
   return (
     <Paper elevation={2} className="p-6" square>
       <h2 className="text-navy-primary text-xl font-bold">{children}</h2>
@@ -63,11 +64,7 @@ const HardCodedForm = ({
           Check Answer
         </SubmitButton>
       ) : (
-        isCorrect !== undefined && (
-          <div className="mt-4 font-semibold text-lg">
-            {isCorrect ? "Correct!" : "Incorrect!"}
-          </div>
-        )
+        explanation
       )}
     </Paper>
   );
