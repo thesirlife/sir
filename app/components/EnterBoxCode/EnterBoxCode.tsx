@@ -49,8 +49,13 @@ const EnterBoxCodeForm = () => {
             onChange={handleCodeEnter}
             onComplete={handleCompleted}
             validateChar={validateChar}
-            className="gap-3 border-orange-primary"
+            className="gap-3"
             TextFieldsProps={{ placeholder: "-" }}
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: (theme) => theme.palette.warning.main
+              },
+            }}
           />
           <SubmitButton>Continue</SubmitButton>
           {
