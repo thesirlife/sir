@@ -55,7 +55,7 @@ const FeaturedActivityCarousel = ({
         setCurrentSlide={handleFocus}
         className="absolute -translate-y-1/2 left-1/2 -translate-x-1/2"
       />
-      <div className="bg-pattern-green flex items-center justify-center py-16">
+      <div className="bg-pattern-green overflow-hidden flex items-center justify-center py-16">
         <div className="flex flex-row gap-5 px-4  items-center">
           <Carousel className="w-full" setApi={setApi}>
             <CarouselContent className="container ">
