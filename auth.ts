@@ -1,11 +1,41 @@
 import NextAuth, { NextAuthConfig, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { redirect } from "next/navigation";
+
+type AuthResponse = {
+  success: boolean;
+  statusCode: number;
+  code: string;
+  message: string;
+  data: {
+    token: string;
+    id: number;
+    email: string;
+    nicename: string;
+    firstName: string;
+    lastName: string;
+    displayName: string;
+  };
+};
 
 export const authOptions: NextAuthConfig = {
   pages: {
     signIn: "/login",
     signOut: "/auth/signout",
+  },
+
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        // User is available during sign-in
+        token.id = user.id;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      session.user.name = token.name as string;
+      session.user.id = token.id as string;
+      return session;
+    },
   },
   // Configure one or more authentication providers
   providers: [
@@ -27,12 +57,12 @@ export const authOptions: NextAuthConfig = {
             return null;
           }
 
-          const parsedResponse = await res.json();
-          const jwt = parsedResponse.access_token;
+          const parsedResponse: AuthResponse = await res.json();
 
+          const jwt = parsedResponse.data.token;
           return {
             ...credentials,
-            name: parsedResponse.firstName,
+            name: parsedResponse.data.firstName,
             jwt,
           } as User;
         } catch (e) {

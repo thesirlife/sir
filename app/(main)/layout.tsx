@@ -10,6 +10,8 @@ const MainLayout = async ({ children }: PropsWithChildren) => {
     redirect("/enter-box-code");
   }
 
+  // console.log(session);
+
   return (
     <>
       <Header isLoggedIn={Boolean(session?.user.email)} />
