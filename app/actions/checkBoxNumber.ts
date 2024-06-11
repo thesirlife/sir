@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 // Looks like the MuiOtp component still is intended for use in client-side form libraries like RHF
 // and doesn't play well with server actions (passing a single value in a formData object)
