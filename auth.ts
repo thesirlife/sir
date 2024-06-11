@@ -23,20 +23,6 @@ export const authOptions: NextAuthConfig = {
     signOut: "/auth/signout",
   },
 
-  callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        // User is available during sign-in
-        token.id = user.id;
-      }
-      return token;
-    },
-    session({ session, token }) {
-      session.user.name = token.name as string;
-      session.user.id = token.id as string;
-      return session;
-    },
-  },
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({

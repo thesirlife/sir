@@ -6,7 +6,7 @@ const getStickyPosts = async (
   const postType = type === "general-learning" ? "posts" : "brain-games";
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/${postType}?sticky=true&_embed=true`
+      `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/${postType}?sticky=true&_embed=true&status=publish`
     );
 
     return await response.json();
