@@ -1,9 +1,10 @@
 import NextAuth, { NextAuthConfig, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { redirect } from "next/navigation";
 
 export const authOptions: NextAuthConfig = {
   pages: {
-    signIn: "/signin",
+    signIn: "/login",
     signOut: "/auth/signout",
   },
   // Configure one or more authentication providers

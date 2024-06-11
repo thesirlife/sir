@@ -10,18 +10,11 @@ export type FormState = {
 
 export const login = async (formState: FormState, formData: FormData) => {
   try {
-    await signIn("credentials", formData)
-      .then(() => {
-        formState.status = "success";
-      })
-      .catch(() => {
-        formState.status = "error";
-      });
+    formState.status = "success";
+    await signIn("credentials", formData);
   } catch (error) {
     if (error instanceof AuthError) formState.status = "error";
   }
-
-  revalidatePath("/");
 
   return {
     status: formState.status,

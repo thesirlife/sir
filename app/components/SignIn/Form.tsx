@@ -4,11 +4,14 @@ import { TextField } from "@mui/material";
 import SubmitButton from "../Register/Form/SubmitButton";
 import { FormState, login } from "@/app/actions/logIn";
 import { useFormState } from "react-dom";
+import { redirect } from "next/navigation";
 
 const SignInForm = () => {
   const [formState, action] = useFormState(login, {
     status: "pending" as FormState["status"],
   });
+
+  formState.status === "success" && redirect("/");
 
   return (
     <div>

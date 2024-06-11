@@ -10,8 +10,6 @@ type RelatedArticlesProps = {
 const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
   const articles = await getStickyPosts(type);
 
-  console.log(articles);
-
   return (
     <div className="py-20 bg-green-primary w-full">
       <div className="flex flex-col items-center">
