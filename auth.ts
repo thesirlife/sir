@@ -19,7 +19,7 @@ type AuthResponse = {
 
 export const authOptions: NextAuthConfig = {
   pages: {
-    signIn: "/login",
+    signIn: "/signin",
     signOut: "/auth/signout",
   },
 
