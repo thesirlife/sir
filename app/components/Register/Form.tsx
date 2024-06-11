@@ -28,11 +28,6 @@ const RegisterForm = () => {
     );
   }
 
-  // if (formState.status === "created") {
-  //   redirect(`/?created=true`);
-  // }
-
-  console.log(formState.status);
   return (
     <div>
       <div className="flex flex-col items-center">

@@ -116,7 +116,10 @@ const GeneralLearningArticle = async ({
           </aside>
         </div>
       </div>
-      <RelatedArticles header="Related Articles & Games" />
+      <RelatedArticles
+        header="Related Articles & Games"
+        type="general-learning"
+      />
     </div>
   );
 };

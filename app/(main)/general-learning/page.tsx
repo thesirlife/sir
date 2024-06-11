@@ -23,7 +23,7 @@ const GeneralLearning = async ({
           <h1 className="text-3xl font-bold">General Learning</h1>
         </div>
       </div>
-      <RelatedArticles header="Related Articles" />
+      <RelatedArticles header="Related Articles" type="general-learning" />
       <ArticlesList
         articles={articles.articles}
         total={articles.total}
