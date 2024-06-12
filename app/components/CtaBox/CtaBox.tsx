@@ -3,8 +3,6 @@ import { ImageProps } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
 import { PodcastsOutlined } from "@mui/icons-material";
-import { SvgIconTypeMap } from "@mui/material";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
 import IconWithBackground from "../IconWithBackground";
 import LinkWithIcon from "../LinkWithIcon";
 

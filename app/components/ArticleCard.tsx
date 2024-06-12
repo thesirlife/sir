@@ -83,7 +83,6 @@ const ArticleCard = ({
       } else {
         setTag((await getTagById(tagId)).slug);
         setIcon(ArticleTypeDictionary[tag].icon);
-        console.log(icon);
       }
     })();
 
@@ -105,7 +104,7 @@ const ArticleCard = ({
       {imageUrl !== undefined && (
         <div className="basis-1/2 relative">
           <Image
-            src={imageUrl.source_url}
+            src={imageUrl.source_url || ""}
             alt={header}
             width={212}
             height={144}
