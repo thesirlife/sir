@@ -1,6 +1,3 @@
-import { PodcastsOutlined } from "@mui/icons-material";
-import brainGames from "@/app/cta-images/brain-games.jpg";
-import CtaBox from "../CtaBox/CtaBox";
 import { PropsWithChildren } from "react";
 
 type CarouselItemProps = {

@@ -78,7 +78,10 @@ const FeaturedActivityCarousel = ({
                   <div className="flex flex-col basis-1/2">
                     <CtaBox
                       header={article.title.rendered}
-                      image={brainGames}
+                      image={
+                        article._embedded?.["wp:featuredmedia"][0].source_url ||
+                        brainGames
+                      }
                       imageOnTop
                       link={{
                         href: `general-learning/${article.slug}`,
@@ -99,7 +102,10 @@ const FeaturedActivityCarousel = ({
                   <div className="flex flex-col basis-1/2">
                     <CtaBox
                       header={video.title.rendered}
-                      image={brainGames}
+                      image={
+                        article._embedded?.["wp:featuredmedia"][0].source_url ||
+                        brainGames
+                      }
                       imageOnTop
                       link={{
                         href: `general-learning/${video.slug}`,
