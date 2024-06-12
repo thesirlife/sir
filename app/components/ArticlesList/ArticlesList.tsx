@@ -38,7 +38,6 @@ const ArticlesList = async ({
         </p>
         <div className="flex flex-col gap-8">
           {articles?.map((article) => {
-            console.log(article);
             return (
               <ArticleCard
                 icon={PodcastsOutlined}

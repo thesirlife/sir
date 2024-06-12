@@ -113,6 +113,7 @@ const ArticleCard = ({
           variant="text"
           className="flex flex-row gap-2 mt-"
           href={isGame ? gameUrl : articleUrl}
+          target={isGame ? "_blank" : "_self"}
           endIcon={<NavigateNext fontSize="medium" />}
         >
           {ArticleTypeDictionary[tag]
