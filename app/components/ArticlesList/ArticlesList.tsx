@@ -1,7 +1,7 @@
 import { Post } from "@/app/types/post/types";
 import Filters from "./Filters";
 import ArticleCard from "../ArticleCard";
-import { PodcastsOutlined } from "@mui/icons-material";
+// import { PodcastsOutlined } from "@mui/icons-material";
 import Pagination from "./Pagination";
 import getAllGameCategories from "@/app/data/getAllGameCategories";
 import getAllCategories from "@/app/data/getAllCategories";
@@ -38,16 +38,15 @@ const ArticlesList = async ({
         </p>
         <div className="flex flex-col gap-8">
           {articles?.map((article) => {
+            const tagId =
+              article.tags?.length && article.tags?.length > 0
+                ? article.tags[0]
+                : null;
             return (
               <ArticleCard
-                icon={PodcastsOutlined}
                 isGame={isGame}
                 gameUrl={article["game_link"] || ""}
-                tagId={
-                  article.tags?.length && article.tags?.length > 0
-                    ? article.tags[0]
-                    : null
-                }
+                tagId={tagId}
                 url={article.slug}
                 imageId={article.featured_media}
                 header={article.title.rendered}

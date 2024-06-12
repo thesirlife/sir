@@ -13,9 +13,7 @@ type CtaBoxProps = PaperProps & {
   imageWidth?: number;
   imageHeight?: number;
   header?: string;
-  icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
-    muiName: string;
-  };
+  icon?: JSX.Element;
   link?: {
     href: string;
     label?: string;
@@ -62,7 +60,7 @@ const CtaBox = ({
           />
           {Icon && (
             <IconWithBackground
-              icon={PodcastsOutlined}
+              icon={<PodcastsOutlined />}
               className="absolute top-2 left-2"
             />
           )}
