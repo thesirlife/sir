@@ -21,40 +21,13 @@ const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
                 key={article.id}
                 header={article.title.rendered}
                 image={brainGames}
-                boxLink={`/general-learning/${article.slug}`}
+                boxlink={`/general-learning/${article.slug}`}
                 className="w-full col-span-1"
               >
                 {article.excerpt.rendered}
               </CtaBox>
             );
           })}
-          {/* <CtaBox
-            header="Video Title"
-            image={brainGames}
-            className="w-full col-span-1"
-          >
-            When you&apos;re driving through a busy intersection, how well can
-            you track other cars, pedestrians, and everything else moving around
-            you? Or if you&apos;re chaperoning
-          </CtaBox>
-          <CtaBox
-            header="Video Title"
-            image={brainGames}
-            className="w-full col-span-1"
-          >
-            When you&apos;re driving through a busy intersection, how well can
-            you track other cars, pedestrians, and everything else moving around
-            you? Or if you&apos;re chaperoning
-          </CtaBox>
-          <CtaBox
-            header="Video Title"
-            image={brainGames}
-            className="w-full col-span-1"
-          >
-            When you&apos;re driving through a busy intersection, how well can
-            you track other cars, pedestrians, and everything else moving around
-            you? Or if you&apos;re chaperoning
-          </CtaBox> */}
         </div>
       </div>
     </div>

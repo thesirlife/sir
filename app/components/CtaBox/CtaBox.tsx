@@ -23,7 +23,7 @@ type CtaBoxProps = PaperProps & {
   };
   narrow?: boolean;
   altBodyText?: boolean;
-  boxLink?: string;
+  boxlink?: string;
   imageOnTop?: boolean;
 };
 
