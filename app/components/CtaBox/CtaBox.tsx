@@ -19,7 +19,6 @@ type CtaBoxProps = PaperProps & {
   };
   narrow?: boolean;
   altBodyText?: boolean;
-  boxlink?: string;
   imageOnTop?: boolean;
 };
 

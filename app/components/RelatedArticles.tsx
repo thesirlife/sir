@@ -1,6 +1,5 @@
 import getStickyPosts from "../data/getStickyPosts";
-import CtaBox from "./CtaBox/CtaBox";
-import brainGames from "@/app/cta-images/brain-games.jpg";
+import ArticleCard from "./ArticleCard";
 
 type RelatedArticlesProps = {
   header: string;
@@ -18,7 +17,7 @@ const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
           {articles.map((article) => {
             const hasImage = Boolean(article._embedded?.["wp:featuredmedia"]);
             return (
-              <CtaBox
+              <ArticleCard
                 key={article.id}
                 header={article.title.rendered}
                 imageWidth={
@@ -38,13 +37,14 @@ const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
                     ? String(
                         article._embedded?.["wp:featuredmedia"][0].source_url
                       )
-                    : brainGames
+                    : ""
                 }
-                boxlink={`/general-learning/${article.slug}`}
+                imageId={article.featured_media}
+                url={`/general-learning/${article.slug}`}
                 className="w-full col-span-1"
-              >
-                {article.excerpt.rendered}
-              </CtaBox>
+                imageOnTop
+                description={article.excerpt.rendered}
+              />
             );
           })}
         </div>

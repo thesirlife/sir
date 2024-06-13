@@ -20,9 +20,12 @@ import { Media } from "../types/media/types";
 type ArticleCardProps = PaperProps & {
   header: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   description: string;
   url?: string;
   gameUrl?: string;
+  imageOnTop?: boolean;
   tagId?: number | null;
   isGame?: boolean;
   imageId: number;
@@ -62,6 +65,9 @@ const ArticleCard = ({
   isGame,
   description,
   imageId,
+  imageWidth,
+  imageOnTop,
+  imageHeight,
   gameUrl,
   tagId,
   children,
@@ -99,15 +105,17 @@ const ArticleCard = ({
       elevation={2}
       square
       {...props}
-      className="flex flex-row gap-4 min-h-[192px] p-8"
+      className={`flex ${
+        imageOnTop ? "flex-col" : "flex-row"
+      } gap-4 min-h-[192px] p-8`}
     >
       {imageUrl !== undefined && (
         <div className="basis-1/2 relative">
           <Image
             src={imageUrl.source_url || ""}
             alt={header}
-            width={212}
-            height={144}
+            width={imageWidth ? imageWidth : 212}
+            height={imageHeight ? imageHeight : 144}
             className="w-full rounded"
           />
 
@@ -121,14 +129,14 @@ const ArticleCard = ({
         <div>
           <h3 className="text-xl font-bold">{header}</h3>
           <div
-            className="text-navy-secondary "
+            className="text-navy-secondary mt-3"
             dangerouslySetInnerHTML={{ __html: description }}
           ></div>
         </div>
         <Button
           color="warning"
           variant="text"
-          className="flex flex-row gap-2 mt-"
+          className="flex flex-row gap-2 mt-3"
           href={isGame ? gameUrl : articleUrl}
           target={isGame ? "_blank" : "_self"}
           endIcon={<NavigateNext fontSize="medium" />}

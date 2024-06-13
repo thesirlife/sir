@@ -88,7 +88,10 @@ const GeneralLearningArticle = async ({
           <aside className="col-span-1">
             {isLoggedIn ? (
               <>
-                <SocialShare />
+                <SocialShare
+                  url={`${process.env.APP_URL}/${article[0].slug}`}
+                  title={article[0].title?.rendered}
+                />
                 <BasicCta
                   className="mt-10"
                   button={{
