@@ -23,6 +23,7 @@ export const register = async (formState: FormState, formData: FormData) => {
   });
   try {
     const response = await postUser({ email, username, password });
+    console.log(response);
     // test to see if we get a response.code, which means the user wasn't returned and there's an error
     if (response.code) {
       // test to see if the error is due to an email already existing w/ a user
@@ -43,11 +44,13 @@ export const register = async (formState: FormState, formData: FormData) => {
 
   // AuthJs's documentation is really bad here, and the types are not helpful
   // you can pass formData as the options param by itself, or an object with form values + redirectTo or redirect properties
-  await signIn("credentials", {
-    email,
-    password,
-    redirectTo: "/?newUser=true",
-  });
+  if (formState.status === "created") {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: "/?newUser=true",
+    });
+  }
 
   revalidatePath("/");
 
