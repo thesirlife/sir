@@ -8,7 +8,6 @@ const LoggedOutLayout = async ({ children }: PropsWithChildren) => {
 
   return (
     <div className="min-h-screen flex flex-col items-between justify-between bg-auth">
-      <Header isLoggedIn={Boolean(session?.user.email)} />
       {children}
       <LoggedOutFooter />
     </div>
