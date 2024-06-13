@@ -74,7 +74,6 @@ const FeaturedActivityCarousel = ({
                   <h2 className="text-4xl font-bold basis-1/2">
                     {article.title.rendered}
                   </h2>
-                  <p>{article.excerpt.rendered}</p>
                   <div className="flex flex-col basis-1/2">
                     <CtaBox
                       header={article.title.rendered}
