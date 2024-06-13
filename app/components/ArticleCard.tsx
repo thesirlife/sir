@@ -5,7 +5,6 @@ import IconWithBackground from "./IconWithBackground";
 import {
   PodcastsOutlined,
   NavigateNext,
-  PlayCircleFilledOutlined,
   ArticleOutlined,
   GamesOutlined,
   PlayCircleOutline,
@@ -94,7 +93,6 @@ const ArticleCard = ({
 
     if (isGame) {
       setTag("game");
-      setArticleUrl(`/brain-games/${url}`);
     } else {
       setArticleUrl(`/general-learning/${url}`);
     }

@@ -40,7 +40,9 @@ const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
                     : ""
                 }
                 imageId={article.featured_media}
-                url={`/general-learning/${article.slug}`}
+                url={article.slug}
+                isGame={type === "brain-games"}
+                gameUrl={article["game_link"]}
                 className="w-full col-span-1"
                 imageOnTop
                 description={article.excerpt.rendered}
