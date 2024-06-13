@@ -105,7 +105,7 @@ const ArticleCard = ({
       {...props}
       className={`flex ${
         imageOnTop ? "flex-col" : "flex-row"
-      } gap-4 min-h-[192px] p-8`}
+      } gap-5 min-h-[192px] p-8`}
     >
       {imageUrl !== undefined && (
         <div className="basis-1/2 relative">
