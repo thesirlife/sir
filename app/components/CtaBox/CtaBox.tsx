@@ -69,7 +69,7 @@ const CtaBox = ({
             className={`${
               altBodyText
                 ? "text-navy-primary text-lg"
-                : "text-navy-secondary overflow-hidden whitespace-nowrap text-ellipsis"
+                : "text-navy-secondary overflow-hidden "
             }`}
             dangerouslySetInnerHTML={{
               __html: children as string,
