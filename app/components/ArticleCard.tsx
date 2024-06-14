@@ -17,6 +17,7 @@ import getMediaById from "../data/getMediaById";
 import { Media } from "../types/media/types";
 
 type ArticleCardProps = PaperProps & {
+	session: object,
   header: string;
   image?: string;
   imageWidth?: number;
@@ -58,6 +59,7 @@ const ArticleTypeDictionary: Record<string, ArticleProperties> = {
 // I think there'd be a lot of conditional CSS if I tried to combine them, which could be confusing
 
 const ArticleCard = ({
+	session,
   header,
   url,
   image,
@@ -76,6 +78,14 @@ const ArticleCard = ({
   const [tag, setTag] = useState<string>("article");
   const [articleUrl, setArticleUrl] = useState<string>("");
   const [icon, setIcon] = useState<JSX.Element | null>(null);
+
+	const handleGame = (e) => {
+		e.preventDefault();
+		if (isGame) {
+			// Check if User has a BrainHQ User
+  		console.log(session);
+		}
+	};
 
   useEffect(() => {
     (async () => {
@@ -138,6 +148,7 @@ const ArticleCard = ({
           href={isGame ? gameUrl : articleUrl}
           target={isGame ? "_blank" : "_self"}
           endIcon={<NavigateNext fontSize="medium" />}
+					onClick={(e) => handleGame(e)}
         >
           {ArticleTypeDictionary[tag]
             ? ArticleTypeDictionary[tag].header

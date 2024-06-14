@@ -3,6 +3,8 @@ import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import RelatedArticles from "@/app/components/RelatedArticles";
 import { getBrainGames } from "@/app/data/getBrainGames";
 
+import { auth } from "@/auth"
+
 const BrainGames = async ({
   searchParams,
 }: {
@@ -15,6 +17,11 @@ const BrainGames = async ({
   const categories = searchParams?.categories || 0;
 
   const articles = await getBrainGames({ categories, offset });
+
+	// @TODO :: Redirect user to /login if not logged in
+	const session = await auth();
+  if (!session) return <div>Not authenticated</div>
+
   return (
     <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
       <div className="container">

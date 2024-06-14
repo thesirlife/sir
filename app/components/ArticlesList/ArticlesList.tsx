@@ -5,6 +5,7 @@ import ArticleCard from "../ArticleCard";
 import Pagination from "./Pagination";
 import getAllGameCategories from "@/app/data/getAllGameCategories";
 import getAllCategories from "@/app/data/getAllCategories";
+import { auth } from "@/auth";
 
 const ArticlesList = async ({
   offset,
@@ -19,6 +20,8 @@ const ArticlesList = async ({
   articles: Post[];
   total: string;
 }) => {
+	const session = await auth();
+
   const getCategories = async () => {
     if (isGame) {
       return await getAllGameCategories();
@@ -37,13 +40,14 @@ const ArticlesList = async ({
           {total} {isGame ? "Games" : "Articles"} Found
         </p>
         <div className="flex flex-col gap-8">
-          {articles?.map((article) => {
+          {session && articles?.map((article) => {
             const tagId =
               article.tags?.length && article.tags?.length > 0
                 ? article.tags[0]
                 : null;
             return (
               <ArticleCard
+								session={session}
                 isGame={isGame}
                 gameUrl={article["game_link"] || ""}
                 tagId={tagId}
