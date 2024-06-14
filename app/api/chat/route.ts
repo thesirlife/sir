@@ -11,31 +11,50 @@ export async function POST(req) {
 
 		// Extract the `messages` and `context` from the body of the request
 		const result = await req.json();
-		console.log(result);
+		const { message, session_id } = result;
+		// const { messages, session_id } = result;
+		// const lastInput = messages.slice(-1)[0].content;
 
-		const { messages, context, sessionId } = result;
-		const lastInput = messages.slice(-1)[0].content;
-		console.log(lastInput);
+		let responseStream = new TransformStream();
+		const writer = responseStream.writable.getWriter();
+		const encoder = new TextEncoder();
 
-		let response = await fetch(`http://54.69.12.63/message`, {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-				'content-type': 'application/json',
-				Authorization: 'Bearer ' + process.env.PROXYCURL_API_KEY,
-			},
-			body: JSON.stringify({
-				session_id: sessionId,
-				stream: true,
-				message: lastInput,
-			}),
-		});
-		console.log(response.json());
+		writer.write(encoder.encode('Vercel is a platform for....'));
 
-		// Convert the response into a friendly text-stream
-		const stream = OpenAIStream(response);
+		try {
+			const response = await fetch(`http://54.69.12.63/message`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Content-Encoding': 'none',
+					Authorization: 'Bearer ' + process.env.CHATBOT_API_KEY,
+				},
+				body: JSON.stringify({
+					session_id,
+					stream: true,
+					message,
+				}),
+			});
 
-		// Respond with the stream
-		return new StreamingTextResponse(stream);
+			return new Response(response.readable, {
+				headers: {
+					'Content-Type': 'text/event-stream',
+					Connection: 'keep-alive',
+					'Cache-Control': 'no-cache, no-transform',
+					'Content-Encoding': 'none',
+				},
+			});
+
+			// const stream = OpenAIStream(response, {
+			// 	onCompletion: async (completion) => {
+			// 		console.log(completion);
+			// 	},
+			// });
+
+			// return new StreamingTextResponse(stream);
+		} catch (error) {
+				console.error('Error calling API:', error);
+				return 'There was an error processing your request. Please try again later.';
+		}
 	// }
 }

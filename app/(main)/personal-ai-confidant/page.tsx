@@ -5,6 +5,7 @@ import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import ChatBot from "@/app/components/ChatBot/ChatBot";
 
 async function getChatSession(user: object) {
+	console.log(process.env.CHATBOT_API_KEY);
 	const sessionId = await fetch('http://54.69.12.63/sessions', {
 		method: 'POST',
 		body: JSON.stringify({
@@ -12,7 +13,7 @@ async function getChatSession(user: object) {
 		}),
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' + process.env.PROXYCURL_API_KEY,
+			Authorization: 'Bearer ' +  process.env.CHATBOT_API_KEY,
 		},
 	})
 		.then(async (res) => {
