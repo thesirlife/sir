@@ -23,7 +23,7 @@ const BrainGames = async ({
           <h1 className="text-3xl font-bold">Brain Games</h1>
         </div>
       </div>
-      <RelatedArticles header="Related Articles" />
+      <RelatedArticles header="Related Articles" type="brain-games" />
       <ArticlesList
         isGame
         articles={articles.articles}

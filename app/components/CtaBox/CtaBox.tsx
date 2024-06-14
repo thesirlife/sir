@@ -3,8 +3,6 @@ import { ImageProps } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
 import { PodcastsOutlined } from "@mui/icons-material";
-import { SvgIconTypeMap } from "@mui/material";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
 import IconWithBackground from "../IconWithBackground";
 import LinkWithIcon from "../LinkWithIcon";
 
@@ -13,9 +11,7 @@ type CtaBoxProps = PaperProps & {
   imageWidth?: number;
   imageHeight?: number;
   header?: string;
-  icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
-    muiName: string;
-  };
+  icon?: JSX.Element;
   link?: {
     href: string;
     label?: string;
@@ -23,7 +19,6 @@ type CtaBoxProps = PaperProps & {
   };
   narrow?: boolean;
   altBodyText?: boolean;
-  boxLink?: string;
   imageOnTop?: boolean;
 };
 
@@ -62,7 +57,7 @@ const CtaBox = ({
           />
           {Icon && (
             <IconWithBackground
-              icon={PodcastsOutlined}
+              icon={<PodcastsOutlined />}
               className="absolute top-2 left-2"
             />
           )}
@@ -73,7 +68,7 @@ const CtaBox = ({
             className={`${
               altBodyText
                 ? "text-navy-primary text-lg"
-                : "text-navy-secondary overflow-hidden whitespace-nowrap text-ellipsis"
+                : "text-navy-secondary overflow-hidden "
             }`}
             dangerouslySetInnerHTML={{
               __html: children as string,

@@ -31,7 +31,7 @@ const CtaBoxWide = ({
         <div className="flex flex-col overflow-x-hidden basis-2/3">
           <h3 className="text-xl font-bold mb-2">{header}</h3>
           <div
-            className="text-navy-secondary overflow-hidden whitespace-nowrap text-ellipsis"
+            className="text-navy-secondary overflow-hidden"
             dangerouslySetInnerHTML={{
               __html: children as string,
             }}

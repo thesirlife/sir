@@ -3,14 +3,16 @@
 import SubmitButton from "../Register/Form/SubmitButton";
 import { useFormState } from "react-dom";
 import { MuiOtpInput } from "mui-one-time-password-input";
-import { SetStateAction, useRef, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 import { Divider } from "@mui/material";
 import { checkBoxNumber, FormState } from "@/app/actions/checkBoxNumber";
+import { redirect } from "next/navigation";
 
 const EnterBoxCodeForm = () => {
   const [formState, action] = useFormState(checkBoxNumber, {
-    verified: false as FormState["verified"],
+    verified: null as FormState["verified"],
   });
+
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [otp, setOtp] = useState("");
 
@@ -29,6 +31,10 @@ const EnterBoxCodeForm = () => {
     return matchIsNumeric(value);
   };
 
+  useEffect(() => {
+    formState.verified === true && redirect("/register");
+  }, [formState]);
+
   return (
     <div>
       <div className="flex flex-col items-center">
@@ -46,26 +52,28 @@ const EnterBoxCodeForm = () => {
             length={6}
             autoFocus
             value={otp}
+            id="number"
             onChange={handleCodeEnter}
             onComplete={handleCompleted}
             validateChar={validateChar}
             className="gap-3"
-            TextFieldsProps={{ placeholder: "-" }}
+            TextFieldsProps={(index) => ({
+              placeholder: "-",
+              name: `number${index}`,
+            })}
             sx={{
               "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: (theme) => theme.palette.warning.main
+                borderColor: (theme) => theme.palette.warning.main,
               },
             }}
           />
           <SubmitButton>Continue</SubmitButton>
-          {
-            (formState.verified = false && (
-              <p className="text-red-500 font-semibold text-center">
-                Sorry, we don&apos;t recognize the number you entered. Please
-                check your box code and try again.
-              </p>
-            ))
-          }
+          {formState.verified === false && (
+            <p className="text-red-500 font-semibold text-center">
+              Sorry, we don&apos;t recognize the number you entered. Please
+              check your box code and try again.
+            </p>
+          )}
         </div>
       </form>
     </div>
@@ -73,6 +81,3 @@ const EnterBoxCodeForm = () => {
 };
 
 export default EnterBoxCodeForm;
-function useref(arg0: null) {
-  throw new Error("Function not implemented.");
-}

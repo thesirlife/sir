@@ -34,7 +34,7 @@ const Dashboard = async ({
       <WelcomeBanner user={name} />
       <FeaturedActivityCarousel article={article} video={video} />
       <Explore topPages={[brainGamesPage, generalLearningPage, aiPage]} />
-      <RelatedArticles header="Summer Box" />
+      <RelatedArticles header="Summer Box" type="general-learning" />
     </div>
   );
 };

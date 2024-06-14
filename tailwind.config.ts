@@ -19,6 +19,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "pattern-green": "url('./green-background.jpg')",
+        auth: "url('./auth.jpg')",
       },
       container: {
         screens: {

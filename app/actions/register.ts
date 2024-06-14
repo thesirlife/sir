@@ -43,11 +43,13 @@ export const register = async (formState: FormState, formData: FormData) => {
 
   // AuthJs's documentation is really bad here, and the types are not helpful
   // you can pass formData as the options param by itself, or an object with form values + redirectTo or redirect properties
-  await signIn("credentials", {
-    email,
-    password,
-    redirectTo: "/?newUser=true",
-  });
+  if (formState.status === "created") {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: "/?newUser=true",
+    });
+  }
 
   revalidatePath("/");
 

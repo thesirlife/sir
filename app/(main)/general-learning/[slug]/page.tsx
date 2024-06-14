@@ -18,12 +18,12 @@ const GeneralLearningArticle = async ({
 }) => {
   const session = await auth();
   const isLoggedIn = session?.user.email;
-  const article = await getPost(params?.slug);
-  const author = await getUserById(Number(article?.author));
+  const article = (await getPost(params?.slug)) ?? [];
+  const author = await getUserById(Number(article[0].author));
 
   const getTags = async () => {
     const tagData = await Promise.all(
-      (article?.tags ?? []).map((tagId) => getTagById(tagId))
+      (article[0]?.tags ?? []).map((tagId) => getTagById(tagId))
     );
     return tagData;
   };
@@ -38,7 +38,7 @@ const GeneralLearningArticle = async ({
       <div className="container">
         {isLoggedIn && (
           <div className="py-10 border-b-2 border-gray-600">
-            <Breadcrumbs title={article?.title?.rendered} />
+            <Breadcrumbs title={article[0]?.title?.rendered} />
           </div>
         )}
       </div>
@@ -67,12 +67,13 @@ const GeneralLearningArticle = async ({
                 isLoggedIn ? "" : "text-navy-primary"
               } text-4xl mb-8`}
             >
-              {article?.title?.rendered}
+              {article[0].title?.rendered}
             </h1>
+
             <div
               className={`${isLoggedIn ? "" : "[&>p]:text-navy-primary"}`}
               dangerouslySetInnerHTML={{
-                __html: String(article?.content?.rendered),
+                __html: String(article[0].content?.rendered),
               }}
             ></div>
             <BasicCta
@@ -87,7 +88,10 @@ const GeneralLearningArticle = async ({
           <aside className="col-span-1">
             {isLoggedIn ? (
               <>
-                <SocialShare />
+                <SocialShare
+                  url={`${process.env.APP_URL}/${article[0].slug}`}
+                  title={article[0].title?.rendered}
+                />
                 <BasicCta
                   className="mt-10"
                   button={{
@@ -116,7 +120,10 @@ const GeneralLearningArticle = async ({
           </aside>
         </div>
       </div>
-      <RelatedArticles header="Related Articles & Games" />
+      <RelatedArticles
+        header="Related Articles & Games"
+        type="general-learning"
+      />
     </div>
   );
 };

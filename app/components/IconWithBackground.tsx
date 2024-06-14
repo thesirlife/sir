@@ -1,23 +1,11 @@
-import { SvgIconProps, SvgIconTypeMap } from "@mui/material";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
+import { SvgIconProps } from "@mui/material";
 
 type IconWithBackgroundProps = SvgIconProps & {
-  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
-    muiName: string;
-  };
+  icon: JSX.Element | null;
 };
 
-const IconWithBackground = ({
-  icon,
-  className,
-  ...props
-}: IconWithBackgroundProps) => {
-  const Icon = icon;
-  return (
-    <div className={`bg-white rounded-full p-1 ${className}`}>
-      <Icon {...props} />
-    </div>
-  );
+const IconWithBackground = ({ icon, className }: IconWithBackgroundProps) => {
+  return <div className={`bg-white rounded-full p-1 ${className}`}>{icon}</div>;
 };
 
 export default IconWithBackground;

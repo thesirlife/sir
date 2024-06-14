@@ -6,9 +6,10 @@ import { ArrowForward } from "@mui/icons-material";
 
 type HeaderProps = {
   isLoggedIn?: boolean;
+  onLoginPage?: boolean;
 };
 
-const Header = ({ isLoggedIn }: HeaderProps) => {
+const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
   return (
     <header className="bg-green-primary flex px-12 flex-row justify-between h-[72px] align-center ">
       <div className="items-center flex">
@@ -28,6 +29,18 @@ const Header = ({ isLoggedIn }: HeaderProps) => {
             Get Support
           </Link>
         </nav>
+      ) : onLoginPage ? (
+        <div className="flex flex-row gap-4 items-center">
+          <p>Do you have a box number?</p>
+          <Button
+            variant="contained"
+            color="warning"
+            href="/enter-box-code"
+            endIcon={<ArrowForward fontSize="medium" />}
+          >
+            Create Your Account
+          </Button>
+        </div>
       ) : (
         <div className="flex flex-row gap-4 items-center">
           <p>Already created your account?</p>

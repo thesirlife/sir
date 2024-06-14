@@ -1,7 +1,8 @@
+import { LinkProps } from "@mui/material";
 import MuiButton, { ButtonProps as MuiButtonProps } from "@mui/material/Button";
 import { PropsWithChildren } from "react";
 
-type ButtonProps = MuiButtonProps;
+type ButtonProps = MuiButtonProps & Pick<LinkProps, "target">;
 
 const Button = ({ children, ...props }: PropsWithChildren<ButtonProps>) => {
   return (
