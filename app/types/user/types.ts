@@ -23,5 +23,10 @@ export type User = {
   };
   meta: {
     persisted_preferences: any[]; // You may want to specify a more specific type for persisted preferences if known
+    user_meta_brain_hq_user_id: number[];
+    user_meta_box_1_puzzle: ["on" | "off" | null];
+    user_meta_box_1_food_challenge: ["on" | "off" | null];
+    user_meta_box_1_featured_activity: ["on" | "off" | null];
+    user_meta_box_1_visited_community: ["on" | "off" | null];
   };
 };

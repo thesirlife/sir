@@ -1,5 +1,29 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import Badge from "@/app/components/Badge";
+
+type BadgeInfo = {
+  name: string;
+  image: string;
+};
+
+const BadgeInfo: BadgeInfo[] = [
+  {
+    name: "Complete the Food Challenge",
+    image: "",
+  },
+  {
+    name: "Complete the Puzzle",
+    image: "",
+  },
+  {
+    name: "Complete the Featured Activity",
+    image: "",
+  },
+  {
+    name: "Visit the Community",
+    image: "",
+  },
+];
 const MyBadges = async () => {
   return (
     <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
