@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Gloock, Roboto, Bitter } from "next/font/google";
-import { SessionProvider } from "next-auth/react";
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 import "./globals.css";
 
 import {
@@ -40,6 +41,7 @@ export default function RootLayout({
     <StyledEngineProvider injectFirst>
       <CssVarsProvider theme={theme}>
         <html lang="en">
+          <GoogleAnalytics gaId="G-MMYG827PJL" />
           <body
             className={`${gloock.variable} ${roboto.variable} ${bitter.variable}`}
           >
