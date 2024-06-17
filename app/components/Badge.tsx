@@ -1,13 +1,13 @@
 "use client";
 
 import { Paper, Chip, ChipProps } from "@mui/material";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { CheckCircle, CircleOutlined } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 type BadgeProps = {
   name: string;
   complete: boolean;
-  image: string;
+  image: StaticImageData;
 } & ChipProps;
 
 const Badge = ({ name, complete, image, onClick }: BadgeProps) => {
