@@ -139,7 +139,7 @@ const ArticleCard = ({
           href={isGame ? gameUrl : articleUrl}
           target={isGame ? "_blank" : "_self"}
           endIcon={<NavigateNext fontSize="medium" />}
-					onClick={() => sendGAEvent({ event: isGame ? 'gameClicked' : 'articleClicked', value: isGame ? gameUrl : articleUrl })}
+          onClick={() => sendGAEvent({ event: isGame ? 'gameClicked' : 'articleClicked', value: isGame ? gameUrl : articleUrl })}
         >
           {ArticleTypeDictionary[tag]
             ? ArticleTypeDictionary[tag].header
