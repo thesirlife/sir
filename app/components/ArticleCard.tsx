@@ -15,6 +15,7 @@ import Button from "./global/Button";
 import getTagById from "../data/getTagById";
 import getMediaById from "../data/getMediaById";
 import { Media } from "../types/media/types";
+import { sendGAEvent } from '@next/third-parties/google'
 
 type ArticleCardProps = PaperProps & {
   header: string;
@@ -138,6 +139,7 @@ const ArticleCard = ({
           href={isGame ? gameUrl : articleUrl}
           target={isGame ? "_blank" : "_self"}
           endIcon={<NavigateNext fontSize="medium" />}
+					onClick={() => sendGAEvent({ event: isGame ? 'gameClicked' : 'articleClicked', value: isGame ? gameUrl : articleUrl })}
         >
           {ArticleTypeDictionary[tag]
             ? ArticleTypeDictionary[tag].header
