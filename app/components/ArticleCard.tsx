@@ -15,6 +15,7 @@ import Button from "./global/Button";
 import getTagById from "../data/getTagById";
 import getMediaById from "../data/getMediaById";
 import { Media } from "../types/media/types";
+import { sendGAEvent } from '@next/third-parties/google'
 
 type ArticleCardProps = PaperProps & {
 	session: object,
@@ -81,10 +82,8 @@ const ArticleCard = ({
 
 	const handleGame = (e) => {
 		e.preventDefault();
-		if (isGame) {
-			// Check if User has a BrainHQ User
-  		console.log(session);
-		}
+    // Check if User has a BrainHQ User
+    console.log(session);
 	};
 
   useEffect(() => {
@@ -148,7 +147,12 @@ const ArticleCard = ({
           href={isGame ? gameUrl : articleUrl}
           target={isGame ? "_blank" : "_self"}
           endIcon={<NavigateNext fontSize="medium" />}
-					onClick={(e) => handleGame(e)}
+          onClick={(e) => {
+            sendGAEvent({ event: isGame ? 'gameClicked' : 'articleClicked', value: isGame ? gameUrl : articleUrl });
+            if (isGame) {
+              handleGame(e);
+            }
+          }}
         >
           {ArticleTypeDictionary[tag]
             ? ArticleTypeDictionary[tag].header
