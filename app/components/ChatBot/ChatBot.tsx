@@ -1,24 +1,12 @@
-"use client";
+'use client';
 
 import {
-	Alert,
 	Avatar,
-	Button,
 	Box,
-	Card,
-	CardActionArea,
-	CardContent,
-	CircularProgress,
 	LinearProgress,
-	Divider,
-	Drawer,
-	IconButton,
 	Input,
-	Snackbar,
-	Stack,
-	Toolbar,
 	Typography,
-} from "@mui/material";
+} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useState } from 'react';
 

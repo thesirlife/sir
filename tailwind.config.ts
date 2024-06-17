@@ -53,11 +53,11 @@ const config: Config = {
         roboto: ["var(--font-roboto)"],
         bitter: ["var(--font-bitter)"],
       },
-			maxWidth: {
+      maxWidth: {
         50: '50%',
         60: '60%',
         70: '70%',
-			}
+      }
     },
   },
   plugins: [],

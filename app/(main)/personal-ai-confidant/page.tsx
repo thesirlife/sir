@@ -25,14 +25,14 @@ async function getChatSession(userEmail: String) {
 
 const AIChatBot = async () => {
 	const session = await auth();
-  if (!session?.user.email) {
-    redirect(`/`);
-  }
+	if (!session?.user.email) {
+		redirect(`/`);
+	}
 
 	// @TODO :: set this to User Id from session instead of user email
 	const sessionId = await getChatSession(session?.user.email);
 
-  return (
+	return (
 		<>
 			<div className="bg-navy-primary h-full flex flex-col items-center justify-center">
 				<div className="container">
@@ -44,7 +44,7 @@ const AIChatBot = async () => {
 			</div>
 			<ChatBot sessionId={sessionId} />
 		</>
-  );
+	);
 };
 
 export default AIChatBot;

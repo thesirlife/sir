@@ -6,9 +6,9 @@ import { redirect } from "next/navigation";
 
 const SignInPage = async () => {
   const session = await auth();
-  // if (session?.user.email) {
-  //   redirect(`/`);
-  // }
+  if (session?.user.email) {
+    redirect(`/`);
+  }
 
   return (
     <>
