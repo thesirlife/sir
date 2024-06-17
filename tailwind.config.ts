@@ -40,6 +40,7 @@ const config: Config = {
         },
         blueGrey: {
           primary: blueGrey[800],
+          dark: blueGrey[900],
           50: blueGrey[50],
         },
         orange: {
@@ -52,6 +53,11 @@ const config: Config = {
         roboto: ["var(--font-roboto)"],
         bitter: ["var(--font-bitter)"],
       },
+			maxWidth: {
+        50: '50%',
+        60: '60%',
+        70: '70%',
+			}
     },
   },
   plugins: [],

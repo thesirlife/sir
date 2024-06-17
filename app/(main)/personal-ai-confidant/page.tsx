@@ -1,15 +1,14 @@
-// import { getServerSession } from 'next-auth';
-// import { authOptions } from '../../api/auth/[...nextauth]';
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import ChatBot from "@/app/components/ChatBot/ChatBot";
 
-async function getChatSession(user: object) {
-	console.log(process.env.CHATBOT_API_KEY);
+async function getChatSession(userEmail: String) {
 	const sessionId = await fetch('http://54.69.12.63/sessions', {
 		method: 'POST',
 		body: JSON.stringify({
-			user_id: user.userId,
+			user_id: userEmail,
 		}),
 		headers: {
 			'Content-Type': 'application/json',
@@ -18,34 +17,32 @@ async function getChatSession(user: object) {
 	})
 		.then(async (res) => {
 			const response = await res.json();
-			console.log(response.session_id);
 			return response.session_id;
 		})
 		.catch((err) => console.log(err));
-	console.log(sessionId);
 	return sessionId;
 }
 
 const AIChatBot = async () => {
-	// const session = await getServerSession(authOptions);
-	// const chatId = getChatSession(session.user);
-	const user = {
-		userId: 10,
-	};
-	const sessionId = await getChatSession(user);
-	console.log(sessionId);
+	const session = await auth();
+  if (!session?.user.email) {
+    redirect(`/`);
+  }
+
+	// @TODO :: set this to User Id from session instead of user email
+	const sessionId = await getChatSession(session?.user.email);
 
   return (
 		<>
 			<div className="bg-navy-primary h-full flex flex-col items-center justify-center">
 				<div className="container">
-					<div className="py-10">
+					<div className="py-10 px-4 sm:px-0">
 						<Breadcrumbs />
 						<h1 className="text-3xl font-bold">Personal AI Confidant</h1>
 					</div>
 				</div>
-				<ChatBot sessionId={sessionId} />
 			</div>
+			<ChatBot sessionId={sessionId} />
 		</>
   );
 };
