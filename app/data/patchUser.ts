@@ -28,12 +28,13 @@ const patchUser = async ({
       body: JSON.stringify({
         meta: {
           // we really need to just set the type of this stuff in WP to be a boolean instead of ON and OFF, this is ugly AF
-          [property]: value ? "on" : "off",
+          [property]: value ? ["on"] : ["off"],
         },
       }),
     }
   );
-  return await response.json();
+  const data = await response.json();
+  return data;
 };
 
 export default patchUser;
