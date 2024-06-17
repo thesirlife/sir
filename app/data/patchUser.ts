@@ -1,10 +1,9 @@
 import { User } from "../types/user/types";
 
-type MetaProperties =
-  | "user_meta_box_1_puzzle"
-  | "user_meta_box_1_food_challenge"
-  | "user_meta_box_1_featured_activity"
-  | "user_meta_box_1_visited_community";
+type MetaProperties = keyof Omit<
+  User["meta"],
+  "persisted_preferences" | "user_meta_brain_hq_user_id"
+>;
 
 type PatchUserProps = {
   id: number;
