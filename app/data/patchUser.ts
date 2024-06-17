@@ -6,7 +6,7 @@ type MetaProperties =
   | "user_meta_box_1_featured_activity";
 
 type PatchUserProps = {
-  id: string;
+  id: number;
   property: MetaProperties;
   value: boolean;
 };
@@ -22,6 +22,7 @@ const patchUser = async ({
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Basic c2lyZGV2OnJVU1MgYURLMCBCelk3IGx1Q00geDhNSyBhcEFa",
       },
       body: JSON.stringify({
         meta: {

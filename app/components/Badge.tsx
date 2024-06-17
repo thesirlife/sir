@@ -1,4 +1,4 @@
-import { Paper, Chip } from "@mui/material";
+import { Paper, Chip, PaperProps } from "@mui/material";
 import Image from "next/image";
 import { CheckCircle } from "@mui/icons-material";
 
@@ -7,7 +7,7 @@ type BadgeProps = {
   name: string;
   complete: boolean;
   image: string;
-};
+} & PaperProps;
 //
 
 const Badge = ({ name, complete, image }: BadgeProps) => {
