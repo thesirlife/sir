@@ -7,6 +7,7 @@ const getUserById = async (id: number): Promise<User> => {
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-cache",
     }
   );
   return data.json();

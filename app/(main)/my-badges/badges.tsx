@@ -2,13 +2,12 @@
 
 import Badge from "@/app/components/Badge";
 import { User } from "@/app/types/user/types";
+import patchUser from "@/app/data/patchUser";
 
 type BadgeInfo = {
   property: keyof Omit<
     User["meta"],
-    | "persisted_preferences"
-    | "user_meta_brain_hq_user_id"
-    | "user_meta_box_1_visited_community"
+    "persisted_preferences" | "user_meta_brain_hq_user_id"
   >;
   name: string;
   image: string;
@@ -30,6 +29,11 @@ const BadgeList: BadgeInfo[] = [
     image: "",
     property: "user_meta_box_1_featured_activity",
   },
+  {
+    name: "Visit the Community",
+    image: "",
+    property: "user_meta_box_1_visited_community",
+  },
 ];
 
 type BadgeProps = {
@@ -40,17 +44,26 @@ const Badges = ({ user }: BadgeProps) => {
   return (
     <>
       {BadgeList.map((badge) => {
+        const badgeComplete = user.meta[badge.property][0] == "on";
         return (
           <Badge
             key={badge.name}
             image="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/SMPTE_Color_Bars.svg/1200px-SMPTE_Color_Bars.svg.png"
             // this could be cleaned up immensely if we made these values in usermeta
-            complete={
-              user.meta[badge.property][0] == "off" ||
-              user.meta[badge.property][0] == null
-                ? false
-                : true
-            }
+            complete={badgeComplete ? true : false}
+            onClick={() => {
+              badgeComplete
+                ? patchUser({
+                    id: user.id,
+                    property: badge.property,
+                    value: false,
+                  })
+                : patchUser({
+                    id: user.id,
+                    property: badge.property,
+                    value: true,
+                  });
+            }}
             name={badge.name}
           />
         );
