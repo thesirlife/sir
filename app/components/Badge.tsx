@@ -1,16 +1,16 @@
-import { Paper, Chip } from "@mui/material";
+import { Paper, Chip, ChipProps } from "@mui/material";
 import Image from "next/image";
-import { CheckCircle } from "@mui/icons-material";
+import { CheckCircle, CircleOutlined } from "@mui/icons-material";
 
 // this will change eventually when we get the response from the server
 type BadgeProps = {
   name: string;
   complete: boolean;
   image: string;
-};
+} & ChipProps;
 //
 
-const Badge = ({ name, complete, image }: BadgeProps) => {
+const Badge = ({ name, complete, image, onClick }: BadgeProps) => {
   return (
     <Paper elevation={2} className="p-4 rounded-lg max-w-[270px] w-full">
       <div className="flex flex-col gap-3">
@@ -24,8 +24,18 @@ const Badge = ({ name, complete, image }: BadgeProps) => {
               icon={<CheckCircle />}
               label="COMPLETE"
               variant="filled"
+              onClick={onClick}
             />
-          ) : null}
+          ) : (
+            <Chip
+              className="font-medium tracking-wider"
+              color="primary"
+              icon={<CircleOutlined />}
+              label="MARK COMPLETE"
+              variant="outlined"
+              onClick={onClick}
+            />
+          )}
         </div>
       </div>
     </Paper>

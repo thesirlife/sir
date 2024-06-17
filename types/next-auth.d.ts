@@ -6,11 +6,13 @@ declare module "next-auth" {
    */
   interface User {
     email: string;
+    id: number;
     jwt: string;
   }
 
   interface Token {
     email: string;
+    id: number;
     jwt: string;
   }
 
@@ -18,6 +20,7 @@ declare module "next-auth" {
     jwt: string;
 
     user: {
+      id: number;
       email: string;
       name: string;
       lastName: string;

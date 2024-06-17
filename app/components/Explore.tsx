@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Page } from "../types/page/types";
 import CtaBox from "./CtaBox/CtaBox";
@@ -47,6 +49,7 @@ const Explore = ({ topPages }: ExploreProps) => {
           <CtaBoxWide
             image={community}
             header="SIR Facebook Community"
+            onClick={() => console.log("click community")}
             link={{
               href: "",
               label: "Open Community",
