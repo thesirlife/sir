@@ -69,53 +69,57 @@ const FeaturedActivityCarousel = ({
                   </div>
                 </div>
               </CarouselItem>
-              <CarouselItem className="flex justify-center">
-                <div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
-                  <h2 className="text-4xl font-bold basis-1/2">
-                    {article.title.rendered}
-                  </h2>
-                  <div className="flex flex-col basis-1/2">
-                    <CtaBox
-                      header={article.title.rendered}
-                      image={
-                        article._embedded?.["wp:featuredmedia"][0].source_url ||
-                        brainGames
-                      }
-                      imageOnTop
-                      link={{
-                        href: `general-learning/${article.slug}`,
-                        label: "Read Article",
-                      }}
-                    >
-                      {article.excerpt.rendered}
-                    </CtaBox>
-                  </div>
-                </div>
-              </CarouselItem>
-              <CarouselItem className="flex justify-center">
-                <div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
-                  <h2 className="text-4xl font-bold basis-1/2">
-                    {video.title.rendered}
-                  </h2>
-                  <p>{video.excerpt.rendered}</p>
-                  <div className="flex flex-col basis-1/2">
-                    <CtaBox
-                      header={video.title.rendered}
-                      image={
-                        article._embedded?.["wp:featuredmedia"][0].source_url ||
-                        brainGames
-                      }
-                      imageOnTop
-                      link={{
-                        href: `general-learning/${video.slug}`,
-                        label: "Watch Video",
-                      }}
-                    >
-                      {video.excerpt.rendered}
-                    </CtaBox>
-                  </div>
-                </div>
-              </CarouselItem>
+							{article && (
+								<CarouselItem className="flex justify-center">
+									<div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
+										<h2 className="text-4xl font-bold basis-1/2">
+											{article.title.rendered}
+										</h2>
+										<div className="flex flex-col basis-1/2">
+											<CtaBox
+												header={article.title.rendered}
+												image={
+													article._embedded?.["wp:featuredmedia"][0].source_url ||
+													brainGames
+												}
+												imageOnTop
+												link={{
+													href: `general-learning/${article.slug}`,
+													label: "Read Article",
+												}}
+											>
+												{article.excerpt.rendered}
+											</CtaBox>
+										</div>
+									</div>
+								</CarouselItem>
+							)}
+							{video && (
+								<CarouselItem className="flex justify-center">
+									<div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
+										<h2 className="text-4xl font-bold basis-1/2">
+											{video.title.rendered}
+										</h2>
+										<p>{video.excerpt.rendered}</p>
+										<div className="flex flex-col basis-1/2">
+											<CtaBox
+												header={video.title.rendered}
+												image={
+													article._embedded?.["wp:featuredmedia"][0].source_url ||
+													brainGames
+												}
+												imageOnTop
+												link={{
+													href: `general-learning/${video.slug}`,
+													label: "Watch Video",
+												}}
+											>
+												{video.excerpt.rendered}
+											</CtaBox>
+										</div>
+									</div>
+								</CarouselItem>
+							)}
               <CarouselItem className="flex justify-center">
                 Feedback
               </CarouselItem>

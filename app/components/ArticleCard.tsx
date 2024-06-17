@@ -18,7 +18,7 @@ import { Media } from "../types/media/types";
 import { sendGAEvent } from '@next/third-parties/google'
 
 type ArticleCardProps = PaperProps & {
-	session: object,
+  session: object,
   header: string;
   image?: string;
   imageWidth?: number;
@@ -60,7 +60,7 @@ const ArticleTypeDictionary: Record<string, ArticleProperties> = {
 // I think there'd be a lot of conditional CSS if I tried to combine them, which could be confusing
 
 const ArticleCard = ({
-	session,
+  session,
   header,
   url,
   image,
@@ -80,11 +80,42 @@ const ArticleCard = ({
   const [articleUrl, setArticleUrl] = useState<string>("");
   const [icon, setIcon] = useState<JSX.Element | null>(null);
 
-	const handleGame = (e) => {
-		e.preventDefault();
+  const handleGame = async (e) => {
+    e.preventDefault();
     // Check if User has a BrainHQ User
     console.log(session);
-	};
+    // const brainHqId = 10;
+    let brainHqId = 'u3267824';
+    if (brainHqId) {
+      // SSO into BrainHQ
+      const data = await fetch(`/api/brain-hq/user/login`, {
+        method: 'POST',
+        body: JSON.stringify({
+          uid: brainHqId,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const result = await data.json();
+      console.log(result);
+	    const { web } = result;
+      window.open( web, '_blank' ).focus();
+    } else {
+      // Create BrainHQ User and complete SSO
+      const data = await fetch(`/api/brain-hq/user/create`, {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: 1,
+          email: session?.user.email,
+          firstName: session?.user.firstName,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    }
+  };
 
   useEffect(() => {
     (async () => {
