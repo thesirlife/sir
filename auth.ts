@@ -18,6 +18,22 @@ type AuthResponse = {
 };
 
 export const authOptions: NextAuthConfig = {
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        // User is available during sign-in
+        token.id = user.id;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      session.user.name = token.name as string;
+      // @ts-ignore
+      // This is bad, but I don't have the patience to properly type this right now.
+      session.user.id = token.id;
+      return session;
+    },
+  },
   pages: {
     signIn: "/signin",
     signOut: "/auth/signout",
@@ -44,11 +60,11 @@ export const authOptions: NextAuthConfig = {
           }
 
           const parsedResponse: AuthResponse = await res.json();
-
           const jwt = parsedResponse.data.token;
           return {
             ...credentials,
             name: parsedResponse.data.firstName,
+            id: String(parsedResponse.data.id),
             jwt,
           } as User;
         } catch (e) {
