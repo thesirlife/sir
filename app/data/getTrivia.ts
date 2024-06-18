@@ -4,6 +4,9 @@ import dayjs from "dayjs";
 const getTrivia = async (): Promise<TriviaPost> => {
 	const sot = dayjs().startOf('day').format();
 	const eot = dayjs().endOf('day').format();
+	console.log(sot);
+	console.log(eot);
+	console.log(`${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/trivia?after=${sot}&before=${eot}`)
 
 	const response = await fetch(
     `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/trivia?after=${sot}&before=${eot}`,

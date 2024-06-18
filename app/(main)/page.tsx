@@ -30,6 +30,8 @@ const Dashboard = async ({
   const generalLearningPage = await getPage("27");
   const aiPage = await getPage("31");
 
+	console.log(trivia);
+
   return (
     <div>
       {firstLogin ? <OnboardingModal /> : null}
