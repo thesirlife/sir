@@ -4,24 +4,31 @@ import { redirect } from "next/navigation";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import ChatBot from "@/app/components/ChatBot/ChatBot";
 
-async function getChatSession(userEmail: String) {
-	const sessionId = await fetch('http://54.69.12.63/sessions', {
-		method: 'POST',
-		body: JSON.stringify({
-			user_id: userEmail,
-		}),
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' +  process.env.CHATBOT_API_KEY,
-		},
-	})
-		.then(async (res) => {
-			const response = await res.json();
-			return response.session_id;
-		})
-		.catch((err) => console.log(err));
-	return sessionId;
-}
+type Session = {
+	message: string,
+	session_id: string,
+};
+
+const getChatSession = async (userId: number) => {
+	try {
+		const result = await fetch(`${process.env.CHATBOT_IP}/sessions`, {
+			method: 'POST',
+			body: JSON.stringify({
+				user_id: userId,
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' +  process.env.CHATBOT_API_KEY,
+			},
+		});
+
+		const response: Session = await result.json();
+		return response.session_id;
+	} catch (error) {
+		console.error('Request error', error);
+		return '';
+	}
+};
 
 const AIChatBot = async () => {
 	const session = await auth();
@@ -29,8 +36,7 @@ const AIChatBot = async () => {
 		redirect(`/`);
 	}
 
-	// @TODO :: set this to User Id from session instead of user email
-	const sessionId = await getChatSession(session?.user.email);
+	const sessionId = await getChatSession(session?.user.id);
 
 	return (
 		<>

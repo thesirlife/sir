@@ -10,18 +10,22 @@ import {
 import SendIcon from '@mui/icons-material/Send';
 import { useState } from 'react';
 
-// this will change eventually when we get the response from the server
-type ChatBot = {
+type ChatBotProps = {
 	sessionId: string;
 };
-//
 
-const ChatBot = ({ sessionId }: ChatBot) => {
+type Message = {
+	id: string;
+	content: string;
+	role: string;
+};
+
+const ChatBot = ({ sessionId }: ChatBotProps) => {
 	const [loading, setIsLoading] = useState(false);
 	const [messages, setMessages] = useState([{
-		id: 1,
+		id: 'assistant-1',
 		content: "Welcome, I&apos;m your AI chat confidant!\n\nType in your thoughts or questions as if you&apos;re talking to a friend. The AI is here to listen and support you. Your conversations are private and confidential. No one else can see or access what you share.",
-		role: 'assistannt'
+		role: 'assistant'
 	}]);
 
 	const [input, setInput] = useState('');
@@ -31,7 +35,7 @@ const ChatBot = ({ sessionId }: ChatBot) => {
 		if (!trimmedText) return;
 
 		const userMessage = {
-				id: messages.length + 1,
+				id: `user-${messages.length + 1}`,
 				content: trimmedText,
 				role: 'user'
 		};
@@ -40,7 +44,7 @@ const ChatBot = ({ sessionId }: ChatBot) => {
 		setInput('');
 		setIsLoading(true);
 
-		const apiResponse = await fetch('http://54.69.12.63/message', {
+		const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_CHATBOT_IP}/message`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -73,17 +77,18 @@ const ChatBot = ({ sessionId }: ChatBot) => {
 						setMessages((messages) => {
 							return [
 								...messages,
-								{ role: "assistant", content: incomingMessage.replaceAll(/data: \\n\\n/gi, '') },
+								{
+									id: `assistant-${messages.length + 1}`,
+									role: "assistant",
+									content: incomingMessage.replaceAll(/data: \\n\\n/gi, '')
+								},
 							];
 						});
 						setIsLoading(false);
-						console.log('Stream finished');
-						// Return from the function
 						return;
 					}
 					// Convert the chunk value to a string
 					const chunkString = new TextDecoder().decode(value);
-					// Log the chunk string
 					incomingMessage += chunkString.trim().replaceAll(/data: /gi, '').replace(/[\r\n]+/g, '');
 
 					// Read the next chunk
@@ -104,9 +109,9 @@ const ChatBot = ({ sessionId }: ChatBot) => {
 			<div className="max-w-[600px] w-full flex flex-col">
 				{messages &&
 					messages.length > 0 &&
-					messages.map((m, index) => (
+					messages.map((m: Message, index) => (
 						<div
-							key={index}
+							key={`${m.role}-${index}`}
 							className={`sm:max-w-70 mb-8 ${m.role === 'user' ? 'self-end bg-blueGrey-dark rounded-2xl p-3 text-right' : 'self-start flex gap-4'}`}
 						>
 							{m.role !== 'user' && (
