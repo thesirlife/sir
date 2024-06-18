@@ -56,12 +56,12 @@ const FeaturedActivityCarousel = ({
         className="absolute -translate-y-1/2 left-1/2 -translate-x-1/2"
       />
       <div className="bg-pattern-green overflow-hidden flex items-center justify-center py-16">
-        <div className="flex flex-row gap-5 px-4  items-center">
+        <div className="flex flex-row gap-5 px-4 items-center">
           <Carousel className="w-full" setApi={setApi}>
             <CarouselContent className="container ">
               <CarouselItem className="flex justify-center">
-                <div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
-                  <h2 className=" mb-4 text-4xl font-bold basis-1/2">
+                <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-between gap-20 h-full w-full">
+                  <h2 className=" mb-4 text-4xl font-bold md:basis-1/2">
                     Test Your Knowledge With Some Quick Trivia!
                   </h2>
                   <div className="flex flex-col basis-1/2">
@@ -71,7 +71,7 @@ const FeaturedActivityCarousel = ({
               </CarouselItem>
               <CarouselItem className="flex justify-center">
                 <div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
-                  <h2 className="text-4xl font-bold basis-1/2">
+                  <h2 className="text-4xl font-bold md:basis-1/2">
                     {article.title.rendered}
                   </h2>
                   <div className="flex flex-col basis-1/2">

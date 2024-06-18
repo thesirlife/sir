@@ -13,7 +13,7 @@ const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
     <div className="py-20 bg-green-primary w-full">
       <div className="flex flex-col items-center">
         <h2 className="mb-6">{header}</h2>
-        <div className="grid grid-cols-3 gap-6 container">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-md:px-4 container">
           {articles.map((article) => {
             const hasImage = Boolean(article._embedded?.["wp:featuredmedia"]);
             return (
