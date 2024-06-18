@@ -26,7 +26,7 @@ export const register = async (formState: FormState, formData: FormData) => {
     // test to see if we get a response.code, which means the user wasn't returned and there's an error
     if (response.code) {
       // test to see if the error is due to an email already existing w/ a user
-      if (response.code === "existing_user_email") {
+      if (response.code === "existing_user_email" || response.code === 'existing_user_login') {
         formState.status = "exists";
       } else {
         // all other potential errors
