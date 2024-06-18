@@ -6,8 +6,8 @@ const SuperBowl = () => {
     { text: "1960", isAnswer: false },
     { text: "1970", isAnswer: true },
   ];
-	console.log(choices);
-  return (
+
+	return (
     <div>
       <HardCodedForm
         choices={choices}

@@ -29,7 +29,6 @@ const FeaturedActivityCarousel = ({
   video,
 	trivia,
 }: FeaturedActivityCarouselProps) => {
-	console.log(trivia);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
   const [choices, setChoices] = useState<Choice[]>();
