@@ -1,7 +1,7 @@
-import { Post } from "../types/post/types";
+import { TriviaPost } from "../components/TriviaForms/Form";
 import dayjs from "dayjs";
 
-const getTrivia = async (): Promise<Post | undefined> => {
+const getTrivia = async (): Promise<TriviaPost | undefined> => {
 	const sot = dayjs().startOf('day').format();
 	const eot = dayjs().endOf('day').format();
 
