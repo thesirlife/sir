@@ -32,7 +32,10 @@ const EnterBoxCodeForm = () => {
   };
 
   useEffect(() => {
-    formState.verified === true && redirect("/register");
+    if (formState.verified === true) {
+      sessionStorage.setItem('hasBoxNumber', 'verified');
+      redirect("/register");
+    }
   }, [formState]);
 
   return (

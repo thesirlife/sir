@@ -4,12 +4,22 @@ import { TextField, Divider } from "@mui/material";
 import { FormState, register } from "@/app/actions/register";
 import SubmitButton from "./Form/SubmitButton";
 import { useFormState } from "react-dom";
+import { useEffect } from "react";
 import UserExists from "./UserExists";
+import { redirect } from "next/navigation";
 
 const RegisterForm = () => {
   const [formState, action] = useFormState(register, {
     status: "pending" as FormState["status"],
   });
+
+  // Set sessionStorage variable after Box Num entered correctly to prevent direct hit of /register page without Box Num entry
+  useEffect(() => {
+    const boxNum = sessionStorage.getItem('hasBoxNumber');
+    if (boxNum !== 'verified') {
+      redirect("/enter-box-code");
+    }
+  }, []);
 
   if (formState.status === "exists") {
     return <UserExists status={formState.status} />;
