@@ -1,16 +1,24 @@
-import { Paper, Chip } from "@mui/material";
-import Image from "next/image";
-import { CheckCircle } from "@mui/icons-material";
+"use client";
 
-// this will change eventually when we get the response from the server
+import { Paper, Chip, ChipProps } from "@mui/material";
+import Image, { StaticImageData } from "next/image";
+import { CheckCircle, CircleOutlined } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 type BadgeProps = {
   name: string;
   complete: boolean;
-  image: string;
-};
-//
+  image: StaticImageData;
+} & ChipProps;
 
-const Badge = ({ name, complete, image }: BadgeProps) => {
+const Badge = ({ name, complete, image, onClick }: BadgeProps) => {
+  const router = useRouter();
+  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (onClick) {
+      onClick(event);
+      router.push("/my-badges", { scroll: false });
+    }
+  };
+
   return (
     <Paper elevation={2} className="p-4 rounded-lg max-w-[270px] w-full">
       <div className="flex flex-col gap-3">
@@ -24,8 +32,18 @@ const Badge = ({ name, complete, image }: BadgeProps) => {
               icon={<CheckCircle />}
               label="COMPLETE"
               variant="filled"
+              onClick={handleClick}
             />
-          ) : null}
+          ) : (
+            <Chip
+              className="font-medium tracking-wider"
+              color="primary"
+              icon={<CircleOutlined />}
+              label="MARK COMPLETE"
+              variant="outlined"
+              onClick={handleClick}
+            />
+          )}
         </div>
       </div>
     </Paper>
