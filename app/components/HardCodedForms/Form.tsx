@@ -41,7 +41,7 @@ const HardCodedForm = ({
         {choices.map((choice) => {
           return (
             <Chip
-              className={`hover:border-orange-primary cursor-pointer flex justify-start text-lg [&>.MuiChip-label]:w-full   border-navy-secondary py-3 px-3 rounded-full h-full leading-4 ${
+              className={`hover:border-orange-primary cursor-pointer flex justify-start text-lg [&>.MuiChip-label]:w-full border-navy-secondary py-3 px-3 rounded-full h-full leading-4 ${
                 choice === currentChoice
                   ? "border-green-primary text-green-primary"
                   : "text-navy-primary"
@@ -54,6 +54,11 @@ const HardCodedForm = ({
               variant="outlined"
               clickable={false}
               onClick={() => setCurrentChoice(choice)}
+							sx={{
+								"& .MuiChip-label": {
+									overflow: 'visible'
+								}
+							}}
               label={<div className="flex flex-col gap-1 justify-center">
                 {choice.isAnswer && submitted && (
                   <div className="flex flex-row justify-between items-center">
@@ -63,7 +68,7 @@ const HardCodedForm = ({
                 )}
                 {!choice.isAnswer && submitted && currentChoice === choice && (
                   <div className="text-red-800 text-sm">Incorrect!</div>
-                
+
                 )}
                 {choice.text}
               </div>}
