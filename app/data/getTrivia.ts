@@ -1,7 +1,7 @@
 import { TriviaPost } from "../components/TriviaForms/Form";
 import dayjs from "dayjs";
 
-const getTrivia = async (): Promise<TriviaPost | undefined> => {
+const getTrivia = async (): Promise<TriviaPost> => {
 	const sot = dayjs().startOf('day').format();
 	const eot = dayjs().endOf('day').format();
 
