@@ -88,7 +88,7 @@ const FeaturedActivityCarousel = ({
 							{article && (
 								<CarouselItem className="flex justify-center">
 									<div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
-										<h2 className="text-4xl font-bold basis-1/2">
+										<h2 className="text-4xl font-bold md:basis-1/2">
 											{article.title.rendered}
 										</h2>
 										<div className="flex flex-col basis-1/2">
@@ -113,7 +113,7 @@ const FeaturedActivityCarousel = ({
 							{video && (
 								<CarouselItem className="flex justify-center">
 									<div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
-										<h2 className="text-4xl font-bold basis-1/2">
+										<h2 className="text-4xl font-bold md:basis-1/2">
 											{video.title.rendered}
 										</h2>
 										<p>{video.excerpt.rendered}</p>
