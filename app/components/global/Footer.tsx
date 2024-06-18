@@ -4,9 +4,9 @@ import dayjs from "dayjs";
 
 const Footer = () => {
   return (
-    <footer className="bg-navy-primary py-8">
+    <footer className="bg-navy-primary py-8 px-4">
       <div className="flex flex-col container m-auto">
-        <div className="flex flex-row gap-4 pb-6 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-4 pb-6 justify-center items-center">
           <h3 className="text-xl">Want To Help Us Improve SIR?</h3>
           <Button
             variant="contained"
