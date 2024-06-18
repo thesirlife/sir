@@ -31,13 +31,7 @@ const FeaturedActivityCarousel = ({
 }: FeaturedActivityCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
-
-	const choices: Choice[] = [
-    { text: trivia.incorrect_answer_1, isAnswer: false },
-    { text: trivia.incorrect_answer_2, isAnswer: false },
-    { text: trivia.correct_answer, isAnswer: true },
-  ];
-	const newChoices: Choice[] = shuffleArray(choices);
+  const [choices, setChoices] = useState<Choice[]>();
 
   const handleFocus = (slide?: number) => {
     setCurrentSlide(slide || 0);
@@ -60,6 +54,17 @@ const FeaturedActivityCarousel = ({
 
     api.scrollTo(currentSlide);
   }, [api, currentSlide]);
+
+	useEffect(() => {
+		const choices: Choice[] = [
+			{ text: trivia.incorrect_answer_1, isAnswer: false },
+			{ text: trivia.incorrect_answer_2, isAnswer: false },
+			{ text: trivia.correct_answer, isAnswer: true },
+		];
+		const newChoices: Choice[] = shuffleArray(choices);
+		setChoices(newChoices);
+	}, [trivia]);
+
   return (
     <div className="relative">
       <DailyChecklist
@@ -71,20 +76,22 @@ const FeaturedActivityCarousel = ({
         <div className="flex flex-row gap-5 px-4 items-center">
           <Carousel className="w-full" setApi={setApi}>
             <CarouselContent className="container ">
-              <CarouselItem className="flex justify-center">
-                <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-between gap-20 h-full w-full">
-                  <h2 className=" mb-4 text-4xl font-bold md:basis-1/2">
-                    Test Your Knowledge With Some Quick Trivia!
-                  </h2>
-                  <div className="flex flex-col basis-1/2">
-                    <Trivia
-											title={trivia.title.rendered}
-											choices={newChoices}
-											trivia_meta_snippet={trivia.trivia_meta_snippet}
-										/>
-                  </div>
-                </div>
-              </CarouselItem>
+							{trivia && choices && (
+								<CarouselItem className="flex justify-center">
+									<div className="max-w-[956px] flex flex-col md:flex-row items-center justify-between gap-20 h-full w-full">
+										<h2 className=" mb-4 text-4xl font-bold md:basis-1/2">
+											Test Your Knowledge With Some Quick Trivia!
+										</h2>
+										<div className="flex flex-col basis-1/2">
+											<Trivia
+												title={trivia.title.rendered}
+												choices={choices}
+												trivia_meta_snippet={trivia.trivia_meta_snippet}
+											/>
+										</div>
+									</div>
+								</CarouselItem>
+							)}
 							{article && (
 								<CarouselItem className="flex justify-center">
 									<div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
