@@ -48,11 +48,6 @@ export const postUser = async ({
 		}
 	);
 
-	if (!res.ok) {
-		// @TODO :: Type is not right here
-		return null;
-	}
-
 	const parsedResponse: AuthResponse = await res.json();
 	const jwt = parsedResponse.data.token;
 
