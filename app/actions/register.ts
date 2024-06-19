@@ -23,7 +23,6 @@ export const register = async (formState: FormState, formData: FormData) => {
   });
   try {
     const response = await postUser({ email, username, password });
-    console.log(response);
     // test to see if we get a response.code, which means the user wasn't returned and there's an error
     if (response.code) {
       // test to see if the error is due to an email already existing w/ a user
