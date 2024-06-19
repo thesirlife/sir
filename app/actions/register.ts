@@ -12,7 +12,7 @@ const newUserSchema = z.object({
 });
 
 export type FormState = {
-  status: "created" | "exists" | "error" | "pending";
+  status: "created" | "exists" | "error" | "pending" | "invalid";
 };
 
 export const register = async (formState: FormState, formData: FormData) => {
@@ -23,11 +23,17 @@ export const register = async (formState: FormState, formData: FormData) => {
   });
   try {
     const response = await postUser({ email, username, password });
+    console.log(response);
     // test to see if we get a response.code, which means the user wasn't returned and there's an error
     if (response.code) {
       // test to see if the error is due to an email already existing w/ a user
-      if (response.code === "existing_user_email" || response.code === 'existing_user_login') {
+      if (
+        response.code === "existing_user_email" ||
+        response.code === "existing_user_login"
+      ) {
         formState.status = "exists";
+      } else if (response.code === "rest_invalid_param") {
+        formState.status = "invalid";
       } else {
         // all other potential errors
         formState.status = "error";

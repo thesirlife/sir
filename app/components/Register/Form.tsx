@@ -15,8 +15,8 @@ const RegisterForm = () => {
 
   // Set sessionStorage variable after Box Num entered correctly to prevent direct hit of /register page without Box Num entry
   useEffect(() => {
-    const boxNum = sessionStorage.getItem('hasBoxNumber');
-    if (boxNum !== 'verified') {
+    const boxNum = sessionStorage.getItem("hasBoxNumber");
+    if (boxNum !== "verified") {
       redirect("/enter-box-code");
     }
   }, []);
@@ -84,6 +84,12 @@ const RegisterForm = () => {
         </div>
         <Divider className="my-8" flexItem />
         <SubmitButton>Finish Setup</SubmitButton>
+        {formState.status === "invalid" && (
+          <p className="text-red-500 font-semibold text-center max-w-100 mt-4">
+            Your have entered an email address in a format we do not support,
+            please enter only alphanumeric characters.
+          </p>
+        )}
       </form>
     </div>
   );
