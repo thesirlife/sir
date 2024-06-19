@@ -48,7 +48,11 @@ export const postUser = async ({
   const parsedResponse: AuthResponse = await res.json();
   const jwt = parsedResponse.data.token;
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/users?username=${email}&email=${email}&password=${password}&first_name=${username}`,
+    `${
+      process.env.NEXT_PUBLIC_WPREST_ENDPOINT
+    }/users?username=${encodeURIComponent(email)}&email=${encodeURIComponent(
+      email
+    )}&password=${password}&first_name=${username}`,
     {
       method: "POST",
       headers: {
