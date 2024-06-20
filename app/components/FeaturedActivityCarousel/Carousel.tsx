@@ -83,7 +83,7 @@ const FeaturedActivityCarousel = ({
             <CarouselContent className="container ">
               {trivia && choices && (
                 <CarouselItem className="flex justify-center">
-                  <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-between gap-20 h-full w-full">
+                  <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-20 h-full w-full">
                     <h2 className=" mb-4 text-4xl font-bold md:basis-1/2">
                       Test Your Knowledge With Some Quick Trivia!
                     </h2>
@@ -99,7 +99,7 @@ const FeaturedActivityCarousel = ({
               )}
               {article && (
                 <CarouselItem className="flex justify-center">
-                  <div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
+                  <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-20 h-full w-full">
                     <h2 className="text-4xl font-bold md:basis-1/2">
                       {article.title.rendered}
                     </h2>
@@ -124,7 +124,7 @@ const FeaturedActivityCarousel = ({
               )}
               {video && (
                 <CarouselItem className="flex justify-center">
-                  <div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
+                  <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-10 md:gap-20 h-full w-full">
                     <h2 className="text-4xl font-bold md:basis-1/2">
                       {video.title.rendered}
                     </h2>
@@ -151,8 +151,8 @@ const FeaturedActivityCarousel = ({
                 Feedback
               </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious onClick={scrollPrev} />
-            <CarouselNext onClick={scrollNext} />
+            <CarouselPrevious className="max-md:hidden" onClick={scrollPrev} />
+            <CarouselNext className="max-md:hidden" onClick={scrollNext} />
           </Carousel>
         </div>
       </div>

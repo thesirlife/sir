@@ -22,10 +22,12 @@ const DailyChecklist = ({
   return (
     <Paper
       elevation={2}
-      className={`inline-flex flex-row py-3 pr-3 pl-6 items-center bg-white rounded-full drop-shadow-md ${className}`}
+      className={`inline-flex flex-row md:py-3 md:pr-3 md:pl-6 py-1 pr-1 pl-2 items-center bg-white rounded-full drop-shadow-md ${className}`}
       {...props}
     >
-      <p className="pr-4 text-navy-primary">My Daily Checklist</p>
+      <p className="md:pr-4 pr-2 text-navy-primary max-md:text-sm">
+        My Daily Checklist
+      </p>
       <ButtonGroup color="secondary" className="gap-1">
         {CheckListItems.map((item, index) => (
           <Button
@@ -34,9 +36,9 @@ const DailyChecklist = ({
             onFocus={() =>
               setCurrentSlide && setCurrentSlide(Object.values(item)[0])
             }
-            className={`rounded-full ${
+            className={`rounded-full max-md:text-xs ${
               currentSlide === Object.values(item)[0] &&
-              "bg-green-primary text-white"
+              "bg-green-primary text-white "
             }`}
           >
             {Object.keys(item)[0]}
