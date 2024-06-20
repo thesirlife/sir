@@ -5,7 +5,7 @@ import { PropsWithChildren, useState } from "react";
 import SubmitButton from "../Register/Form/SubmitButton";
 import { Check } from "@mui/icons-material";
 import { Choice } from "@/app/types/trivia/types";
-
+import { sendGAEvent } from "@next/third-parties/google";
 type HardCodedFormProps = {
   choices: Choice[];
   explanation: string;
@@ -27,6 +27,10 @@ const HardCodedForm = ({
       setIsCorrect(false);
     }
     setSubmittted(true);
+    sendGAEvent({
+      event: "triviaSubmitted",
+      value: `Choice: ${currentChoice} - Answer: ${isCorrect}`,
+    });
   };
 
   return (
