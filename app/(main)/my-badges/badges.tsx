@@ -43,13 +43,29 @@ const BadgeList: BadgeInfo[] = [
 
 type BadgeProps = {
   user: User;
+  userId: number;
 };
 
-const Badges = ({ user }: BadgeProps) => {
+const handleBadgeClick = (
+  badge: BadgeInfo["property"],
+  userId: number,
+  value: boolean
+) => {
+  patchUser({
+    id: userId,
+    property: badge,
+    value,
+  }).then((data) => {
+    // I hate this it's so hacky but I'm tired
+    window.location.reload();
+  });
+};
+
+const Badges = ({ userId, user }: BadgeProps) => {
   return (
     <>
       {BadgeList.map((badge) => {
-        const badgeComplete = user.meta[badge.property][0] == "on";
+        const badgeComplete = user.meta && user.meta[badge.property][0] == "on";
         return (
           <Badge
             key={badge.name}
@@ -58,16 +74,8 @@ const Badges = ({ user }: BadgeProps) => {
             complete={badgeComplete ? true : false}
             onClick={() => {
               badgeComplete
-                ? patchUser({
-                    id: user.id,
-                    property: badge.property,
-                    value: false,
-                  })
-                : patchUser({
-                    id: user.id,
-                    property: badge.property,
-                    value: true,
-                  });
+                ? handleBadgeClick(badge.property, userId, false)
+                : handleBadgeClick(badge.property, userId, true);
             }}
             name={badge.name}
           />

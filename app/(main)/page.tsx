@@ -25,7 +25,7 @@ const Dashboard = async ({
 
   const article = await getRandomArticle();
   const video = await getRandomVideo();
-	const trivia = await getTrivia();
+  const trivia = await getTrivia();
   const brainGamesPage = await getPage("29");
   const generalLearningPage = await getPage("27");
   const aiPage = await getPage("31");
@@ -34,8 +34,15 @@ const Dashboard = async ({
     <div>
       {firstLogin ? <OnboardingModal /> : null}
       <WelcomeBanner user={name} />
-      <FeaturedActivityCarousel article={article} video={video} trivia={trivia} />
-      <Explore topPages={[brainGamesPage, generalLearningPage, aiPage]} />
+      <FeaturedActivityCarousel
+        article={article}
+        video={video}
+        trivia={trivia}
+      />
+      <Explore
+        topPages={[brainGamesPage, generalLearningPage, aiPage]}
+        userId={Number(session?.user.id)}
+      />
       <RelatedArticles header="Summer Box" type="general-learning" />
     </div>
   );

@@ -10,10 +10,10 @@ const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
   const articles = await getStickyPosts(type);
 
   return (
-    <div className="py-20 bg-green-primary w-full">
+    <div className="py-20 bg-green-primary w-full max-md:px-4">
       <div className="flex flex-col items-center">
         <h2 className="mb-6">{header}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-md:px-4 container">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6  container">
           {articles.map((article) => {
             const hasImage = Boolean(article._embedded?.["wp:featuredmedia"]);
             return (

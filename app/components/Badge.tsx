@@ -15,7 +15,6 @@ const Badge = ({ name, complete, image, onClick }: BadgeProps) => {
   const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (onClick) {
       onClick(event);
-      router.push("/my-badges", { scroll: false });
     }
   };
 

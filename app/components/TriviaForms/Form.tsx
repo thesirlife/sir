@@ -1,44 +1,12 @@
-import HardCodedForm, { Choice } from "../HardCodedForms/Form";
+import { TTrivia } from "@/app/types/trivia/types";
+import HardCodedForm from "../HardCodedForms/Form";
 
-export type TriviaPost = {
-	id: number,
-	date: Date,
-	date_gmt: Date,
-	guid: {
-		rendered: string,
-	},
-	modified: Date,
-	modified_gmt: Date,
-	slug: string,
-	status: string,
-	type: 'trivia',
-	link: string,
-	title: {
-		rendered: string
-	},
-	template: string,
-	correct_answer: string,
-	incorrect_answer_1: string,
-	incorrect_answer_2: string,
-	trivia_meta_snippet: string,
-	_links: any
-};
-
-type Trivia = {
-	title: string,
-	trivia_meta_snippet: string,
-	choices: Choice[],
-}
-
-const Trivia = (trivia: Trivia) => {
-	const { title, choices, trivia_meta_snippet } = trivia;
+const Trivia = (trivia: TTrivia) => {
+  const { title, choices, trivia_meta_snippet } = trivia;
 
   return (
     <div>
-    	<HardCodedForm
-        choices={choices}
-        explanation={trivia_meta_snippet}
-      >
+      <HardCodedForm choices={choices} explanation={trivia_meta_snippet}>
         {title}
       </HardCodedForm>
     </div>

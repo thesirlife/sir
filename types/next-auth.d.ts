@@ -17,11 +17,10 @@ declare module "next-auth" {
   }
 
   interface Session {
-    jwt: string;
-
     user: {
       id: number;
       email: string;
+      jwt: string;
       name: string;
       lastName: string;
       displayName: string;

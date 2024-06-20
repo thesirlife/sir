@@ -1,4 +1,5 @@
-import HardCodedForm, { Choice } from "./Form";
+import { Choice } from "@/app/types/trivia/types";
+import HardCodedForm from "./Form";
 
 const SuperBowl = () => {
   const choices: Choice[] = [
@@ -7,7 +8,7 @@ const SuperBowl = () => {
     { text: "1970", isAnswer: true },
   ];
 
-	return (
+  return (
     <div>
       <HardCodedForm
         choices={choices}
