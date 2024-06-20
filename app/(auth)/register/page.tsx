@@ -4,6 +4,11 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Header from "@/app/components/global/header";
 
+export const metadata = {
+  title: "Register for SIR",
+  description: "Register for SIR.",
+};
+
 const LoggedOutPage = async () => {
   const session = await auth();
   if (session?.user.email) {

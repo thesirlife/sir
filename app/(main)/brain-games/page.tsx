@@ -3,6 +3,11 @@ import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import RelatedArticles from "@/app/components/RelatedArticles";
 import { getBrainGames } from "@/app/data/getBrainGames";
 
+export const metadata = {
+  title: "Brain Games",
+  description: "Links to brain games by BrainHQ",
+};
+
 const BrainGames = async ({
   searchParams,
 }: {

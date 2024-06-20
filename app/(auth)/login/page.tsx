@@ -4,6 +4,11 @@ import { auth } from "@/auth";
 import Paper from "@mui/material/Paper";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Login to SIR",
+  description: "Login to SIR.",
+};
+
 const SignInPage = async () => {
   const session = await auth();
   if (session?.user.email) {

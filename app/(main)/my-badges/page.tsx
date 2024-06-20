@@ -3,6 +3,11 @@ import Badges from "./badges";
 import { auth } from "@/auth";
 import getCurrentUser from "@/app/data/getCurrentUser";
 
+export const metadata = {
+  title: "My Badges",
+  description: "View your badges, both completed and in progress.",
+};
+
 const MyBadges = async () => {
   const session = await auth();
   const user = await getCurrentUser(session?.user.jwt as string);

@@ -4,6 +4,11 @@ import { auth } from "@/auth";
 import Paper from "@mui/material/Paper";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Enter Box Code",
+  description: "The page to enter the box code.",
+};
+
 const SignInPage = async () => {
   const session = await auth();
   if (session?.user.email) {
