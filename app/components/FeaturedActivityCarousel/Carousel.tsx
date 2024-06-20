@@ -73,7 +73,13 @@ const FeaturedActivityCarousel = ({
       />
       <div className="bg-pattern-green overflow-hidden flex items-center justify-center py-16">
         <div className="flex flex-row gap-5 px-4 items-center">
-          <Carousel className="w-full" setApi={setApi}>
+          <Carousel
+            className="w-full"
+            setApi={setApi}
+            opts={{
+              watchDrag: false,
+            }}
+          >
             <CarouselContent className="container ">
               {trivia && choices && (
                 <CarouselItem className="flex justify-center">
