@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Gloock, Roboto, Bitter } from "next/font/google";
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "./globals.css";
 

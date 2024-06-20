@@ -4,11 +4,7 @@ import { Chip, Divider, Paper } from "@mui/material";
 import { PropsWithChildren, useState } from "react";
 import SubmitButton from "../Register/Form/SubmitButton";
 import { Check } from "@mui/icons-material";
-
-export type Choice = {
-  text: string;
-  isAnswer: boolean;
-};
+import { Choice } from "@/app/types/trivia/types";
 
 type HardCodedFormProps = {
   choices: Choice[];
@@ -45,33 +41,37 @@ const HardCodedForm = ({
                 choice === currentChoice
                   ? "border-green-primary text-green-primary"
                   : "text-navy-primary"
-              } ${choice.isAnswer && submitted && (
-                "border-green-primary"
-                )} ${!choice.isAnswer && submitted && currentChoice === choice && (
-                  "border-red-800"
-                  )}`}
+              } ${choice.isAnswer && submitted && "border-green-primary"} ${
+                !choice.isAnswer &&
+                submitted &&
+                currentChoice === choice &&
+                "border-red-800"
+              }`}
               key={choice.text}
               variant="outlined"
               clickable={false}
               onClick={() => setCurrentChoice(choice)}
-							sx={{
-								"& .MuiChip-label": {
-									overflow: 'visible'
-								}
-							}}
-              label={<div className="flex flex-col gap-1 justify-center">
-                {choice.isAnswer && submitted && (
-                  <div className="flex flex-row justify-between items-center">
-                    <div className="text-green-primary text-sm">Correct!</div>
-                    <Check />
-                  </div>
-                )}
-                {!choice.isAnswer && submitted && currentChoice === choice && (
-                  <div className="text-red-800 text-sm">Incorrect!</div>
-
-                )}
-                {choice.text}
-              </div>}
+              sx={{
+                "& .MuiChip-label": {
+                  overflow: "visible",
+                },
+              }}
+              label={
+                <div className="flex flex-col gap-1 justify-center">
+                  {choice.isAnswer && submitted && (
+                    <div className="flex flex-row justify-between items-center">
+                      <div className="text-green-primary text-sm">Correct!</div>
+                      <Check />
+                    </div>
+                  )}
+                  {!choice.isAnswer &&
+                    submitted &&
+                    currentChoice === choice && (
+                      <div className="text-red-800 text-sm">Incorrect!</div>
+                    )}
+                  {choice.text}
+                </div>
+              }
             />
           );
         })}
