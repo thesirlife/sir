@@ -6,13 +6,15 @@ import CtaBox from "./CtaBox/CtaBox";
 import community from "@/app/cta-images/community.jpg";
 import badges from "@/app/cta-images/badges.jpg";
 import CtaBoxWide from "./CtaBox/CtaBoxWide";
+import patchUser from "../data/patchUser";
 
 type ExploreProps = {
   // i suck at ts
   topPages: Page[] | Record<any, any>;
+  userId: number;
 };
 
-const Explore = ({ topPages }: ExploreProps) => {
+const Explore = ({ topPages, userId }: ExploreProps) => {
   return (
     <div className="bg-navy-primary pb-14 flex flex-col items-center justify-center">
       <h2 className="text-center pb-8 pt-12 font-bold">
@@ -49,7 +51,13 @@ const Explore = ({ topPages }: ExploreProps) => {
           <CtaBoxWide
             image={community}
             header="SIR Facebook Community"
-            onClick={() => console.log("click community")}
+            onClick={() =>
+              patchUser({
+                id: userId,
+                property: "user_meta_box_1_visited_community",
+                value: true,
+              })
+            }
             link={{
               href: "",
               label: "Open Community",

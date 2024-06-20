@@ -23,14 +23,19 @@ export const authOptions: NextAuthConfig = {
       if (user) {
         // User is available during sign-in
         token.id = user.id;
+        token.jwt = user.jwt;
       }
+
       return token;
     },
     session({ session, token }) {
       session.user.name = token.name as string;
+      session.user.jwt = token.jwt as string;
+
       // @ts-ignore
       // This is bad, but I don't have the patience to properly type this right now.
       session.user.id = token.id;
+      session.user.jwt = token.jwt as string;
       return session;
     },
   },
