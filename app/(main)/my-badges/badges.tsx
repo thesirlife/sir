@@ -3,6 +3,11 @@
 import Badge from "@/app/components/Badge";
 import { User } from "@/app/types/user/types";
 import patchUser from "@/app/data/patchUser";
+import { StaticImageData } from "next/image";
+import food from "@/app/cta-images/food.jpg";
+import community from "@/app/cta-images/community-badge.jpg";
+import puzzle from "@/app/cta-images/puzzle.jpg";
+import featured from "@/app/cta-images/featured.jpg";
 
 type BadgeInfo = {
   property: keyof Omit<
@@ -10,59 +15,67 @@ type BadgeInfo = {
     "persisted_preferences" | "user_meta_brain_hq_user_id"
   >;
   name: string;
-  image: string;
+  image: StaticImageData;
 };
 
 const BadgeList: BadgeInfo[] = [
   {
     name: "Complete the Food Challenge",
-    image: "",
+    image: food,
     property: "user_meta_box_1_food_challenge",
   },
   {
     name: "Complete the Puzzle",
-    image: "",
+    image: puzzle,
     property: "user_meta_box_1_puzzle",
   },
   {
     name: "Complete the Featured Activity",
-    image: "",
+    image: featured,
     property: "user_meta_box_1_featured_activity",
   },
   {
     name: "Visit the Community",
-    image: "",
+    image: community,
     property: "user_meta_box_1_visited_community",
   },
 ];
 
 type BadgeProps = {
   user: User;
+  userId: number;
 };
 
-const Badges = ({ user }: BadgeProps) => {
+const handleBadgeClick = (
+  badge: BadgeInfo["property"],
+  userId: number,
+  value: boolean
+) => {
+  patchUser({
+    id: userId,
+    property: badge,
+    value,
+  }).then((data) => {
+    // I hate this it's so hacky but I'm tired
+    window.location.reload();
+  });
+};
+
+const Badges = ({ userId, user }: BadgeProps) => {
   return (
     <>
       {BadgeList.map((badge) => {
-        const badgeComplete = user.meta[badge.property][0] == "on";
+        const badgeComplete = user.meta && user.meta[badge.property][0] == "on";
         return (
           <Badge
             key={badge.name}
-            image="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/SMPTE_Color_Bars.svg/1200px-SMPTE_Color_Bars.svg.png"
+            image={badge.image}
             // this could be cleaned up immensely if we made these values in usermeta
             complete={badgeComplete ? true : false}
             onClick={() => {
               badgeComplete
-                ? patchUser({
-                    id: user.id,
-                    property: badge.property,
-                    value: false,
-                  })
-                : patchUser({
-                    id: user.id,
-                    property: badge.property,
-                    value: true,
-                  });
+                ? handleBadgeClick(badge.property, userId, false)
+                : handleBadgeClick(badge.property, userId, true);
             }}
             name={badge.name}
           />

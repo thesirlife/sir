@@ -10,22 +10,27 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import DailyChecklist from "../DailyChecklist";
-import SuperBowl from "../HardCodedForms/SuperBowl";
+import Trivia from "../TriviaForms/Form";
 import { Post } from "@/app/types/post/types";
 import CtaBox from "../CtaBox/CtaBox";
 import brainGames from "@/app/cta-images/brain-games.jpg";
+import { shuffleArray } from "@/app/util/shuffleArray";
+import { Choice, TriviaPost } from "@/app/types/trivia/types";
 
 type FeaturedActivityCarouselProps = {
   article: Post;
   video: Post;
+  trivia: TriviaPost;
 };
 
 const FeaturedActivityCarousel = ({
   article,
   video,
+  trivia,
 }: FeaturedActivityCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
+  const [choices, setChoices] = useState<Choice[]>();
 
   const handleFocus = (slide?: number) => {
     setCurrentSlide(slide || 0);
@@ -35,9 +40,9 @@ const FeaturedActivityCarousel = ({
     setCurrentSlide((prev) => prev - 1);
     if (api) api.scrollPrev();
   }, [api]);
+
   const scrollNext = useCallback(() => {
     setCurrentSlide((next) => next + 1);
-
     if (api) api.scrollNext();
   }, [api]);
 
@@ -48,6 +53,17 @@ const FeaturedActivityCarousel = ({
 
     api.scrollTo(currentSlide);
   }, [api, currentSlide]);
+
+  useEffect(() => {
+    const choices: Choice[] = [
+      { text: trivia?.incorrect_answer_1, isAnswer: false },
+      { text: trivia?.incorrect_answer_2, isAnswer: false },
+      { text: trivia?.correct_answer, isAnswer: true },
+    ];
+    const newChoices: Choice[] = shuffleArray(choices);
+    setChoices(newChoices);
+  }, [trivia]);
+
   return (
     <div className="relative">
       <DailyChecklist
@@ -56,19 +72,31 @@ const FeaturedActivityCarousel = ({
         className="absolute -translate-y-1/2 left-1/2 -translate-x-1/2"
       />
       <div className="bg-pattern-green overflow-hidden flex items-center justify-center py-16">
-        <div className="flex flex-row gap-5 px-4  items-center">
-          <Carousel className="w-full" setApi={setApi}>
+        <div className="flex flex-row gap-5 px-4 items-center">
+          <Carousel
+            className="w-full"
+            setApi={setApi}
+            opts={{
+              watchDrag: false,
+            }}
+          >
             <CarouselContent className="container ">
-              <CarouselItem className="flex justify-center">
-                <div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
-                  <h2 className=" mb-4 text-4xl font-bold basis-1/2">
-                    Test Your Knowledge With Some Quick Trivia!
-                  </h2>
-                  <div className="flex flex-col basis-1/2">
-                    <SuperBowl />
-                  </div>
-                </div>
-              </CarouselItem>
+              {trivia && choices && (
+                <CarouselItem className="flex justify-center">
+                  <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-20 h-full w-full">
+                    <h2 className=" mb-4 text-4xl font-bold md:basis-1/2">
+                      Test Your Knowledge With Some Quick Trivia!
+                    </h2>
+                    <div className="flex flex-col basis-1/2">
+                      <Trivia
+                        title={trivia?.title.rendered}
+                        choices={choices}
+                        trivia_meta_snippet={trivia?.trivia_meta_snippet}
+                      />
+                    </div>
+									</div>
+								</CarouselItem>
+							)}
 							{article && (
 								<CarouselItem className="flex justify-center">
 									<div className="max-w-[956px] flex flex-row items-center justify-between gap-20 h-full w-full">
@@ -124,8 +152,8 @@ const FeaturedActivityCarousel = ({
                 Feedback
               </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious onClick={scrollPrev} />
-            <CarouselNext onClick={scrollNext} />
+            <CarouselPrevious className="max-md:hidden" onClick={scrollPrev} />
+            <CarouselNext className="max-md:hidden" onClick={scrollNext} />
           </Carousel>
         </div>
       </div>

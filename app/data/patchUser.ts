@@ -1,10 +1,9 @@
 import { User } from "../types/user/types";
 
-type MetaProperties =
-  | "user_meta_box_1_puzzle"
-  | "user_meta_box_1_food_challenge"
-  | "user_meta_box_1_featured_activity"
-  | "user_meta_box_1_visited_community";
+type MetaProperties = keyof Omit<
+  User["meta"],
+  "persisted_preferences" | "user_meta_brain_hq_user_id"
+>;
 
 type PatchUserProps = {
   id: number;
@@ -28,12 +27,13 @@ const patchUser = async ({
       body: JSON.stringify({
         meta: {
           // we really need to just set the type of this stuff in WP to be a boolean instead of ON and OFF, this is ugly AF
-          [property]: value ? "on" : "off",
+          [property]: value ? ["on"] : ["off"],
         },
       }),
     }
   );
-  return await response.json();
+  const data = await response.json();
+  return data;
 };
 
 export default patchUser;

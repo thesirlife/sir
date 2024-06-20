@@ -6,24 +6,39 @@ import CtaBox from "./CtaBox/CtaBox";
 import community from "@/app/cta-images/community.jpg";
 import badges from "@/app/cta-images/badges.jpg";
 import CtaBoxWide from "./CtaBox/CtaBoxWide";
+import patchUser from "../data/patchUser";
+import { sendGAEvent } from "@next/third-parties/google";
 
 type ExploreProps = {
   // i suck at ts
   topPages: Page[] | Record<any, any>;
+  userId: number;
 };
 
-const Explore = ({ topPages }: ExploreProps) => {
+const Explore = ({ topPages, userId }: ExploreProps) => {
+  const handleCommunityClick = () => {
+    patchUser({
+      id: userId,
+      property: "user_meta_box_1_visited_community",
+      value: true,
+    });
+
+    sendGAEvent({
+      event: "communityCalloutClicked",
+      value: true,
+    });
+  };
   return (
     <div className="bg-navy-primary pb-14 flex flex-col items-center justify-center">
       <h2 className="text-center pb-8 pt-12 font-bold">
         Explore Something New:
       </h2>
-      <div className="grid grid-cols-6 gap-6 container">
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-6 max-md:px-4 container">
         {topPages.map((page: Page) => {
           return (
             <Link
               href={page.slug}
-              className="col-span-2 row-span-1"
+              className="col-span-1 md:col-span-2 row-span-1"
               key={page.id}
             >
               <CtaBox
@@ -45,11 +60,11 @@ const Explore = ({ topPages }: ExploreProps) => {
           );
         })}
 
-        <div className="col-span-3 row-span-1">
+        <div className="col-span-1 md:col-span-3 row-span-1">
           <CtaBoxWide
             image={community}
             header="SIR Facebook Community"
-            onClick={() => console.log("click community")}
+            onClick={handleCommunityClick}
             link={{
               href: "",
               label: "Open Community",
@@ -62,7 +77,7 @@ const Explore = ({ topPages }: ExploreProps) => {
             and general learning.
           </CtaBoxWide>
         </div>
-        <div className="col-span-3 row-span-1">
+        <div className="col-span-1 md:col-span-3 row-span-1">
           <CtaBoxWide
             image={badges}
             header="My Badges"

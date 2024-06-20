@@ -33,7 +33,7 @@ const GeneralLearningArticle = async ({
     <div
       className={`${
         isLoggedIn ? " bg-navy-primary" : "bg-blueGrey-50"
-      } h-full flex flex-col items-center justify-center`}
+      } h-full flex flex-col items-center justify-center px-4`}
     >
       <div className="container">
         {isLoggedIn && (
@@ -42,8 +42,8 @@ const GeneralLearningArticle = async ({
           </div>
         )}
       </div>
-      <div className=" mb-10 container">
-        <div className="grid grid-cols-4 gap-16 mt-10">
+      <div className="mb-10  container">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mt-10">
           <aside className="col-span-1">
             <div>
               <p className={`${isLoggedIn ? "" : "text-navy-primary"}`}>
@@ -61,7 +61,7 @@ const GeneralLearningArticle = async ({
               ))}
             </div>
           </aside>
-          <main className="col-span-2">
+          <main className="col-span-1 md:col-span-2">
             <h1
               className={`${
                 isLoggedIn ? "" : "text-navy-primary"

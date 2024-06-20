@@ -11,14 +11,14 @@ type HeaderProps = {
 
 const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
   return (
-    <header className="bg-green-primary flex px-12 flex-row justify-between h-[72px] align-center ">
+    <header className="bg-green-primary flex px-4 md:px-12 flex-row justify-between h-[72px] align-center ">
       <div className="items-center flex">
         <Link href="/">
           <Image src={Logo} alt="SIR Header Logo" />
         </Link>
       </div>
       {isLoggedIn ? (
-        <nav className="flex gap-4 flex-row items-center">
+        <nav className="flex gap-3 md:gap-4 flex-row items-center">
           <Link className="underline" href="/dashboard">
             My Hub
           </Link>

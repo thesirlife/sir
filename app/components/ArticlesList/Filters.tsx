@@ -29,7 +29,7 @@ const Filters = ({ categories, categoryList }: FilterProps) => {
   return (
     <div className="flex flex-col items-center gap-3 pt-20 pb-8">
       <p>Explore:</p>
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row max-md:flex-wrap gap-2">
         <>
           <Chip
             href={pathname}
