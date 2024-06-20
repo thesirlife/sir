@@ -1,5 +1,5 @@
-import { TriviaPost } from "../components/TriviaForms/Form";
 import dayjs from "dayjs";
+import { TriviaPost } from "../types/trivia/types";
 
 const getTrivia = async (): Promise<TriviaPost> => {
   const sot = dayjs().startOf("day").format();
@@ -17,8 +17,8 @@ const getTrivia = async (): Promise<TriviaPost> => {
       },
     }
   );
-  const trivia = await response.json();
 
+  const trivia = await response.json();
   return trivia[0];
 };
 

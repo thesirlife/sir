@@ -40,9 +40,9 @@ const FeaturedActivityCarousel = ({
     setCurrentSlide((prev) => prev - 1);
     if (api) api.scrollPrev();
   }, [api]);
+
   const scrollNext = useCallback(() => {
     setCurrentSlide((next) => next + 1);
-
     if (api) api.scrollNext();
   }, [api]);
 
@@ -122,7 +122,6 @@ const FeaturedActivityCarousel = ({
                     <h2 className="text-4xl font-bold md:basis-1/2">
                       {video.title.rendered}
                     </h2>
-                    <p>{video.excerpt.rendered}</p>
                     <div className="flex flex-col basis-1/2">
                       <CtaBox
                         header={video.title.rendered}
