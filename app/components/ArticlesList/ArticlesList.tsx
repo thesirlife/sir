@@ -30,7 +30,7 @@ const ArticlesList = async ({
   const categoryList = await getCategories();
 
   return (
-    <div className="max-w-[662px] w-full">
+    <div className="max-w-[662px] w-full  max-md:px-4">
       <Filters categories={categories} categoryList={categoryList} />
       <div className="border-t-2 border-gray-600 container pt-8">
         <p className="text-center pb-8">

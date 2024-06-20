@@ -18,7 +18,7 @@ const GeneralLearning = async ({
   return (
     <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
       <div className="container">
-        <div className="py-10">
+        <div className="py-10 max-md:px-4">
           <Breadcrumbs />
           <h1 className="text-3xl font-bold">General Learning</h1>
         </div>
