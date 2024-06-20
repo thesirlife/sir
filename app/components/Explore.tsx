@@ -7,6 +7,7 @@ import community from "@/app/cta-images/community.jpg";
 import badges from "@/app/cta-images/badges.jpg";
 import CtaBoxWide from "./CtaBox/CtaBoxWide";
 import patchUser from "../data/patchUser";
+import { sendGAEvent } from "@next/third-parties/google";
 
 type ExploreProps = {
   // i suck at ts
@@ -15,6 +16,18 @@ type ExploreProps = {
 };
 
 const Explore = ({ topPages, userId }: ExploreProps) => {
+  const handleCommunityClick = () => {
+    patchUser({
+      id: userId,
+      property: "user_meta_box_1_visited_community",
+      value: true,
+    });
+
+    sendGAEvent({
+      event: "communityCalloutClicked",
+      value: true,
+    });
+  };
   return (
     <div className="bg-navy-primary pb-14 flex flex-col items-center justify-center">
       <h2 className="text-center pb-8 pt-12 font-bold">
@@ -51,13 +64,7 @@ const Explore = ({ topPages, userId }: ExploreProps) => {
           <CtaBoxWide
             image={community}
             header="SIR Facebook Community"
-            onClick={() =>
-              patchUser({
-                id: userId,
-                property: "user_meta_box_1_visited_community",
-                value: true,
-              })
-            }
+            onClick={handleCommunityClick}
             link={{
               href: "",
               label: "Open Community",
