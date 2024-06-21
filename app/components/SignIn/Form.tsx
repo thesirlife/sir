@@ -1,7 +1,7 @@
 "use client";
 
 import { TextField } from "@mui/material";
-import SubmitButton from "../Register/Form/SubmitButton";
+import SubmitButton from "../SubmitButton";
 import { FormState, login } from "@/app/actions/logIn";
 import { useFormState } from "react-dom";
 import { redirect } from "next/navigation";

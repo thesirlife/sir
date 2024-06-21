@@ -1,6 +1,6 @@
 "use client";
 
-import SubmitButton from "../Register/Form/SubmitButton";
+import SubmitButton from "../SubmitButton";
 import { useFormState } from "react-dom";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { SetStateAction, useEffect, useRef, useState } from "react";
@@ -33,7 +33,7 @@ const EnterBoxCodeForm = () => {
 
   useEffect(() => {
     if (formState.verified === true) {
-      sessionStorage.setItem('hasBoxNumber', 'verified');
+      sessionStorage.setItem("hasBoxNumber", "verified");
       redirect("/register");
     }
   }, [formState]);

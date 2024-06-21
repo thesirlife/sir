@@ -2,7 +2,7 @@
 
 import { TextField, Divider } from "@mui/material";
 import { FormState, register } from "@/app/actions/register";
-import SubmitButton from "./Form/SubmitButton";
+import SubmitButton from "../SubmitButton";
 import { useFormState } from "react-dom";
 import { useEffect } from "react";
 import UserExists from "./UserExists";
