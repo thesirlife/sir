@@ -26,7 +26,7 @@ const ResetPasswordForm = () => {
     <div>
       <div className="flex flex-col items-center">
         <h2 className="font-bold">Reset Your Password</h2>
-        <p className="text-lg mb-4 opacity-60 text-center">
+        <p className="text-lg mb-8 opacity-60 text-center">
           Enter your email below to reset your password.
         </p>
       </div>

@@ -30,7 +30,7 @@ const SetPasswordForm = () => {
     <div>
       <div className="flex flex-col items-center">
         <h2 className="font-bold">Set Your New Password</h2>
-        <p className="text-lg mb-4 opacity-60 text-center">
+        <p className="text-lg mb-8 opacity-60 text-center">
           Enter your information, along with the code sent via email, to reset
           your password.
         </p>
