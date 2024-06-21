@@ -1,24 +1,25 @@
 "use server";
 
 import { z } from "zod";
-import resetPassword from "../data/resetPassword";
+import setNewPassword from "../data/setPassword";
 const newUserSchema = z.object({
   email: z.string().email(),
+  password: z.string().min(8).max(40),
+  code: z.string().min(8).max(8),
 });
 
 export type FormState = {
   status: "reset" | "error";
 };
 
-export const resetPasswordAction = async (
-  formState: FormState,
-  formData: FormData
-) => {
-  const { email } = newUserSchema.parse({
+export const setPassword = async (formState: FormState, formData: FormData) => {
+  const { email, password, code } = newUserSchema.parse({
     email: formData.get("email"),
+    code: formData.get("code"),
+    password: formData.get("password"),
   });
   try {
-    const response = await resetPassword(email);
+    const response = await setNewPassword(email, password, code);
 
     if (response.data.status === 500) {
       formState.status = "error";

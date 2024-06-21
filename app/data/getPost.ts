@@ -13,7 +13,6 @@ export const getPost = async (slug: string): Promise<Post[] | undefined> => {
     );
     return await data.json();
   } catch (error) {
-    console.error(error);
     return;
   }
 };

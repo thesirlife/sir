@@ -1,4 +1,10 @@
-const setPassword = async (email: string, password: string, code: string) => {
+import { ResetPassword } from "../types/resetPassword/types";
+
+const setPassword = async (
+  email: string,
+  password: string,
+  code: string
+): Promise<ResetPassword> => {
   const params = new URLSearchParams({
     email,
     password,
@@ -6,7 +12,7 @@ const setPassword = async (email: string, password: string, code: string) => {
   });
 
   const reponse = await fetch(
-    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/users/set-password?${params}`,
+    `${process.env.NEXT_PUBLIC_RESETPASS_ENDPOINT}/set-password?${params}`,
     {
       method: "POST",
     }
