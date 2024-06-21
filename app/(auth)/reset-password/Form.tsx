@@ -3,15 +3,13 @@
 import { TextField, Divider } from "@mui/material";
 import { useFormState } from "react-dom";
 import SubmitButton from "@/app/components/SubmitButton";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { FormState, resetPassword } from "@/app/actions/resetPassword";
-import { useState } from "react";
 
 const ResetPasswordForm = () => {
-  const [formState, action] = useFormState(resetPassword, {
+  const [serverFormState, action] = useFormState(resetPassword, {
     status: "pending" as FormState["status"],
   });
-  const [formValid, setFormValid] = useState(false);
 
   type FormInput = {
     email: string;
@@ -20,9 +18,12 @@ const ResetPasswordForm = () => {
     code: string;
   };
 
-  const { register, handleSubmit, watch } = useForm<FormInput>();
-  // const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data);
-
+  const {
+    watch,
+    control,
+    formState: { errors, isValid },
+  } = useForm<FormInput>({ mode: "onChange" });
+  console.log(errors);
   return (
     <div>
       <div className="flex flex-col items-center">
@@ -36,59 +37,91 @@ const ResetPasswordForm = () => {
         className="flex flex-col items-center justify-center"
       >
         <div className="flex flex-col gap-4 [&>*]:max-w-[260px]">
-          <TextField
-            id="email"
-            inputMode="email"
-            label="Email Address"
-            InputLabelProps={{ shrink: true }}
-            placeholder="enter email"
-            required
-            {...register("email")}
+          <Controller
+            control={control}
+            name="email"
+            rules={{ required: "email is required" }}
+            render={({ field }) => (
+              <TextField
+                id="email"
+                inputMode="email"
+                label="Email Address"
+                InputLabelProps={{ shrink: true }}
+                placeholder="enter email"
+                required
+                {...field}
+              />
+            )}
           />
-          <TextField
-            id="password"
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ minLength: 8 }}
-            label="New Password"
-            placeholder="create your new password"
-            helperText="At least 8 characters, more is better."
-            required
-            type="password"
-            {...register("password", {
-              required: true,
-            })}
+          <Controller
+            control={control}
+            name="password"
+            rules={{ required: "password is required" }}
+            render={({ field }) => (
+              <TextField
+                id="password"
+                InputLabelProps={{ shrink: true }}
+                inputProps={{ minLength: 8 }}
+                label="New Password"
+                placeholder="create your new password"
+                helperText="At least 8 characters, more is better."
+                required
+                type="password"
+                {...field}
+              />
+            )}
           />
-          <TextField
-            id="passwordConfirmation"
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ minLength: 8 }}
-            label="New Password Again"
-            placeholder="confirm your new password"
-            required
-            type="password"
-            {...register("passwordConfirmation", {
-              required: true,
+
+          <Controller
+            control={control}
+            name="passwordConfirmation"
+            rules={{
+              required: "Password is required",
               validate: (val: string) => {
                 if (watch("password") != val) {
-                  return "Your passwords do no match";
+                  return "Your passwords do not match";
                 }
               },
-            })}
+            }}
+            render={({ field }) => (
+              <TextField
+                id="passwordConfirmation"
+                InputLabelProps={{ shrink: true }}
+                inputProps={{ minLength: 8 }}
+                label="New Password Again"
+                placeholder="confirm your new password"
+                required
+                type="password"
+                {...field}
+              />
+            )}
           />
-          <TextField
-            id="code"
-            inputMode="text"
-            label="Code"
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ minLength: 8, maxLength: 8 }}
-            placeholder="enter your password reset code"
-            required
-            type="text"
-            {...register("code")}
+          {errors.passwordConfirmation && (
+            <p className="text-red-500">
+              {errors.passwordConfirmation.message}
+            </p>
+          )}
+          <Controller
+            control={control}
+            name="code"
+            rules={{ required: "code is required" }}
+            render={({ field }) => (
+              <TextField
+                id="code"
+                inputMode="text"
+                label="Code"
+                InputLabelProps={{ shrink: true }}
+                inputProps={{ minLength: 8, maxLength: 8 }}
+                placeholder="enter your password reset code"
+                required
+                type="text"
+                {...field}
+              />
+            )}
           />
         </div>
         <Divider className="my-8" flexItem />
-        <SubmitButton disabled={!formValid}>Reset Password</SubmitButton>
+        <SubmitButton disabled={!isValid}>Reset Password</SubmitButton>
       </form>
     </div>
   );
