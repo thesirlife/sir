@@ -11,6 +11,18 @@ import { auth } from "@/auth";
 import { Chip } from "@mui/material";
 import Hat from "@/app/cta-images/hat.jpg";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  return {
+    title: params.slug
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase()),
+  };
+}
+
 const GeneralLearningArticle = async ({
   params,
 }: {

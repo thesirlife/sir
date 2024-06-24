@@ -1,5 +1,5 @@
 import { useFormStatus } from "react-dom";
-import Button from "../../global/Button";
+import Button from "./global/Button";
 import { ButtonProps } from "@mui/material";
 
 type SubmitButtonProps = ButtonProps & {

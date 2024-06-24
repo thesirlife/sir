@@ -41,12 +41,12 @@ export default function RootLayout({
     <StyledEngineProvider injectFirst>
       <CssVarsProvider theme={theme}>
         <html lang="en">
-          <GoogleAnalytics gaId="G-MMYG827PJL" />
           <body
             className={`${gloock.variable} ${roboto.variable} ${bitter.variable}`}
           >
             {children}
           </body>
+          <GoogleAnalytics gaId="G-MMYG827PJL" />
         </html>
       </CssVarsProvider>
     </StyledEngineProvider>

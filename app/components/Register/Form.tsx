@@ -2,7 +2,7 @@
 
 import { TextField, Divider } from "@mui/material";
 import { FormState, register } from "@/app/actions/register";
-import SubmitButton from "./Form/SubmitButton";
+import SubmitButton from "../SubmitButton";
 import { useFormState } from "react-dom";
 import { useEffect } from "react";
 import UserExists from "./UserExists";
@@ -42,7 +42,7 @@ const RegisterForm = () => {
     <div>
       <div className="flex flex-col items-center">
         <h2 className="font-bold">Setup Your Account</h2>
-        <p className="text-lg mb-4 opacity-60">
+        <p className="text-lg mb-8 opacity-60">
           Enter your information below to finish setting up your SIR account.
         </p>
       </div>

@@ -5,6 +5,11 @@ import { getBrainGames } from "@/app/data/getBrainGames";
 
 import { auth } from "@/auth"
 
+export const metadata = {
+  title: "Brain Games",
+  description: "Links to brain games by BrainHQ",
+};
+
 const BrainGames = async ({
   searchParams,
 }: {

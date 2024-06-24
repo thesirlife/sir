@@ -2,7 +2,7 @@
 
 import { Chip, Divider, Paper } from "@mui/material";
 import { PropsWithChildren, useState } from "react";
-import SubmitButton from "../Register/Form/SubmitButton";
+import SubmitButton from "../SubmitButton";
 import { Check } from "@mui/icons-material";
 import { Choice } from "@/app/types/trivia/types";
 import { sendGAEvent } from "@next/third-parties/google";

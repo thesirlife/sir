@@ -3,6 +3,11 @@ import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import RelatedArticles from "@/app/components/RelatedArticles";
 import getPosts from "@/app/data/getPosts";
 
+export const metadata = {
+  title: "General Learning",
+  description: "General Learning Articles from SIR",
+};
+
 const GeneralLearning = async ({
   searchParams,
 }: {
