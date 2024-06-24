@@ -28,11 +28,11 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 		content: "Welcome, I&apos;m your AI chat confidant!\n\nType in your thoughts or questions as if you&apos;re talking to a friend. The AI is here to listen and support you. Your conversations are private and confidential. No one else can see or access what you share.",
 		role: 'assistant'
 	}]);
+	const [latestMessages, setLatestMessages] = useState(null);
 
 	const [input, setInput] = useState('');
 
 	const handleSendMessage = async (newInput = input) => {
-		console.log(newInput);
 		const trimmedText = newInput.trim();
 		if (!trimmedText) return;
 
@@ -50,8 +50,8 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				'Access-Control-Allow-Origin': '*',
-				Authorization: 'Bearer WkYwJlK8Cv1vR5KwYnLRBCJrVRiTQNCT',
+				// @TODO Deal with this
+				Authorization: `Bearer ${process.env.CHATBOT_API_KEY}`,
 			},
 			body: JSON.stringify({
 				session_id: sessionId,
@@ -62,52 +62,40 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 
 		if (!apiResponse.body) return;
 
-		// To decode incoming data as a string
 		const reader = apiResponse.body.getReader();
-		let incomingMessage = "";
+		const decoder = new TextDecoder('utf-8');
+		let buffer = '';
+		let incomingMessage = '';
 
-		const readChunk = () => {
-			// Read a chunk from the reader
-			reader.read()
-				.then(({
-						value,
-						done
-				}) => {
-					// Check if the stream is done
-					if (done) {
-						// Log a message
-						setMessages((messages) => {
-							return [
-								...messages,
-								{
-									id: `assistant-${messages.length + 1}`,
-									role: "assistant",
-									content: incomingMessage
-								},
-							];
-						});
-						setIsLoading(false);
-						return;
-					}
-					// Convert the chunk value to a string
-					const chunkString = new TextDecoder().decode(value);
-					console.log(JSON.stringify(chunkString));
-					console.log(chunkString.replace(/data: /gi, '').replace(/[\r\n\n]+/g, '').trim());
-					// incomingMessage += JSON.stringify(chunkString.replace(/data: /gi, '').replace(/[\r\n\n\n\n]+/g, '<br />'));
-					incomingMessage += chunkString;
+		while (true) {
+			const { done, value } = await reader.read();
+			if (done) {
+				setMessages((messages) => {
+					return [
+						...messages,
+						{
+							id: `assistant-${messages.length + 1}`,
+							role: "assistant",
+							content: incomingMessage
+						},
+					];
+				});
+				setIsLoading(false);
+				break;
+			};
+			buffer += decoder.decode(value, { stream: true });
 
-					// Read the next chunk
-					readChunk();
-			})
-			.catch(error => {
-					// Log the error
-					console.error(error);
-			});
-		};
-
-		// Start reading the first chunk
-		readChunk();
-};
+			let boundary;
+			while ((boundary = buffer.indexOf('\n\n')) >= 0) {
+				const chunk = buffer.slice(0, boundary + 1).trim();
+				buffer = buffer.slice(boundary + 2);
+				if (chunk.startsWith('data:')) {
+					const data = chunk.slice(5);
+					incomingMessage += data;
+				}
+			}
+		}
+	};
 
 	return (
 		<div className="bg-green-primary h-full flex flex-col items-center justify-center py-10 sm:py-20 px-3">
@@ -143,6 +131,8 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 							</Box>
 						</div>
 					))}
+
+					{latestMessages}
 				</div>
 
 				{initialScreen && (
