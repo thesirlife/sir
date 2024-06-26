@@ -5,28 +5,24 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 const HubspotTracking = ({ session }) => {
 	const pathname = usePathname()
-	const emailAddress = session.user.email ? session.user.email : null;
+	const emailAddress = session?.user?.email ? session.user.email : null;
 
 	var firstLoad = useRef(true);
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			var _hsq = window._hsq = window._hsq || [];
-
-			if (firstLoad.current === true) {
+			if (emailAddress) {
+				var _hsq = window._hsq = window._hsq || [];
 				_hsq.push(['setPath', pathname]);
 				_hsq.push(['trackPageView']);
 
-				if (emailAddress) {
+				if (firstLoad.current === true) {
 					_hsq.push(["identify",{
 						email: emailAddress
 					}]);
-				}
 
-				firstLoad.current = false;
-			} else {
-				_hsq.push(['setPath', pathname]);
-				_hsq.push(['trackPageView']);
+					firstLoad.current = false;
+				}
 			}
 		}
 	}, [pathname, emailAddress])
