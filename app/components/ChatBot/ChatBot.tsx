@@ -21,17 +21,19 @@ type Message = {
 };
 
 const ChatBot = ({ sessionId }: ChatBotProps) => {
+	const [initialScreen, setInitialScreen] = useState(true);
 	const [loading, setIsLoading] = useState(false);
 	const [messages, setMessages] = useState([{
 		id: 'assistant-1',
 		content: "Welcome, I&apos;m your AI chat confidant!\n\nType in your thoughts or questions as if you&apos;re talking to a friend. The AI is here to listen and support you. Your conversations are private and confidential. No one else can see or access what you share.",
 		role: 'assistant'
 	}]);
+	const [latestMessages, setLatestMessages] = useState(null);
 
 	const [input, setInput] = useState('');
 
-	const handleSendMessage = async () => {
-		const trimmedText = input.trim();
+	const handleSendMessage = async (newInput = input) => {
+		const trimmedText = newInput.trim();
 		if (!trimmedText) return;
 
 		const userMessage = {
@@ -48,8 +50,8 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				'Access-Control-Allow-Origin': '*',
-				Authorization: 'Bearer WkYwJlK8Cv1vR5KwYnLRBCJrVRiTQNCT',
+				// @TODO Deal with this
+				Authorization: `Bearer ${process.env.CHATBOT_API_KEY}`,
 			},
 			body: JSON.stringify({
 				session_id: sessionId,
@@ -60,49 +62,40 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 
 		if (!apiResponse.body) return;
 
-		// To decode incoming data as a string
 		const reader = apiResponse.body.getReader();
-		let incomingMessage = "";
+		const decoder = new TextDecoder('utf-8');
+		let buffer = '';
+		let incomingMessage = '';
 
-		const readChunk = () => {
-			// Read a chunk from the reader
-			reader.read()
-				.then(({
-						value,
-						done
-				}) => {
-					// Check if the stream is done
-					if (done) {
-						// Log a message
-						setMessages((messages) => {
-							return [
-								...messages,
-								{
-									id: `assistant-${messages.length + 1}`,
-									role: "assistant",
-									content: incomingMessage.replaceAll(/data: \\n\\n/gi, '')
-								},
-							];
-						});
-						setIsLoading(false);
-						return;
-					}
-					// Convert the chunk value to a string
-					const chunkString = new TextDecoder().decode(value);
-					incomingMessage += chunkString.trim().replaceAll(/data: /gi, '').replace(/[\r\n]+/g, '');
+		while (true) {
+			const { done, value } = await reader.read();
+			if (done) {
+				setMessages((messages) => {
+					return [
+						...messages,
+						{
+							id: `assistant-${messages.length + 1}`,
+							role: "assistant",
+							content: incomingMessage
+						},
+					];
+				});
+				setIsLoading(false);
+				break;
+			};
+			buffer += decoder.decode(value, { stream: true });
 
-					// Read the next chunk
-					readChunk();
-			})
-			.catch(error => {
-					// Log the error
-					console.error(error);
-			});
-		};
-
-		// Start reading the first chunk
-		readChunk();
-};
+			let boundary;
+			while ((boundary = buffer.indexOf('\n\n')) >= 0) {
+				const chunk = buffer.slice(0, boundary + 1).trim();
+				buffer = buffer.slice(boundary + 2);
+				if (chunk.startsWith('data:')) {
+					const data = chunk.slice(5);
+					incomingMessage += data;
+				}
+			}
+		}
+	};
 
 	return (
 		<div className="bg-green-primary h-full flex flex-col items-center justify-center py-10 sm:py-20 px-3">
@@ -112,7 +105,7 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 					messages.map((m: Message, index) => (
 						<div
 							key={`${m.role}-${index}`}
-							className={`sm:max-w-70 mb-8 ${m.role === 'user' ? 'self-end bg-blueGrey-dark rounded-2xl p-3 text-right' : 'self-start flex gap-4'}`}
+							className={`sm:max-w-70 mb-6 ${m.role === 'user' ? 'self-end bg-blueGrey-dark rounded-2xl p-3 text-right' : 'self-start flex gap-4'}`}
 						>
 							{m.role !== 'user' && (
 								<Avatar
@@ -139,6 +132,63 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 						</div>
 					))}
 
+					{latestMessages}
+				</div>
+
+				{initialScreen && (
+					<div className="sm:max-w-70 w-full pt-6 pb-6 mt-6 mb-6 border-t-2 border-b-2">
+						<h2 className="text-xl font-bold text-center">
+							Start With A Topic Or Send A Message
+						</h2>
+						<div className="grid grid-cols-4 gap-2 mt-6">
+							<button
+								className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
+								onClick={() => {
+									setInput('Ask me some questions about my health');
+									setInitialScreen(false);
+									handleSendMessage('Ask me some questions about my health');
+								}}
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="24px"  width="24px" viewBox="0 0 24 24"><path stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2Z"/></svg>
+								<p className="pt-3">Ask me some questions about my health</p>
+							</button>
+							<button
+								className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
+								onClick={() => {
+									setInput('Tell me interesting historical facts');
+									setInitialScreen(false);
+									handleSendMessage('Tell me interesting historical facts');
+								}}
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2V3ZM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7V3Z"/></g></svg>
+								<p className="pt-3">Tell me interesting historical facts</p>
+							</button>
+							<button
+								className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
+								onClick={() => {
+									setInput('Explain the coolest scientific discoveries');
+									setInitialScreen(false);
+									handleSendMessage('Explain the coolest scientific discoveries');
+								}}
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M6 18h8M3 22h18M14 22a7 7 0 1 0 0-14h-1M9 14h2M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2H9ZM12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></g></svg>
+								<p className="pt-3">Explain the coolest scientific discoveries</p>
+							</button>
+							<button
+								className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
+								onClick={() => {
+									setInput('Tell me interesting facts about sports');
+									setInitialScreen(false);
+									handleSendMessage('Tell me interesting facts about sports');
+								}}
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15M11 12 5.12 2.2M13 12l5.88-9.8M8 7h8"/><path d="M12 22a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M12 18v-2h-.5"/></g></svg>
+								<p className="pt-3">Tell me interesting facts about sports</p>
+							</button>
+						</div>
+					</div>
+				)}
+
 				{loading ? (
 					<Box
 						sx={{
@@ -151,12 +201,7 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 					</Box>
 				) : null}
 
-				<Box
-					sx={{
-						bottom: 0,
-						position: 'sticky',
-					}}
-				>
+				<Box className="max-w-[600px] w-full">
 					<Input
 						placeholder="send a message"
 						value={input}
@@ -178,7 +223,6 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 				</Box>
 
 				<div id="anchor" style={{ overflowAnchor: 'auto', height: '1px' }}></div>
-			</div>
 		</div>
 	);
 };
