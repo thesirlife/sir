@@ -153,19 +153,34 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 								<p className="pt-3">Ask me some questions about my health</p>
 							</button>
 							<button
-								className="bg-blueGrey-dark rounded-lg p-3 text-left"
+								className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
+								onClick={() => {
+									setInput('Tell me interesting historical facts');
+									setInitialScreen(false);
+									handleSendMessage('Tell me interesting historical facts');
+								}}
 							>
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2V3ZM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7V3Z"/></g></svg>
 								<p className="pt-3">Tell me interesting historical facts</p>
 							</button>
 							<button
-								className="bg-blueGrey-dark rounded-lg p-3 text-left"
+								className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
+								onClick={() => {
+									setInput('Explain the coolest scientific discoveries');
+									setInitialScreen(false);
+									handleSendMessage('Explain the coolest scientific discoveries');
+								}}
 							>
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M6 18h8M3 22h18M14 22a7 7 0 1 0 0-14h-1M9 14h2M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2H9ZM12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></g></svg>
 								<p className="pt-3">Explain the coolest scientific discoveries</p>
 							</button>
 							<button
-								className="bg-blueGrey-dark rounded-lg p-3 text-left"
+								className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
+								onClick={() => {
+									setInput('Tell me interesting facts about sports');
+									setInitialScreen(false);
+									handleSendMessage('Tell me interesting facts about sports');
+								}}
 							>
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15M11 12 5.12 2.2M13 12l5.88-9.8M8 7h8"/><path d="M12 22a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M12 18v-2h-.5"/></g></svg>
 								<p className="pt-3">Tell me interesting facts about sports</p>
