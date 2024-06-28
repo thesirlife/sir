@@ -51,7 +51,7 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 			headers: {
 				"Content-Type": "application/json",
 				// @TODO Deal with this
-				Authorization: `Bearer ${process.env.CHATBOT_API_KEY}`,
+				Authorization: `Bearer ${process.env.NEXT_PUBLIC_CHATBOT_API_KEY}`,
 			},
 			body: JSON.stringify({
 				session_id: sessionId,
