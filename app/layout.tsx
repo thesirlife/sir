@@ -51,10 +51,10 @@ export default async function RootLayout({
             className={`${gloock.variable} ${roboto.variable} ${bitter.variable}`}
           >
             {children}
+						<Script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/44439799.js" strategy="beforeInteractive" />
+						<HubspotTracking session={session} />
           </body>
           <GoogleAnalytics gaId="G-MMYG827PJL" />
-					<Script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/44439799.js" strategy="beforeInteractive" />
-					<HubspotTracking session={session} />
         </html>
       </CssVarsProvider>
     </StyledEngineProvider>
