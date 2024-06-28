@@ -20,25 +20,6 @@ const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
               <ArticleCard
                 key={article.id}
                 header={article.title.rendered}
-                imageWidth={
-                  hasImage
-                    ? article._embedded?.["wp:featuredmedia"][0].media_details
-                        .width
-                    : 0
-                }
-                imageHeight={
-                  hasImage
-                    ? article._embedded?.["wp:featuredmedia"][0].media_details
-                        .height
-                    : 0
-                }
-                image={
-                  hasImage
-                    ? String(
-                        article._embedded?.["wp:featuredmedia"][0].source_url
-                      )
-                    : ""
-                }
                 imageId={article.featured_media}
                 url={article.slug}
                 isGame={type === "brain-games"}

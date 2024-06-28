@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import IconWithBackground from "./IconWithBackground";
 import {
   PodcastsOutlined,
@@ -15,11 +15,12 @@ import Button from "./global/Button";
 import getTagById from "../data/getTagById";
 import getMediaById from "../data/getMediaById";
 import { Media } from "../types/media/types";
-import { sendGAEvent } from '@next/third-parties/google'
+import { sendGAEvent } from "@next/third-parties/google";
+import BrainHq from "@/app/cta-images/brain-hq-default.jpg";
 
 type ArticleCardProps = PaperProps & {
   header: string;
-  image?: string;
+  image?: string | StaticImageData;
   imageWidth?: number;
   imageHeight?: number;
   description: string;
@@ -111,7 +112,7 @@ const ArticleCard = ({
       {imageUrl !== undefined && (
         <div className="basis-1/2 relative">
           <Image
-            src={imageUrl.source_url || ""}
+            src={imageUrl.source_url || (isGame ? BrainHq : "")}
             alt={header}
             width={imageWidth ? imageWidth : 212}
             height={imageHeight ? imageHeight : 144}
@@ -126,7 +127,10 @@ const ArticleCard = ({
 
       <div className="basis-1/2 flex flex-col justify-between items-start">
         <div>
-          <h3 className="text-xl font-bold">{header}</h3>
+          <h3
+            className="text-xl font-bold"
+            dangerouslySetInnerHTML={{ __html: header }}
+          />
           <div
             className="text-navy-secondary mt-3"
             dangerouslySetInnerHTML={{ __html: description }}
@@ -139,7 +143,12 @@ const ArticleCard = ({
           href={isGame ? gameUrl : articleUrl}
           target={isGame ? "_blank" : "_self"}
           endIcon={<NavigateNext fontSize="medium" />}
-          onClick={() => sendGAEvent({ event: isGame ? 'gameClicked' : 'articleClicked', value: isGame ? gameUrl : articleUrl })}
+          onClick={() =>
+            sendGAEvent({
+              event: isGame ? "gameClicked" : "articleClicked",
+              value: isGame ? gameUrl : articleUrl,
+            })
+          }
         >
           {ArticleTypeDictionary[tag]
             ? ArticleTypeDictionary[tag].header

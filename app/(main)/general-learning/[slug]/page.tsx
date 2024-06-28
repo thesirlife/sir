@@ -10,6 +10,7 @@ import { getTagColor } from "@/app/util/getTagColor";
 import { auth } from "@/auth";
 import { Chip } from "@mui/material";
 import Hat from "@/app/cta-images/hat.jpg";
+import getCategoryById from "@/app/data/getCategoryById";
 
 export async function generateMetadata({
   params,
@@ -41,6 +42,16 @@ const GeneralLearningArticle = async ({
   };
   const tags = await getTags();
 
+  const getCategories = async () => {
+    const categoryData = await Promise.all(
+      (article[0]?.categories ?? []).map((categoryId) =>
+        getCategoryById(categoryId)
+      )
+    );
+    return categoryData;
+  };
+  const categories = await getCategories();
+
   return (
     <div
       className={`${
@@ -63,27 +74,39 @@ const GeneralLearningArticle = async ({
               </p>
             </div>
 
-            <div className="flex flex-row gap-2 flex-wrap mt-4">
-              {tags.map((tag) => (
-                <Chip
-                  key={tag.id}
-                  label={tag.name}
-                  color={getTagColor(tag.slug)}
-                />
-              ))}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-row gap-2 flex-wrap mt-4">
+                {tags.map((tag) => (
+                  <Chip
+                    key={tag.id}
+                    label={tag.name}
+                    color={getTagColor(tag.slug)}
+                  />
+                ))}
+              </div>
+              <div className="flex flex-row gap-2 flex-wrap">
+                {categories.map((category) => (
+                  <Chip
+                    key={category.id}
+                    label={category.name}
+                    color="primary"
+                  />
+                ))}
+              </div>
             </div>
           </aside>
-          <main className="col-span-1 md:col-span-2">
+          <main className="col-span-1 md:col-span-2 [&_p]:mb-1 [&_iframe]:mb-4 [&_ul]:list-disc [&_ul]:mb-4 [&_li]:pl-4 [&_li]:ml-4 [&_h2]:text-2xl [&_h2]:mb-4 [&_h3]:text-lg [&_h3]:mb-2">
             <h1
               className={`${
                 isLoggedIn ? "" : "text-navy-primary"
               } text-4xl mb-8`}
-            >
-              {article[0].title?.rendered}
-            </h1>
+              dangerouslySetInnerHTML={{
+                __html: String(article[0].title?.rendered),
+              }}
+            />
 
             <div
-              className={`${isLoggedIn ? "" : "[&>p]:text-navy-primary"}`}
+              className={`${isLoggedIn ? "" : "[&>p]:text-navy-primary"}  `}
               dangerouslySetInnerHTML={{
                 __html: String(article[0].content?.rendered),
               }}

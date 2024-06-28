@@ -19,7 +19,7 @@ const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
       </div>
       {isLoggedIn ? (
         <nav className="flex gap-3 md:gap-4 flex-row items-center">
-          <Link className="underline" href="/dashboard">
+          <Link className="underline" href="/">
             My Hub
           </Link>
           <Link className="underline" href="/my-badges">
