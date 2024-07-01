@@ -60,6 +60,12 @@ p {
   @apply font-roboto;
 }
 
+ol, ul {
+	list-style: auto;
+	margin: revert;
+	padding: 0 1rem;
+}
+
 iframe {
   width: 100%;
 }
