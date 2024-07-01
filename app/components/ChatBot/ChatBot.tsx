@@ -34,6 +34,7 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 	const [input, setInput] = useState('');
 
 	const handleSendMessage = async (newInput = input) => {
+		setInitialScreen(false);
 		const trimmedText = newInput.trim();
 		if (!trimmedText) return;
 
@@ -131,6 +132,10 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 								sx={{
 									'& p': {
 										margin: m.role !== 'user' ? '0 0 1rem' : '0',
+									},
+									'& a': {
+										textDecoration: 'underline',
+										fontWeight: 700,
 									}
 								}}
 							>
