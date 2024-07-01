@@ -90,8 +90,14 @@ const ChatBot = ({ sessionId }: ChatBotProps) => {
 				const chunk = buffer.slice(0, boundary + 1).trim();
 				buffer = buffer.slice(boundary + 2);
 				if (chunk.startsWith('data:')) {
-					const data = chunk.slice(5);
-					incomingMessage += data;
+					const jsonData = chunk.slice(5).trim();
+					try {
+						const data = JSON.parse(jsonData);
+						console.log('Received:', data);
+						incomingMessage += data;
+					} catch (error) {
+						console.error('Error parsing JSON:', error);
+					}
 				}
 			}
 		}
