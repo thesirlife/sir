@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-import Header from "../components/global/header";
 import { auth } from "@/auth";
 import LoggedOutFooter from "../components/Register/Footer";
 

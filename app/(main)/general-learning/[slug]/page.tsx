@@ -30,7 +30,7 @@ const GeneralLearningArticle = async ({
   params: { slug: string };
 }) => {
   const session = await auth();
-  const isLoggedIn = session?.user.email;
+  const isLoggedIn = Boolean(session?.user.email);
   const article = (await getPost(params?.slug)) ?? [];
   const author = await getUserById(Number(article[0].author));
 
@@ -55,8 +55,8 @@ const GeneralLearningArticle = async ({
   return (
     <div
       className={`${
-        isLoggedIn ? " bg-navy-primary" : "bg-blueGrey-50"
-      } h-full flex flex-col items-center justify-center px-4`}
+        isLoggedIn ? " bg-navy-primary px-4" : "bg-blueGrey-50"
+      } h-full flex flex-col items-center justify-center`}
     >
       <div className="container">
         {isLoggedIn && (
@@ -111,14 +111,30 @@ const GeneralLearningArticle = async ({
                 __html: String(article[0].content?.rendered),
               }}
             ></div>
-            <BasicCta
-              className="mt-6 text-center"
-              button={{
-                text: "Join Discussion",
-              }}
-            >
-              Join our community discussion on this topic
-            </BasicCta>
+            {isLoggedIn ? (
+              <BasicCta
+                className="mt-6 text-center"
+                button={{
+                  text: "Join Discussion",
+                  variant: "text",
+                }}
+              >
+                Join our community discussion on this topic
+              </BasicCta>
+            ) : (
+              <BasicCta
+                className="mt-6 text-center"
+                button={{
+                  text: "Sign in",
+                  variant: "outlined",
+                }}
+              >
+                <span className="flex flex-col gap-1">
+                  <span>Already have a box?</span>
+                  <span>Sign in to your account for more content.</span>
+                </span>
+              </BasicCta>
+            )}
           </main>
           <aside className="col-span-1">
             {isLoggedIn ? (
@@ -131,6 +147,7 @@ const GeneralLearningArticle = async ({
                   className="mt-10"
                   button={{
                     text: "Join Discussion",
+                    variant: "text",
                   }}
                 >
                   Join our community discussion on this topic
@@ -156,8 +173,13 @@ const GeneralLearningArticle = async ({
         </div>
       </div>
       <RelatedArticles
-        header="Related Articles & Games"
+        header={
+          isLoggedIn
+            ? "Related Articles & Games"
+            : "Sign up for monthly boxes, games, foods and more."
+        }
         type="general-learning"
+        isLoggedIn={isLoggedIn}
       />
     </div>
   );

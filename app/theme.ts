@@ -38,6 +38,13 @@ const theme = extendTheme({
         outlined: ({ theme }) => ({
           backgroundColor: blueGrey[50],
         }),
+        outlinedWarning: ({ theme }) => ({
+          backgroundColor: "transparent",
+          borderTopLeftRadius: "0.15rem",
+          borderBottomLeftRadius: "1rem",
+          borderTopRightRadius: "1rem",
+          borderBottomRightRadius: "0.15rem",
+        }),
         contained: ({ theme }) => ({
           padding: "0.5rem 1rem",
         }),

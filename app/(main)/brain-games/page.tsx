@@ -4,6 +4,8 @@ import RelatedArticles from "@/app/components/RelatedArticles";
 import { getBrainGames } from "@/app/data/getBrainGames";
 import Image from "next/image";
 import BrainHq from "@/app/cta-images/brain-hq.png";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Brain Games",
@@ -20,6 +22,10 @@ const BrainGames = async ({
 }) => {
   const offset = searchParams?.offset || 0;
   const categories = searchParams?.categories || 0;
+  const session = await auth();
+  if (!session?.user.email) {
+    redirect("/enter-box-code");
+  }
 
   const articles = await getBrainGames({ categories, offset });
   return (

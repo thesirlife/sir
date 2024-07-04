@@ -2,6 +2,7 @@ import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import Badges from "./badges";
 import { auth } from "@/auth";
 import getCurrentUser from "@/app/data/getCurrentUser";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "My Badges",
@@ -10,6 +11,9 @@ export const metadata = {
 
 const MyBadges = async () => {
   const session = await auth();
+  if (!session?.user.email) {
+    redirect("/enter-box-code");
+  }
   const user = await getCurrentUser(session?.user.jwt as string);
   return (
     <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
