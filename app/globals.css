@@ -60,6 +60,12 @@ p {
   @apply font-roboto;
 }
 
+ol, ul {
+	list-style: auto;
+	margin: revert;
+	padding: 0 1rem;
+}
+
 iframe {
   width: 100%;
 }
@@ -70,7 +76,7 @@ iframe {
   }
 }
 
-/* this is a hack copying CSS output from the MUI button since buttons are added in WYSISYG 
+/* this is a hack copying CSS output from the MUI button since buttons are added in WYSISYG
 – ideally, we should create a different component in WP, then feed in our custom Button component  */
 .wp-block-button__link {
   display: -webkit-inline-box;
