@@ -36,12 +36,12 @@ const DailyChecklist = ({
             onFocus={() =>
               setCurrentSlide && setCurrentSlide(Object.values(item)[0])
             }
-            className={`rounded-full max-md:text-xs ${
+            className={`rounded-full max-md:text-xs  py-2 ${
               currentSlide === Object.values(item)[0] &&
-              "bg-green-primary text-white "
+              "bg-green-primary text-white"
             }`}
           >
-            {Object.keys(item)[0]}
+            {index + 1}. {Object.keys(item)[0]}
           </Button>
         ))}
       </ButtonGroup>

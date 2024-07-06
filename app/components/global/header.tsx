@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/app/sir-header-logo.svg";
 import Button from "./Button";
-import { ArrowForward } from "@mui/icons-material";
+import { ArrowForward, OpenInNew } from "@mui/icons-material";
 
 type HeaderProps = {
   isLoggedIn?: boolean;
@@ -19,15 +19,29 @@ const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
       </div>
       {isLoggedIn ? (
         <nav className="flex gap-3 md:gap-4 flex-row items-center">
-          <Link className="underline" href="/dashboard">
-            My Hub
+          <Link className="underline decoration-green-secondary" href="/">
+            My Digital Hub
           </Link>
-          <Link className="underline" href="/my-badges">
+          <Link
+            className="underline decoration-green-secondary"
+            href="/my-badges"
+          >
             My Badges
           </Link>
-          <Link className="underline" href="/get-support">
+          <Link
+            className="underline decoration-green-secondary"
+            href="/get-support"
+          >
             Get Support
           </Link>
+          <Button
+            href="mailto:hello@thesirlife.com"
+            color="warning"
+            variant="contained"
+            endIcon={<OpenInNew />}
+          >
+            Share Feedback
+          </Button>
         </nav>
       ) : onLoginPage ? (
         <div className="flex flex-row gap-4 items-center">

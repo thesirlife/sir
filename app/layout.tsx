@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import Script from 'next/script';
+import { auth } from "@/auth";
 import { Gloock, Roboto, Bitter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+
+import HubspotTracking from "@/app/components/Hubspot/embed";
 
 import "./globals.css";
 
@@ -32,11 +36,13 @@ export const metadata: Metadata = {
   title: "SIR",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+	const session = await auth();
+
   return (
     <StyledEngineProvider injectFirst>
       <CssVarsProvider theme={theme}>
@@ -45,6 +51,8 @@ export default function RootLayout({
             className={`${gloock.variable} ${roboto.variable} ${bitter.variable}`}
           >
             {children}
+						<Script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/44439799.js" strategy="beforeInteractive" />
+						<HubspotTracking session={session} />
           </body>
           <GoogleAnalytics gaId="G-MMYG827PJL" />
         </html>

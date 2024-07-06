@@ -8,6 +8,7 @@ import getRandomArticle from "../data/getRandomArticle";
 import getRandomVideo from "../data/getRandomVideo";
 import getTrivia from "../data/getTrivia";
 import getPage from "../data/getPage";
+import { redirect } from "next/navigation";
 
 const Dashboard = async ({
   searchParams,
@@ -17,6 +18,9 @@ const Dashboard = async ({
   };
 }) => {
   const session = await auth();
+  if (!session?.user.email) {
+    redirect("/enter-box-code");
+  }
   const firstLogin = searchParams?.newUser;
 
   const name = session?.user.name
@@ -43,7 +47,7 @@ const Dashboard = async ({
         topPages={[brainGamesPage, generalLearningPage, aiPage]}
         userId={Number(session?.user.id)}
       />
-      <RelatedArticles header="Summer Box" type="general-learning" />
+      <RelatedArticles header="SIR Welcome Box" type="general-learning" />
     </div>
   );
 };
