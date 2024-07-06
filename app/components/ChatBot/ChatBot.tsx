@@ -56,6 +56,7 @@ const ChatBot = ({ userId }: ChatBotProps) => {
 
 			const response: Session = await result.json();
 			setSessionId(response.session_id);
+			setInitialLoading(false);
 			sessionStorage.setItem('chatSessionId', response.session_id);
 		} catch (error) {
 			console.error("Request error", error);
