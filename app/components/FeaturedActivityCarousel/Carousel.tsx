@@ -148,9 +148,6 @@ const FeaturedActivityCarousel = ({
                   </div>
                 </CarouselItem>
               )}
-              <CarouselItem className="flex justify-center">
-                Feedback
-              </CarouselItem>
             </CarouselContent>
             <CarouselPrevious className="max-md:hidden" onClick={scrollPrev} />
             <CarouselNext className="max-md:hidden" onClick={scrollNext} />

@@ -54,7 +54,7 @@ export default async function RootLayout({
 						<Script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/44439799.js" strategy="beforeInteractive" />
 						<HubspotTracking session={session} />
           </body>
-          <GoogleAnalytics gaId="G-MMYG827PJL" />
+          <GoogleAnalytics gaId="G-L7T5ZQH0G5" />
         </html>
       </CssVarsProvider>
     </StyledEngineProvider>

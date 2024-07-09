@@ -11,7 +11,7 @@ type HeaderProps = {
 
 const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
   return (
-    <header className="bg-green-primary flex px-4 md:px-12 flex-row justify-between h-[72px] align-center ">
+    <header className="bg-green-primary md:flex px-4 md:px-12 md:flex-row justify-between md:h-[72px] align-center ">
       <div className="items-center flex">
         <Link href="/">
           <Image src={Logo} alt="SIR Header Logo" />

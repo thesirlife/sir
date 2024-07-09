@@ -10,7 +10,6 @@ const CheckListItems: Array<Record<string, number>> = [
   { Trivia: 0 },
   { Article: 1 },
   { Video: 2 },
-  { Feedback: 3 },
 ];
 
 const DailyChecklist = ({
