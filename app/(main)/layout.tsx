@@ -2,7 +2,6 @@ import { PropsWithChildren } from "react";
 import Header from "../components/global/header";
 import Footer from "../components/global/Footer";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import LoggedOutFooter from "../components/Register/Footer";
 const MainLayout = async ({ children }: PropsWithChildren) => {
   const session = await auth();
