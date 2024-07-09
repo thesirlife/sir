@@ -1,7 +1,6 @@
 import { Post } from "@/app/types/post/types";
 import Filters from "./Filters";
 import ArticleCard from "../ArticleCard";
-// import { PodcastsOutlined } from "@mui/icons-material";
 import Pagination from "./Pagination";
 import getAllGameCategories from "@/app/data/getAllGameCategories";
 import getAllCategories from "@/app/data/getAllCategories";
@@ -21,6 +20,7 @@ const ArticlesList = async ({
   total: string;
 }) => {
 	const session = await auth();
+	console.log(session);
 
   const getCategories = async () => {
     if (isGame) {

@@ -2,7 +2,7 @@ import { User } from "../types/user/types";
 
 type MetaProperties = keyof Omit<
   User["meta"],
-  "persisted_preferences" | "user_meta_brain_hq_user_id"
+  "persisted_preferences"
 >;
 
 type PatchUserProps = {

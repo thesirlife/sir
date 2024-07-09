@@ -16,7 +16,11 @@ import getTagById from "../data/getTagById";
 import getMediaById from "../data/getMediaById";
 import { Media } from "../types/media/types";
 import { sendGAEvent } from "@next/third-parties/google";
+
 import BrainHq from "@/app/cta-images/brain-hq-default.jpg";
+import getCurrentUser from "@/app/data/getCurrentUser";
+import loginBrainHQUser from "@/app/data/loginBrainHQUser";
+import createBrainHQUser from "@/app/data/createBrainHQUser";
 
 type ArticleCardProps = PaperProps & {
   session: object,
@@ -76,45 +80,37 @@ const ArticleCard = ({
   children,
   ...props
 }: PropsWithChildren<ArticleCardProps>) => {
+	const [error, setError] = useState<string>('');
   const [imageUrl, setImageUrl] = useState<Media>();
   const [tag, setTag] = useState<string>("article");
   const [articleUrl, setArticleUrl] = useState<string>("");
   const [icon, setIcon] = useState<JSX.Element | null>(null);
 
-  const handleGame = async (e) => {
+	const handleGame = async (e) => {
     e.preventDefault();
     // Check if User has a BrainHQ User
-    console.log(session);
-    // const brainHqId = 10;
-    let brainHqId = 'u3267824';
-    if (brainHqId) {
-      // SSO into BrainHQ
-      const data = await fetch(`/api/brain-hq/user/login`, {
-        method: 'POST',
-        body: JSON.stringify({
-          uid: brainHqId,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const result = await data.json();
-      console.log(result);
+		console.log(session?.user.jwt);
+		const user = await getCurrentUser(session?.user.jwt as string);
+		console.log(user.meta.user_meta_brain_hq_user_id.length > 0 && user.meta.user_meta_brain_hq_user_id[0] !== '');
+		if (user.meta.user_meta_brain_hq_user_id.length > 0 && user.meta.user_meta_brain_hq_user_id[0] !== '') {
+			// SSO into BrainHQ
+			const brainHqId = user.meta.user_meta_brain_hq_user_id[0];
+			console.log('login');
+      const result = await loginBrainHQUser(parseInt(brainHqId) as number);
+			console.log(result);
 	    const { web } = result;
-      window.open( web, '_blank' ).focus();
+      // window.open( web, '_blank' ).focus();
     } else {
-      // Create BrainHQ User and complete SSO
-      const data = await fetch(`/api/brain-hq/user/create`, {
-        method: 'POST',
-        body: JSON.stringify({
-          userId: 1,
-          email: session?.user.email,
-          firstName: session?.user.firstName,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+			// Create BrainHQ User and complete SSO
+			console.log('create user for SSO');
+      const result = await createBrainHQUser(session?.user.id, session?.user.email, session?.user.name);
+			console.log(result);
+			if (!result.error) {
+				const { web } = result;
+				// window.open( web, '_blank' ).focus();
+			} else {
+				setError(result.error);
+			}
     }
   };
 
@@ -196,6 +192,11 @@ const ArticleCard = ({
             ? ArticleTypeDictionary[tag].header
             : "Read Article"}
         </Button>
+				{error && (
+					<p className="text-red-500">
+						{error}
+					</p>
+				)}
       </div>
     </Paper>
   );

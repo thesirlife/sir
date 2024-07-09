@@ -7,11 +7,9 @@ import BrainHq from "@/app/cta-images/brain-hq.png";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
-import { auth } from "@/auth"
-
 export const metadata = {
   title: "Brain Games",
-  description: "Links to brain games by BrainHQ",
+  description: "Engage with brain games by BrainHQ",
 };
 
 const BrainGames = async ({
@@ -30,10 +28,6 @@ const BrainGames = async ({
   }
 
   const articles = await getBrainGames({ categories, offset });
-
-	// @TODO :: Redirect user to /login if not logged in
-	const session = await auth();
-  if (!session) return <div>Not authenticated</div>
 
   return (
     <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
