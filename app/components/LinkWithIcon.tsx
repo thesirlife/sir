@@ -14,7 +14,12 @@ const LinkWithIcon = ({
   ...props
 }: LinkWithIconProps) => {
   return (
-    <Link href={href} className="flex items-center gap-1 leading-5" {...props}>
+    <Link
+      href={href}
+      target={isExternal ? "_blank" : "_self"}
+      className="flex items-center gap-1 leading-5"
+      {...props}
+    >
       <span>{label}</span>
       {isExternal ? (
         <OpenInNew fontSize="small" />

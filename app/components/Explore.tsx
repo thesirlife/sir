@@ -66,7 +66,7 @@ const Explore = ({ topPages, userId }: ExploreProps) => {
             header="SIR Facebook Community"
             onClick={handleCommunityClick}
             link={{
-              href: "",
+              href: "https://www.facebook.com/groups/800152378911097",
               label: "Open Community",
               isExternal: true,
             }}
