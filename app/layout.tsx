@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Script from 'next/script';
+import Script from "next/script";
 import { auth } from "@/auth";
 import { Gloock, Roboto, Bitter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -8,10 +8,7 @@ import HubspotTracking from "@/app/components/Hubspot/embed";
 
 import "./globals.css";
 
-import {
-  Experimental_CssVarsProvider as CssVarsProvider,
-  StyledEngineProvider,
-} from "@mui/material/styles";
+import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme";
 
 const gloock = Gloock({
@@ -41,22 +38,29 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-	const session = await auth();
+  const session = await auth();
 
   return (
     <StyledEngineProvider injectFirst>
-      <CssVarsProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <html lang="en">
           <body
             className={`${gloock.variable} ${roboto.variable} ${bitter.variable}`}
           >
             {children}
-						<Script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/44439799.js" strategy="beforeInteractive" />
-						<HubspotTracking session={session} />
+            <Script
+              type="text/javascript"
+              id="hs-script-loader"
+              async
+              defer
+              src="//js.hs-scripts.com/44439799.js"
+              strategy="beforeInteractive"
+            />
+            <HubspotTracking session={session} />
           </body>
           <GoogleAnalytics gaId="G-L7T5ZQH0G5" />
         </html>
-      </CssVarsProvider>
+      </ThemeProvider>
     </StyledEngineProvider>
   );
 }
