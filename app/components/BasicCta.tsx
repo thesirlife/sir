@@ -6,6 +6,8 @@ import { ButtonProps, Paper } from "@mui/material";
 type BasicCtaProps = {
   button: {
     text: string;
+    url: string;
+    isExternal?: boolean;
     variant?: ButtonProps["variant"];
   };
   className?: string;
@@ -13,7 +15,7 @@ type BasicCtaProps = {
 
 const BasicCta = ({
   children,
-  button: { text, variant = "text" },
+  button: { text, variant = "text", url, isExternal = false },
   ...props
 }: PropsWithChildren<BasicCtaProps>) => {
   return (
@@ -24,7 +26,9 @@ const BasicCta = ({
           color="warning"
           variant={variant}
           className="mt-2"
-          endIcon={variant === "text" ? <OpenInNew /> : <KeyboardArrowRight />}
+          href={url}
+          target={isExternal ? "_blank" : "_self"}
+          endIcon={isExternal ? <OpenInNew /> : <KeyboardArrowRight />}
         >
           {text}
         </Button>

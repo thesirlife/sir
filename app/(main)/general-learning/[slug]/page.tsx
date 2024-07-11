@@ -55,7 +55,7 @@ const GeneralLearningArticle = async ({
   return (
     <div
       className={`${
-        isLoggedIn ? " bg-navy-primary px-4" : "bg-blueGrey-50"
+        isLoggedIn ? " bg-navy-primary" : "bg-blueGrey-50"
       } h-full flex flex-col items-center justify-center`}
     >
       <div className="container">
@@ -115,8 +115,10 @@ const GeneralLearningArticle = async ({
               <BasicCta
                 className="mt-6 text-center"
                 button={{
+                  url: "https://www.facebook.com/groups/800152378911097",
                   text: "Join Discussion",
                   variant: "text",
+                  isExternal: true,
                 }}
               >
                 Join our community discussion on this topic
@@ -125,6 +127,7 @@ const GeneralLearningArticle = async ({
               <BasicCta
                 className="mt-6 text-center"
                 button={{
+                  url: "/login",
                   text: "Sign in",
                   variant: "outlined",
                 }}
@@ -146,8 +149,10 @@ const GeneralLearningArticle = async ({
                 <BasicCta
                   className="mt-10"
                   button={{
+                    url: "https://www.facebook.com/groups/800152378911097",
                     text: "Join Discussion",
                     variant: "text",
+                    isExternal: true,
                   }}
                 >
                   Join our community discussion on this topic
