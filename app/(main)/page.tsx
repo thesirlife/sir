@@ -9,6 +9,7 @@ import getRandomVideo from "../data/getRandomVideo";
 import getTrivia from "../data/getTrivia";
 import getPage from "../data/getPage";
 import { redirect } from "next/navigation";
+import getAuthJwt from "../data/getAuthJwt";
 
 const Dashboard = async ({
   searchParams,
