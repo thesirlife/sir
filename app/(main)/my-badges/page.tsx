@@ -24,7 +24,7 @@ const MyBadges = async () => {
         </div>
       </div>
       <div className="container pb-12">
-        <div className="flex flex-row gap-5 flex-wrap justify-between">
+        <div className="flex flex-row gap-5 flex-wrap justify-between mb-14">
           <Badges user={user} userId={Number(session?.user.id)} />
         </div>
       </div>

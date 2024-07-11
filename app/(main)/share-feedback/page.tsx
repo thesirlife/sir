@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import Survey from "./survey";
 
 export const metadata = {
   title: "Share Feedback",
@@ -21,7 +22,7 @@ const ShareFeedback = async () => {
           <h1 className="text-3xl font-bold">Share Feedback</h1>
         </div>
       </div>
-      <div className="container pb-12"></div>
+      <Survey />
     </div>
   );
 };

@@ -47,7 +47,11 @@ const Dashboard = async ({
         topPages={[brainGamesPage, generalLearningPage, aiPage]}
         userId={Number(session?.user.id)}
       />
-      <RelatedArticles header="SIR Welcome Box" type="general-learning" />
+      <RelatedArticles
+        header="SIR Welcome Box"
+        type="general-learning"
+        isLoggedIn={Boolean(session)}
+      />
     </div>
   );
 };
