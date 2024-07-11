@@ -24,8 +24,7 @@ const OnboardingModal = () => {
           </h2>
           <p className="text-lg text-navy-secondary mb-10">
             Here you will find a variety of fun games to stimulate the brain,
-            interesting articles, and a change to talk to your own AI
-            Confident!platform and engage with the community!
+            interesting articles, and a change to talk to your own AI Confident!
           </p>
 
           <Button
