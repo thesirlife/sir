@@ -33,6 +33,7 @@ const Dashboard = async ({
   const brainGamesPage = await getPage("29");
   const generalLearningPage = await getPage("27");
   const aiPage = await getPage("31");
+  const jwt = await getAuthJwt();
 
   return (
     <div>
@@ -46,6 +47,7 @@ const Dashboard = async ({
       <Explore
         topPages={[brainGamesPage, generalLearningPage, aiPage]}
         userId={Number(session?.user.id)}
+        jwt={jwt}
       />
       <RelatedArticles
         header="SIR Welcome Box"

@@ -13,14 +13,16 @@ type ExploreProps = {
   // i suck at ts
   topPages: Page[] | Record<any, any>;
   userId: number;
+  jwt: string;
 };
 
-const Explore = ({ topPages, userId }: ExploreProps) => {
+const Explore = ({ topPages, userId, jwt }: ExploreProps) => {
   const handleCommunityClick = () => {
     patchUser({
       id: userId,
       property: "user_meta_box_1_visited_community",
       value: true,
+      jwt,
     });
 
     sendGAEvent({
