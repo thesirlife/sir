@@ -38,7 +38,6 @@ const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
             href="mailto:hello@thesirlife.com"
             color="warning"
             variant="contained"
-            endIcon={<OpenInNew />}
           >
             Share Feedback
           </Button>
