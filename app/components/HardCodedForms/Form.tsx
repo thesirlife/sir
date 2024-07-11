@@ -44,10 +44,10 @@ const HardCodedForm = ({
         {choices.map((choice) => {
           return (
             <Chip
-              className={`hover:border-orange-primary cursor-pointer flex justify-start text-lg [&>.MuiChip-label]:w-full border-navy-secondary py-3 px-3 rounded-full h-full leading-4 ${
+              className={`hover:border-orange-primary cursor-pointer flex justify-start text-lg [&>.MuiChip-label]:w-full  py-3 px-3 rounded-full h-full leading-4 ${
                 choice === currentChoice
                   ? "border-navy-primary border-2 text-navy-primary"
-                  : "text-navy-primary"
+                  : "border-navy-secondary"
               } ${choice.isAnswer && submitted && "border-green-primary"} ${
                 !choice.isAnswer &&
                 submitted &&
