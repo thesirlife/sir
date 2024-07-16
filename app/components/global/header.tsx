@@ -36,9 +36,10 @@ const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
             Get Support
           </Link>
           <Button
-            href="mailto:hello@thesirlife.com"
             color="warning"
             variant="contained"
+            href="https://www.thesirlife.com/user-portal-feedback"
+						target="_blank"
           >
             Share Feedback
           </Button>

@@ -43,11 +43,6 @@ const BrainGames = async ({
           </div>
         </div>
       </div>
-      <RelatedArticles
-        header="Related Articles"
-        type="brain-games"
-        isLoggedIn={Boolean(session)}
-      />
       <ArticlesList
         isGame
         articles={articles.articles}

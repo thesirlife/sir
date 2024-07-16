@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="flex flex-col container m-auto">
         <div className="flex flex-col sm:flex-row gap-4 pb-6 justify-center items-center">
           <h3 className="text-xl font-bold">Want To Help Us Improve SIR?</h3>
-          <Button variant="contained" color="warning" href="/share-feedback">
+          <Button variant="contained" color="warning" href="https://www.thesirlife.com/user-portal-feedback" target="_blank">
             Share Feedback
           </Button>
         </div>
