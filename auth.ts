@@ -65,38 +65,13 @@ export const authOptions: NextAuthConfig = {
           }
 
           const parsedResponse: AuthResponse = await res.json();
-					console.log(parsedResponse);
           const jwt = parsedResponse.data.token;
-					console.log(jwt);
-
-					// Immediately request a refresh token for the 30 day expiration
-					// Default initial JWT token expires in 10 minutes
-					// const result = await fetch(
-          //   `${process.env.NEXT_PUBLIC_WPAUTH_ENDPOINT}/token?refresh_token=${jwt}`,
-          //   {
-          //     method: "POST",
-          //     headers: {
-          //       "Content-Type": "application/json",
-					// 			Authorization: `Bearer ${jwt}`,
-          //     },
-          //   }
-          // );
-					// console.log(result);
-
-					// if (!result.ok) {
-					// 	return null;
-          // }
-
-          // const parsedResult: AuthResponse = await result.json();
-					// console.log(parsedResult);
-          // const refreshedJwt = parsedResult.data.token;
-					// console.log(refreshedJwt);
 
           return {
             ...credentials,
             name: parsedResponse.data.firstName,
             id: String(parsedResponse.data.id),
-            jwt: jwt,
+            jwt,
           } as User;
         } catch (e) {
           return null;

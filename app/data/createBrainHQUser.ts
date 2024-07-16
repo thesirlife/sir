@@ -11,7 +11,6 @@ const createBrainHQUser = async (
   email: string,
   firstName: string
 ): Promise<CreateBrainUserResponse> => {
-  console.log(firstName);
   // SSO into BrainHQ
   const data = await fetch(`/api/brain-hq/user/create`, {
     method: "POST",
@@ -25,8 +24,7 @@ const createBrainHQUser = async (
     },
   });
 
-  const result = await data.json();
-  return result;
+  return await data.json();
 };
 
 export default createBrainHQUser;
