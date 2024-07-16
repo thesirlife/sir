@@ -83,7 +83,7 @@ export default async function RootLayout({
 														accountName: "SIR Digital Hub",
 												}
 										});
-								})(${process.env.PENDO_API_KEY});
+								})('${process.env.PENDO_API_KEY}');
 							`}
 						</Script>
           </body>
