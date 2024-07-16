@@ -10,6 +10,7 @@ const PendoTracking = ({ session }) => {
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
+			console.log('Pendo Script:');
 			<Script
 				id="pendo-script"
 				dangerouslySetInnerHTML={{
