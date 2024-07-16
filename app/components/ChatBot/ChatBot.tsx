@@ -409,7 +409,7 @@ const ChatBot = ({ userId }: ChatBotProps) => {
             width: "100%",
           }}
         >
-          The assistant will do its best to provide accurate answers.
+          The assistant will do its best to provide accurate answers.<br />See our <a href="https://www.thesirlife.com/privacy-policy" target="_blank" style={{ textDecoration: 'underline' }}>privacy policy</a> for details.
         </Typography>
       </Box>
 
