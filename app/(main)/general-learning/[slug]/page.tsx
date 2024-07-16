@@ -143,7 +143,7 @@ const GeneralLearningArticle = async ({
             {isLoggedIn ? (
               <>
                 <SocialShare
-                  url={`${process.env.APP_URL}/${article[0].slug}`}
+                  url={`${process.env.NEXTAUTH_URL}/${article[0].slug}`}
                   title={article[0].title?.rendered}
                 />
                 <BasicCta

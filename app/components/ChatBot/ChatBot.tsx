@@ -37,7 +37,7 @@ const ChatBot = ({ userId }: ChatBotProps) => {
     {
       id: "assistant-1",
       content:
-        "Welcome, I&apos;m your AI chat confidant!\n\nType in your thoughts or questions as if you&apos;re talking to a friend. The AI is here to listen and support you. Your conversations are private and confidential. No one else can see or access what you share.",
+        "Welcome, I&apos;m your AI chat confidant!\n\nYou can type and talk to me as if I were a friend! Your conversations are confidential. See our privacy policy for information on how we protect and keep your information private.",
       role: "assistant",
     },
   ]);
@@ -259,57 +259,7 @@ const ChatBot = ({ userId }: ChatBotProps) => {
             Start With A Topic Or Send A Message
           </h2>
           <div className="grid grid-cols-4 gap-2 mt-6">
-            <button
-              className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
-              onClick={() => {
-                setInput("Ask me some questions about my health");
-                setInitialScreen(false);
-                handleSendMessage("Ask me some questions about my health");
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                height="24px"
-                width="24px"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="#fff"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2Z"
-                />
-              </svg>
-              <p className="pt-3">Ask me some questions about my health</p>
-            </button>
-            <button
-              className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
-              onClick={() => {
-                setInput("Tell me interesting historical facts");
-                setInitialScreen(false);
-                handleSendMessage("Tell me interesting historical facts");
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-              >
-                <g
-                  stroke="#fff"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                >
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2V3ZM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7V3Z" />
-                </g>
-              </svg>
-              <p className="pt-3">Tell me interesting historical facts</p>
-            </button>
-            <button
+						<button
               className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
               onClick={() => {
                 setInput("Explain the coolest scientific discoveries");
@@ -334,12 +284,62 @@ const ChatBot = ({ userId }: ChatBotProps) => {
               </svg>
               <p className="pt-3">Explain the coolest scientific discoveries</p>
             </button>
+						<button
+              className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
+              onClick={() => {
+                setInput("Keeping busy during retirement");
+                setInitialScreen(false);
+                handleSendMessage("Keeping busy during retirement");
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+              >
+                <g
+                  stroke="#fff"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                >
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2V3ZM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7V3Z" />
+                </g>
+              </svg>
+              <p className="pt-3">Keeping busy during retirement</p>
+            </button>
             <button
               className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
               onClick={() => {
-                setInput("Tell me interesting facts about sports");
+                setInput("Learn about health as you age");
                 setInitialScreen(false);
-                handleSendMessage("Tell me interesting facts about sports");
+                handleSendMessage("Learn about health as you age");
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                height="24px"
+                width="24px"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="#fff"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2Z"
+                />
+              </svg>
+              <p className="pt-3">Learn about health as you age</p>
+            </button>
+            <button
+              className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
+              onClick={() => {
+                setInput("Most impressive sports accomplishments");
+                setInitialScreen(false);
+                handleSendMessage("Most impressive sports accomplishments");
               }}
             >
               <svg
@@ -359,7 +359,7 @@ const ChatBot = ({ userId }: ChatBotProps) => {
                   <path d="M12 18v-2h-.5" />
                 </g>
               </svg>
-              <p className="pt-3">Tell me interesting facts about sports</p>
+              <p className="pt-3">Most impressive sports accomplishments</p>
             </button>
           </div>
         </div>

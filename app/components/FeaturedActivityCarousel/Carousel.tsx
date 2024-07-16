@@ -84,9 +84,14 @@ const FeaturedActivityCarousel = ({
               {trivia && choices && (
                 <CarouselItem className="flex justify-center">
                   <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-20 h-full w-full">
-                    <h2 className=" mb-4 text-4xl font-bold md:basis-1/2">
-                      Test Your Knowledge With Some Quick Trivia!
-                    </h2>
+										<div className="flex flex-col md:basis-1/2">
+											<h2 className=" mb-4 text-4xl font-bold">
+												Welcome to SIR.
+											</h2>
+											<p>
+												Building simple daily habits can have a tremendous benefit to your day. We have assembled four really quick but fun exercises for you to keep your mind sharp each day. Let&apos;s start with your daily trivia question!
+											</p>
+										</div>
                     <div className="flex flex-col basis-1/2">
                       <Trivia
                         title={trivia?.title.rendered}

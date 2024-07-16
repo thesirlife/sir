@@ -20,7 +20,7 @@ const OnboardingModal = () => {
         <div className="p-6">
           <Image src={onboarding} alt="Onboarding" width={420} height={180} />
           <h2 className="text-xl font-bold mb-2 mt-3">
-            Welcome To The Online Box Experience!
+            Welcome To The SIR Digital Hub!
           </h2>
           <p className="text-lg text-navy-secondary mb-10">
             Here you will find a variety of fun games to stimulate the brain,

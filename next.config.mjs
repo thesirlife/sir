@@ -2,8 +2,8 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      {
-        hostname: "sirboxdev.wpenginepowered.com",
+			{
+        hostname: "sirlifedev.wpenginepowered.com",
       },
       {
         hostname: "upload.wikimedia.org",
