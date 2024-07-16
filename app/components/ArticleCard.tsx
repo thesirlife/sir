@@ -10,15 +10,24 @@ import {
   PlayCircleOutline,
 } from "@mui/icons-material";
 import { Paper, PaperProps } from "@mui/material";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { MouseEvent, PropsWithChildren, useEffect, useState } from "react";
 import Button from "./global/Button";
 import getTagById from "../data/getTagById";
 import getMediaById from "../data/getMediaById";
 import { Media } from "../types/media/types";
 import { sendGAEvent } from "@next/third-parties/google";
+
 import BrainHq from "@/app/cta-images/brain-hq-default.jpg";
+import createBrainHQUser from "@/app/data/createBrainHQUser";
 
 type ArticleCardProps = PaperProps & {
+  session: {
+    user: {
+      id: number;
+      email: string;
+      name: string;
+    };
+  };
   header: string;
   image?: string | StaticImageData;
   imageWidth?: number;
@@ -60,6 +69,7 @@ const ArticleTypeDictionary: Record<string, ArticleProperties> = {
 // I think there'd be a lot of conditional CSS if I tried to combine them, which could be confusing
 
 const ArticleCard = ({
+  session,
   header,
   url,
   image,
@@ -74,10 +84,30 @@ const ArticleCard = ({
   children,
   ...props
 }: PropsWithChildren<ArticleCardProps>) => {
+  const [error, setError] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<Media>();
   const [tag, setTag] = useState<string>("article");
   const [articleUrl, setArticleUrl] = useState<string>("");
   const [icon, setIcon] = useState<JSX.Element | null>(null);
+
+  const handleGame = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const result = await createBrainHQUser(
+      session?.user.id,
+      session?.user.email,
+      session?.user.name
+    );
+    // when you get the type of the response from the API, you can replace Object with that type
+    // then, the errors below should resolve since they now exist on the type, instead of just the generic Object type
+    if (!result.error) {
+      setError("");
+      const { web } = result;
+      window.open(web, "_blank")?.focus();
+    } else {
+      setError(result.error);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -143,17 +173,21 @@ const ArticleCard = ({
           href={isGame ? gameUrl : articleUrl}
           target={isGame ? "_blank" : "_self"}
           endIcon={<NavigateNext fontSize="medium" />}
-          onClick={() =>
+          onClick={(e) => {
             sendGAEvent({
               event: isGame ? "gameClicked" : "articleClicked",
               value: isGame ? gameUrl : articleUrl,
-            })
-          }
+            });
+            if (isGame) {
+              handleGame(e);
+            }
+          }}
         >
           {ArticleTypeDictionary[tag]
             ? ArticleTypeDictionary[tag].header
             : "Read Article"}
         </Button>
+        {error && <p className="text-red-500">{error}</p>}
       </div>
     </Paper>
   );

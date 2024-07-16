@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Brain Games",
-  description: "Links to brain games by BrainHQ",
+  description: "Engage with brain games by BrainHQ",
 };
 
 const BrainGames = async ({
@@ -28,6 +28,7 @@ const BrainGames = async ({
   }
 
   const articles = await getBrainGames({ categories, offset });
+
   return (
     <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
       <div className="container">

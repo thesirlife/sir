@@ -66,6 +66,7 @@ export const authOptions: NextAuthConfig = {
 
           const parsedResponse: AuthResponse = await res.json();
           const jwt = parsedResponse.data.token;
+
           return {
             ...credentials,
             name: parsedResponse.data.firstName,

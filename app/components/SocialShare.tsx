@@ -9,7 +9,6 @@ type SocialShareProps = {
 };
 
 const SocialShare = ({ url, title }: SocialShareProps) => {
-  console.log(url);
   return (
     <div className="flex flex-col gap-2">
       <p className="drop-shadow-sm font-medium">Share this article:</p>
