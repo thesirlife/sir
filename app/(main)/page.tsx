@@ -9,6 +9,7 @@ import getRandomVideo from "../data/getRandomVideo";
 import getTrivia from "../data/getTrivia";
 import getPage from "../data/getPage";
 import { redirect } from "next/navigation";
+import getAuthJwt from "../data/getAuthJwt";
 
 const Dashboard = async ({
   searchParams,
@@ -33,6 +34,7 @@ const Dashboard = async ({
   const brainGamesPage = await getPage("29");
   const generalLearningPage = await getPage("27");
   const aiPage = await getPage("31");
+  const jwt = await getAuthJwt();
 
   return (
     <div>
@@ -46,8 +48,13 @@ const Dashboard = async ({
       <Explore
         topPages={[brainGamesPage, generalLearningPage, aiPage]}
         userId={Number(session?.user.id)}
+        jwt={jwt}
       />
-      <RelatedArticles header="SIR Welcome Box" type="general-learning" />
+      <RelatedArticles
+        header="SIR Welcome Box"
+        type="general-learning"
+        isLoggedIn={Boolean(session)}
+      />
     </div>
   );
 };

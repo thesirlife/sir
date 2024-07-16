@@ -3,6 +3,7 @@ import Badges from "./badges";
 import { auth } from "@/auth";
 import getCurrentUser from "@/app/data/getCurrentUser";
 import { redirect } from "next/navigation";
+import getAuthJwt from "@/app/data/getAuthJwt";
 
 export const metadata = {
   title: "My Badges",
@@ -14,6 +15,7 @@ const MyBadges = async () => {
   if (!session?.user.email) {
     redirect("/enter-box-code");
   }
+  const jwt = await getAuthJwt();
   const user = await getCurrentUser(session?.user.jwt as string);
   return (
     <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
@@ -24,8 +26,8 @@ const MyBadges = async () => {
         </div>
       </div>
       <div className="container pb-12">
-        <div className="flex flex-row gap-5 flex-wrap justify-between">
-          <Badges user={user} userId={Number(session?.user.id)} />
+        <div className="flex flex-row gap-5 flex-wrap justify-between mb-14">
+          <Badges user={user} userId={Number(session?.user.id)} jwt={jwt} />
         </div>
       </div>
     </div>

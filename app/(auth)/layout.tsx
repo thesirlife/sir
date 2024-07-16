@@ -6,7 +6,7 @@ const LoggedOutLayout = async ({ children }: PropsWithChildren) => {
   const session = await auth();
 
   return (
-    <div className="min-h-screen flex flex-col items-between justify-between bg-auth">
+    <div className="min-h-screen flex flex-col items-between justify-between bg-auth bg-cover">
       {children}
       <LoggedOutFooter />
     </div>

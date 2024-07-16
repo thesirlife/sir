@@ -30,7 +30,8 @@ const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
           </Link>
           <Link
             className="underline decoration-green-secondary"
-            href="/get-support"
+            href="https://www.thesirlife.com/get-support"
+            target="_blank"
           >
             Get Support
           </Link>
@@ -38,7 +39,6 @@ const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
             href="mailto:hello@thesirlife.com"
             color="warning"
             variant="contained"
-            endIcon={<OpenInNew />}
           >
             Share Feedback
           </Button>

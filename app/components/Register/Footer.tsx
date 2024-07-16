@@ -7,7 +7,11 @@ const LoggedOutFooter = () => {
       <p className="items-center flex">&copy; SIR 2024</p>
       <div className="flex items-center">
         <div className="max-h-7 flex flex-row gap-4 items-center">
-          <Link href="#" className="underline decoration-green-secondary">
+          <Link
+            href="https://www.thesirlife.com/get-support"
+            target="_blank"
+            className="underline decoration-green-secondary"
+          >
             Get Support
           </Link>
           <Divider
@@ -15,7 +19,11 @@ const LoggedOutFooter = () => {
             flexItem
             className="bg-orange-light"
           />
-          <Link href="#" className="underline decoration-green-secondary">
+          <Link
+            href="https://www.thesirlife.com/terms-and-conditions"
+            target="_blank"
+            className="underline decoration-green-secondary"
+          >
             Terms & Conditions
           </Link>
           <Divider
@@ -23,15 +31,23 @@ const LoggedOutFooter = () => {
             flexItem
             className="bg-orange-light"
           />
-          <Link href="#" className="underline decoration-green-secondary">
-            About SIR
+          <Link
+            href="https://www.thesirlife.com/faqs"
+            target="_blank"
+            className="underline decoration-green-secondary"
+          >
+            FAQ
           </Link>
           <Divider
             orientation="vertical"
             flexItem
             className="bg-orange-light"
           />
-          <Link href="#" className="underline decoration-green-secondary">
+          <Link
+            href="https://www.thesirlife.com/privacy-policy"
+            target="_blank"
+            className="underline decoration-green-secondary"
+          >
             Privacy Policy
           </Link>
         </div>

@@ -18,17 +18,9 @@
 }
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 }
 
 body {
@@ -60,10 +52,11 @@ p {
   @apply font-roboto;
 }
 
-ol, ul {
-	list-style: auto;
-	margin: revert;
-	padding: 0 1rem;
+ol,
+ul {
+  list-style: auto;
+  margin: revert;
+  padding: 0 1rem;
 }
 
 iframe {
@@ -78,7 +71,8 @@ iframe {
 
 /* this is a hack copying CSS output from the MUI button since buttons are added in WYSISYG
 – ideally, we should create a different component in WP, then feed in our custom Button component  */
-.wp-block-button__link {
+.wp-block-button__link,
+iframe .survey-page-button {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;

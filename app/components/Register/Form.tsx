@@ -41,7 +41,7 @@ const RegisterForm = () => {
   return (
     <div>
       <div className="flex flex-col items-center">
-        <h2 className="font-bold">Setup Your Account</h2>
+        <h2 className="font-bold">Set-up Your Account</h2>
         <p className="text-lg mb-8 opacity-60">
           Enter your information below to finish setting up your SIR account.
         </p>
@@ -83,7 +83,13 @@ const RegisterForm = () => {
           />
         </div>
         <Divider className="my-8" flexItem />
-        <SubmitButton>Finish Setup</SubmitButton>
+        <SubmitButton className="px-16">Finish Setup</SubmitButton>
+        <p className="text-xs leading-6 mt-8 text-center max-w-[500px]">
+          We will not share your email address with any third parties. Your
+          email address is used solely for account security purposes, such as
+          verifying your identity and resetting your password. Rest assured,
+          your email information is kept confidential and protected.
+        </p>
         {formState.status === "invalid" && (
           <p className="text-red-500 font-semibold text-center max-w-100 mt-4">
             Your have entered an email address in a format we do not support,

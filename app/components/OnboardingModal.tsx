@@ -23,9 +23,10 @@ const OnboardingModal = () => {
             Welcome To The Online Box Experience!
           </h2>
           <p className="text-lg text-navy-secondary mb-10">
-            We offer free games, learning and community for those who have
-            received our boxes. Explore the platform and engage with the
-            community!
+            Here you will find a variety of fun games to stimulate the brain,
+            interesting articles, and a change to talk to your own AI Confidant!
+            Start your day with the daily check list and explore everything else
+            we have to offer.
           </p>
 
           <Button

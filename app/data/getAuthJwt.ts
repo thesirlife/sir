@@ -1,6 +1,3 @@
-import dayjs from "dayjs";
-import { TriviaPost } from "../types/trivia/types";
-
 type AuthResponse = {
   success: boolean;
   statusCode: number;
@@ -17,10 +14,7 @@ type AuthResponse = {
   };
 };
 
-const getTrivia = async (): Promise<TriviaPost> => {
-  const sot = dayjs().startOf("day").format();
-  const eot = dayjs().endOf("day").format();
-
+const getAuthJwt = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_WPAUTH_ENDPOINT}/token`, {
     method: "POST",
     body: JSON.stringify({
@@ -35,24 +29,7 @@ const getTrivia = async (): Promise<TriviaPost> => {
   const parsedResponse: AuthResponse = await res.json();
   const jwt = parsedResponse.data.token;
 
-  const response = await fetch(
-    `${
-      process.env.NEXT_PUBLIC_WPREST_ENDPOINT
-    }/trivia?after=${encodeURIComponent(sot)}&before=${encodeURIComponent(
-      eot
-    )}`,
-    {
-      cache: "no-cache",
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  const trivia = await response.json();
-
-  return trivia[0];
+  return jwt;
 };
 
-export default getTrivia;
+export default getAuthJwt;

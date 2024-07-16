@@ -10,7 +10,11 @@ type RelatedArticlesProps = {
   isLoggedIn?: boolean;
 };
 
-const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
+const RelatedArticles = async ({
+  header,
+  type,
+  isLoggedIn,
+}: RelatedArticlesProps) => {
   const articles = await getStickyPosts(type);
 	const session = await auth();
 
@@ -36,15 +40,17 @@ const RelatedArticles = async ({ header, type }: RelatedArticlesProps) => {
             );
           })}
         </div>
-        <Button
-          color="warning"
-          endIcon={<OpenInNew />}
-          variant="contained"
-          className="mt-6"
-          href="/enter-box-code"
-        >
-          Sign Up Now
-        </Button>
+        {!isLoggedIn ? (
+          <Button
+            color="warning"
+            endIcon={<OpenInNew />}
+            variant="contained"
+            className="mt-6"
+            href="/enter-box-code"
+          >
+            Sign Up Now
+          </Button>
+        ) : null}
       </div>
     </div>
   );

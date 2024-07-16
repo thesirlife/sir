@@ -63,9 +63,9 @@ const CtaBox = ({
           )}
         </div>
         <div className="flex flex-col basis-1/2  overflow-x-hidden">
-					<h3
+          <h3
             className="text-xl font-bold mb-2"
-            dangerouslySetInnerHTML={{ __html: header as string }}
+            dangerouslySetInnerHTML={{ __html: header || ("" as string) }}
           />
           <div
             className={`${

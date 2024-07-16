@@ -9,20 +9,23 @@ type PatchUserProps = {
   id: number;
   property: MetaProperties;
   value: boolean;
+  jwt: string;
 };
 
 const patchUser = async ({
   id,
   property,
   value,
+  jwt,
 }: PatchUserProps): Promise<User> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/users/${id}`,
     {
       method: "PATCH",
+      cache: "no-cache",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Basic c2lyZGV2OnJVU1MgYURLMCBCelk3IGx1Q00geDhNSyBhcEFa",
+        Authorization: `Bearer ${jwt}`,
       },
       body: JSON.stringify({
         meta: {

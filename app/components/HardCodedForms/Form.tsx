@@ -36,20 +36,18 @@ const HardCodedForm = ({
   return (
     <Paper elevation={2} className="p-6" square>
       <h2
-				className="text-navy-primary text-xl font-bold"
-				dangerouslySetInnerHTML={{
-					__html: children
-				}}
-			/>
+        className="text-navy-primary text-xl font-bold"
+        dangerouslySetInnerHTML={{ __html: children as string }}
+      />
       <Divider className="my-4" />
       <div className="flex flex-col gap-2">
         {choices.map((choice) => {
           return (
             <Chip
-              className={`hover:border-orange-primary cursor-pointer flex justify-start text-lg [&>.MuiChip-label]:w-full border-navy-secondary py-3 px-3 rounded-full h-full leading-4 ${
+              className={`hover:border-orange-primary cursor-pointer flex justify-start text-lg [&>.MuiChip-label]:w-full  py-3 px-3 rounded-full h-full leading-4 ${
                 choice === currentChoice
-                  ? "border-green-primary text-green-primary"
-                  : "text-navy-primary"
+                  ? "border-navy-primary border-2 text-navy-primary"
+                  : "border-navy-secondary"
               } ${choice.isAnswer && submitted && "border-green-primary"} ${
                 !choice.isAnswer &&
                 submitted &&

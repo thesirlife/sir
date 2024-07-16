@@ -13,14 +13,16 @@ type ExploreProps = {
   // i suck at ts
   topPages: Page[] | Record<any, any>;
   userId: number;
+  jwt: string;
 };
 
-const Explore = ({ topPages, userId }: ExploreProps) => {
+const Explore = ({ topPages, userId, jwt }: ExploreProps) => {
   const handleCommunityClick = () => {
     patchUser({
       id: userId,
       property: "user_meta_box_1_visited_community",
       value: true,
+      jwt,
     });
 
     sendGAEvent({
@@ -66,7 +68,7 @@ const Explore = ({ topPages, userId }: ExploreProps) => {
             header="SIR Facebook Community"
             onClick={handleCommunityClick}
             link={{
-              href: "",
+              href: "https://www.facebook.com/groups/800152378911097",
               label: "Open Community",
               isExternal: true,
             }}
