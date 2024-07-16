@@ -19,7 +19,7 @@ const SignInPage = async () => {
     <>
       <Header isLoggedIn={Boolean(session?.user.email)} />
       <div className="flex items-center justify-center w-full my-6">
-        <Paper square className="max-w-[760px] w-full p-16">
+        <Paper square className="max-w-[760px] w-full px-6 py-8 sm:p-16">
           <EnterBoxCodeForm />
         </Paper>
       </div>
