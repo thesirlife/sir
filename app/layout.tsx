@@ -5,6 +5,7 @@ import { Gloock, Roboto, Bitter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 import HubspotTracking from "@/app/components/Hubspot/embed";
+import PendoTracking from "@/app/components/Pendo/embed";
 
 import "./globals.css";
 
@@ -57,6 +58,7 @@ export default async function RootLayout({
               strategy="beforeInteractive"
             />
             <HubspotTracking session={session} />
+            <PendoTracking session={session} />
           </body>
           <GoogleAnalytics gaId="G-L7T5ZQH0G5" />
         </html>
