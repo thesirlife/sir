@@ -73,13 +73,13 @@ export default async function RootLayout({
 
 										pendo.initialize({
 												visitor: {
-														id: ${userId},
-														email: ${emailAddress},
-														firstName: ${name},
+														id: "${userId}",
+														email: "${emailAddress}",
+														firstName: "${name}",
 												},
 
 												account: {
-														id: ${process.env.PENDO_ACCOUNT_ID},
+														id: "${process.env.PENDO_ACCOUNT_ID}",
 														accountName: "SIR Digital Hub",
 												}
 										});
