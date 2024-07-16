@@ -18,12 +18,16 @@ import { Media } from "../types/media/types";
 import { sendGAEvent } from "@next/third-parties/google";
 
 import BrainHq from "@/app/cta-images/brain-hq-default.jpg";
-import getCurrentUser from "@/app/data/getCurrentUser";
-import loginBrainHQUser from "@/app/data/loginBrainHQUser";
 import createBrainHQUser from "@/app/data/createBrainHQUser";
 
 type ArticleCardProps = PaperProps & {
-  session: object,
+  session: {
+		user: {
+			id: number,
+			email: string,
+			name: string,
+		},
+	},
   header: string;
   image?: string | StaticImageData;
   imageWidth?: number;
@@ -88,30 +92,15 @@ const ArticleCard = ({
 
 	const handleGame = async (e) => {
     e.preventDefault();
-    // Check if User has a BrainHQ User
-		console.log(session?.user.jwt);
-		const user = await getCurrentUser(session?.user.jwt as string);
-		console.log(user.meta.user_meta_brain_hq_user_id.length > 0 && user.meta.user_meta_brain_hq_user_id[0] !== '');
-		if (user.meta.user_meta_brain_hq_user_id.length > 0 && user.meta.user_meta_brain_hq_user_id[0] !== '') {
-			// SSO into BrainHQ
-			const brainHqId = user.meta.user_meta_brain_hq_user_id[0];
-			console.log('login');
-      const result = await loginBrainHQUser(parseInt(brainHqId) as number);
-			console.log(result);
-	    const { web } = result;
-      // window.open( web, '_blank' ).focus();
-    } else {
-			// Create BrainHQ User and complete SSO
-			console.log('create user for SSO');
-      const result = await createBrainHQUser(session?.user.id, session?.user.email, session?.user.name);
-			console.log(result);
-			if (!result.error) {
-				const { web } = result;
-				// window.open( web, '_blank' ).focus();
-			} else {
-				setError(result.error);
-			}
-    }
+
+		const result = await createBrainHQUser(session?.user.id, session?.user.email, session?.user.name);
+		if (!result.error) {
+			setError('');
+			const { web } = result;
+			window.open( web, '_blank' ).focus();
+		} else {
+			setError(result.error);
+		}
   };
 
   useEffect(() => {
