@@ -1,9 +1,7 @@
 import dayjs from "dayjs";
-import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import { TriviaPost } from "../types/trivia/types";
 
-dayjs.extend(timezone);
 dayjs.extend(utc);
 
 type AuthResponse = {
@@ -23,10 +21,10 @@ type AuthResponse = {
 };
 
 const getTrivia = async (): Promise<TriviaPost> => {
+	// Set to UTC-6 for America/Denver, to match the WordPress settings
+	// This allows for the Trivia posts 'scheduled' posts
   const sot = dayjs().utcOffset(-6).startOf("day").format();
   const eot = dayjs().utcOffset(-6).endOf("day").format();
-	console.log(sot);
-	console.log(eot);
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_WPAUTH_ENDPOINT}/token`, {
     method: "POST",
@@ -41,12 +39,6 @@ const getTrivia = async (): Promise<TriviaPost> => {
 
   const parsedResponse: AuthResponse = await res.json();
   const jwt = parsedResponse.data.token;
-
-	console.log(`${
-		process.env.NEXT_PUBLIC_WPREST_ENDPOINT
-	}/trivia?after=${encodeURIComponent(sot)}&before=${encodeURIComponent(
-		eot
-	)}`);
 
   const response = await fetch(
     `${
