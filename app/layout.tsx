@@ -5,7 +5,6 @@ import { Gloock, Roboto, Bitter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 import HubspotTracking from "@/app/components/Hubspot/embed";
-import PendoTracking from "@/app/components/Pendo/embed";
 
 import "./globals.css";
 
