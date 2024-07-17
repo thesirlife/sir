@@ -61,7 +61,6 @@ export default async function RootLayout({
               strategy="beforeInteractive"
             />
             <HubspotTracking session={session} />
-						<div id="pendo thing here" />
             <Script id="pendo-script" strategy="afterInteractive">
 							{`
 								(function(apiKey){

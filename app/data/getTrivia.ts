@@ -20,6 +20,8 @@ type AuthResponse = {
 const getTrivia = async (): Promise<TriviaPost> => {
   const sot = dayjs().startOf("day").format();
   const eot = dayjs().endOf("day").format();
+	console.log(sot);
+	console.log(eot);
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_WPAUTH_ENDPOINT}/token`, {
     method: "POST",
