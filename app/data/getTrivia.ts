@@ -1,5 +1,10 @@
 import dayjs from "dayjs";
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 import { TriviaPost } from "../types/trivia/types";
+
+dayjs.extend(timezone);
+dayjs.extend(utc);
 
 type AuthResponse = {
   success: boolean;
@@ -18,8 +23,8 @@ type AuthResponse = {
 };
 
 const getTrivia = async (): Promise<TriviaPost> => {
-  const sot = dayjs().startOf("day").format();
-  const eot = dayjs().endOf("day").format();
+  let sot = dayjs().startOf("day").tz("America/Denver", true).format();
+  const eot = dayjs().endOf("day").tz("America/Denver", true).format();
 	console.log(sot);
 	console.log(eot);
 
