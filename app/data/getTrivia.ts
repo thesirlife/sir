@@ -37,6 +37,12 @@ const getTrivia = async (): Promise<TriviaPost> => {
   const parsedResponse: AuthResponse = await res.json();
   const jwt = parsedResponse.data.token;
 
+	console.log(`${
+		process.env.NEXT_PUBLIC_WPREST_ENDPOINT
+	}/trivia?after=${encodeURIComponent(sot)}&before=${encodeURIComponent(
+		eot
+	)}`);
+
   const response = await fetch(
     `${
       process.env.NEXT_PUBLIC_WPREST_ENDPOINT
