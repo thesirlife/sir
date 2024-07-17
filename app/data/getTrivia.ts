@@ -23,8 +23,8 @@ type AuthResponse = {
 };
 
 const getTrivia = async (): Promise<TriviaPost> => {
-  let sot = dayjs().startOf("day").tz("America/Denver", true).format();
-  const eot = dayjs().endOf("day").tz("America/Denver", true).format();
+  const sot = dayjs().utcOffset(-6).startOf("day").format();
+  const eot = dayjs().utcOffset(-6).endOf("day").format();
 	console.log(sot);
 	console.log(eot);
 
