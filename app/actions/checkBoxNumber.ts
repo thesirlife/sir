@@ -8,11 +8,6 @@ import { revalidatePath } from "next/cache";
 // so we have to extract each individual number and stitch them together into one
 const newUserSchema = z.object({
   number0: z.string(),
-  number1: z.string(),
-  number2: z.string(),
-  number3: z.string(),
-  number4: z.string(),
-  number5: z.string(),
 });
 
 export type FormState = {
@@ -23,21 +18,16 @@ export const checkBoxNumber = async (
   formState: FormState,
   formData: FormData
 ) => {
-  const { number0, number1, number2, number3, number4, number5 } =
+  const { number0 } =
     newUserSchema.parse({
       number0: formData.get("number0"),
-      number1: formData.get("number1"),
-      number2: formData.get("number2"),
-      number3: formData.get("number3"),
-      number4: formData.get("number4"),
-      number5: formData.get("number5"),
     });
   try {
-    const code = [number0, number1, number2, number3, number4, number5].join(
+    const code = [number0].join(
       ""
     );
 
-    const validCodes = ["123456", "654321", "111111", "222222", "333333"];
+    const validCodes = ["241633"];
 
     if (validCodes.includes(code)) {
       formState.verified = true;
