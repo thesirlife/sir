@@ -2,6 +2,9 @@
 const nextConfig = {
   images: {
     remotePatterns: [
+			{
+        hostname: "sirlifeprod.wpenginepowered.com",
+      },
       {
         hostname: "sirlifedev.wpenginepowered.com",
       },
