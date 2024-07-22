@@ -259,7 +259,7 @@ const ChatBot = ({ userId }: ChatBotProps) => {
             Start With A Topic Or Send A Message
           </h2>
           <div className="grid grid-cols-4 gap-2 mt-6">
-						<button
+            <button
               className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
               onClick={() => {
                 setInput("Explain the coolest scientific discoveries");
@@ -284,7 +284,7 @@ const ChatBot = ({ userId }: ChatBotProps) => {
               </svg>
               <p className="pt-3">Explain the coolest scientific discoveries</p>
             </button>
-						<button
+            <button
               className="bg-blueGrey-dark rounded-lg p-3 text-left hover:underline"
               onClick={() => {
                 setInput("Keeping busy during retirement");
@@ -379,7 +379,7 @@ const ChatBot = ({ userId }: ChatBotProps) => {
 
       <Box className="max-w-[600px] w-full">
         <Input
-          placeholder="send a message"
+          placeholder="Send a message"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disableUnderline={true}
@@ -409,7 +409,18 @@ const ChatBot = ({ userId }: ChatBotProps) => {
             width: "100%",
           }}
         >
-          The assistant will do its best to provide accurate answers.<br />See our <a href="https://www.thesirlife.com/privacy-policy" target="_blank" style={{ textDecoration: 'underline' }}>privacy policy</a> for details.
+          The assistant will do its best to provide accurate answers. Please
+          double check important information.
+          <br />
+          See our{" "}
+          <a
+            href="https://www.thesirlife.com/privacy-policy"
+            target="_blank"
+            style={{ textDecoration: "underline" }}
+          >
+            privacy policy
+          </a>{" "}
+          for details.
         </Typography>
       </Box>
 

@@ -4,7 +4,7 @@ const getRandomVideo = async (): Promise<Post> => {
   // get General Learning articles (posts) tagged as a Video (tag id = 6)
   // then, randomly pick one
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?tags=6&status=publish`,
+    `${process.env.NEXT_PUBLIC_WPREST_ENDPOINT}/posts?tags=6&status=publish&_embed=true`,
     {
       headers: {
         "Content-Type": "application/json",

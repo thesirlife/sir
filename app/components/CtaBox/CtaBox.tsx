@@ -27,8 +27,8 @@ const CtaBox = ({
   header,
   icon,
   link,
-  imageHeight,
-  imageWidth,
+  imageHeight = 160,
+  imageWidth = 400,
   imageOnTop = true,
   narrow,
   children,
@@ -53,7 +53,7 @@ const CtaBox = ({
             alt={header || ""}
             width={imageWidth}
             height={imageHeight}
-            className="w-full"
+            className="w-full max-h-[160px] object-cover"
           />
           {Icon && (
             <IconWithBackground
