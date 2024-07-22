@@ -31,10 +31,13 @@ const FeaturedActivityCarousel = ({
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
   const [choices, setChoices] = useState<Choice[]>();
-  console.log(article);
   const handleFocus = (slide?: number) => {
     setCurrentSlide(slide || 0);
   };
+
+  const handleDrag = useCallback((api: CarouselApi) => {
+    setCurrentSlide(api?.selectedScrollSnap() as number);
+  }, []);
 
   const scrollPrev = useCallback(() => {
     setCurrentSlide((prev) => prev - 1);
@@ -51,8 +54,10 @@ const FeaturedActivityCarousel = ({
       return;
     }
 
+    api.on("select", handleDrag);
     api.scrollTo(currentSlide);
-  }, [api, currentSlide]);
+    setCurrentSlide(currentSlide);
+  }, [api, currentSlide, handleDrag]);
 
   useEffect(() => {
     const choices: Choice[] = [
@@ -73,13 +78,7 @@ const FeaturedActivityCarousel = ({
       />
       <div className="bg-pattern-green overflow-hidden flex items-center justify-center py-16">
         <div className="flex flex-row gap-5 px-4 items-center">
-          <Carousel
-            className="w-full"
-            setApi={setApi}
-            opts={{
-              watchDrag: false,
-            }}
-          >
+          <Carousel className="w-full" setApi={setApi}>
             <CarouselContent className="container ">
               {trivia && choices && (
                 <CarouselItem className="flex justify-center">
