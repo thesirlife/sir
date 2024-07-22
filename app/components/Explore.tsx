@@ -76,7 +76,7 @@ const Explore = ({ topPages, userId, jwt }: ExploreProps) => {
             imageWidth={152}
           >
             Join other SIR members to discuss the box activities, brain games
-            and general learning.
+            and anything else on your mind.
           </CtaBoxWide>
         </div>
         <div className="col-span-1 md:col-span-3 row-span-1">

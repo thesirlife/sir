@@ -31,7 +31,7 @@ const FeaturedActivityCarousel = ({
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
   const [choices, setChoices] = useState<Choice[]>();
-
+  console.log(article);
   const handleFocus = (slide?: number) => {
     setCurrentSlide(slide || 0);
   };
@@ -84,14 +84,17 @@ const FeaturedActivityCarousel = ({
               {trivia && choices && (
                 <CarouselItem className="flex justify-center">
                   <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-20 h-full w-full">
-										<div className="flex flex-col md:basis-1/2">
-											<h2 className=" mb-4 text-4xl font-bold">
-												Welcome to SIR.
-											</h2>
-											<p>
-												Building simple daily habits can have a tremendous benefit to your day. We have assembled four really quick but fun exercises for you to keep your mind sharp each day. Let&apos;s start with your daily trivia question!
-											</p>
-										</div>
+                    <div className="flex flex-col md:basis-1/2">
+                      <h2 className=" mb-4 text-4xl font-bold">
+                        Welcome to SIR.
+                      </h2>
+                      <p>
+                        Building simple daily habits can have a tremendous
+                        benefit to your day. We have assembled four really quick
+                        but fun exercises for you to keep your mind sharp each
+                        day. Let&apos;s start with your daily trivia question!
+                      </p>
+                    </div>
                     <div className="flex flex-col basis-1/2">
                       <Trivia
                         title={trivia?.title.rendered}
@@ -141,8 +144,8 @@ const FeaturedActivityCarousel = ({
                       <CtaBox
                         header={video.title.rendered}
                         image={
-                          article._embedded?.["wp:featuredmedia"][0]
-                            .source_url || brainGames
+                          video._embedded?.["wp:featuredmedia"][0].source_url ||
+                          brainGames
                         }
                         imageOnTop
                         link={{
