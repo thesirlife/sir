@@ -1,6 +1,5 @@
 import ArticlesList from "@/app/components/ArticlesList/ArticlesList";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
-import RelatedArticles from "@/app/components/RelatedArticles";
 import { getBrainGames } from "@/app/data/getBrainGames";
 import Image from "next/image";
 import BrainHq from "@/app/cta-images/brain-hq.png";

@@ -52,8 +52,10 @@ const Breadcrumbs = ({ title = "" }: BreadcrumbsProps) => {
               >
                 <BreadcrumbsLink href={href} icon={pathsMap["posts"]}>
                   {link
-                    .replace(/-/g, " ")
-                    .replace(/\b\w/g, (char) => char.toUpperCase())}
+                    .replace(/\b\w/g, (char) => char.toUpperCase())
+                    // gross one off to capitalize AI
+                    .replace(/(?:^|\W)Ai(?:$|\W)/g, " AI ")
+                    .replace(/-/g, " ")}
                 </BreadcrumbsLink>
               </li>
               {pathNames.length !== index + 1 && <Seperator />}
