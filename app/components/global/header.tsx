@@ -11,8 +11,8 @@ type HeaderProps = {
 
 const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
   return (
-    <header className="bg-green-primary md:flex px-4 md:px-12 md:flex-row justify-between md:h-[72px] align-center ">
-      <div className="items-center flex">
+    <header className="bg-green-primary flex px-4 md:px-12 flex-row justify-between md:h-[72px] align-center ">
+      <div className="items-center flex max-md:pr-2 max-md:py-1">
         <Link href="/">
           <Image src={Logo} alt="SIR Header Logo" />
         </Link>
@@ -39,14 +39,14 @@ const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
             color="warning"
             variant="contained"
             href="https://www.thesirlife.com/user-portal-feedback"
-						target="_blank"
+            target="_blank"
           >
             Share Feedback
           </Button>
         </nav>
       ) : onLoginPage ? (
         <div className="flex flex-row gap-4 items-center">
-          <p>Do you have a box number?</p>
+          <p className="max-md:text-sm">Do you have a box number?</p>
           <Button
             variant="contained"
             color="warning"
@@ -58,7 +58,7 @@ const Header = ({ isLoggedIn, onLoginPage = false }: HeaderProps) => {
         </div>
       ) : (
         <div className="flex flex-row gap-4 items-center">
-          <p>Already created your account?</p>
+          <p className="max-md:text-sm">Already created your account?</p>
           <Button
             variant="contained"
             color="warning"
