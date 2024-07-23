@@ -23,7 +23,8 @@ const HardCodedForm = ({
 
   const checkAnswer = (choice: Choice) => {
 		// @ts-ignore
-		pendo.track("Checked Trivia", {
+		pendo.track("Answered Trivia", {
+			question: children,
 			answer: choice,
 			visitorId: userId
 		});
@@ -61,11 +62,6 @@ const HardCodedForm = ({
               variant="outlined"
               clickable={false}
               onClick={() => {
-								// @ts-ignore
-								pendo.track("Answered Trivia", {
-									answer: choice,
-									visitorId: userId
-								});
 								setCurrentChoice(choice)
 							}}
               sx={{
