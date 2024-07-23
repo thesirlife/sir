@@ -11,6 +11,7 @@ import getPage from "../data/getPage";
 import { redirect } from "next/navigation";
 import getAuthJwt from "../data/getAuthJwt";
 import getRandomBrainGame from "../data/getRandomBrainGame";
+import getTagById from "../data/getTagById";
 
 const Dashboard = async ({
   searchParams,
@@ -32,7 +33,7 @@ const Dashboard = async ({
   const article = await getRandomArticle();
   const video = await getRandomVideo();
   const game = await getRandomBrainGame();
-
+  const articlesTag = await getTagById(25);
   const trivia = await getTrivia();
   const brainGamesPage = await getPage("29");
   const generalLearningPage = await getPage("27");
@@ -55,9 +56,10 @@ const Dashboard = async ({
         jwt={jwt}
       />
       <RelatedArticles
-        header="SIR Welcome Box"
+        header={articlesTag.name}
         type="general-learning"
         isLoggedIn={Boolean(session)}
+        isHome={true}
       />
     </div>
   );
