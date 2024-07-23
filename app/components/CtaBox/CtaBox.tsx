@@ -37,9 +37,14 @@ const CtaBox = ({
 }: PropsWithChildren<CtaBoxProps>) => {
   const Icon = icon;
   return (
-    <Paper elevation={2} square {...props}>
+    <Paper
+      elevation={2}
+      square
+      {...props}
+      className="max-md:justify-center flex"
+    >
       <div
-        className={`flex flex-col gap-4 ${
+        className={`flex flex-col gap-4  ${
           narrow ? "p-4" : "p-6"
         } max-w-[442px]`}
       >
@@ -62,7 +67,7 @@ const CtaBox = ({
             />
           )}
         </div>
-        <div className="flex flex-col basis-1/2  overflow-x-hidden">
+        <div className="flex flex-col basis-1/2 max-md:text-center overflow-x-hidden">
           <h3
             className="text-xl font-bold mb-2"
             dangerouslySetInnerHTML={{ __html: header || ("" as string) }}

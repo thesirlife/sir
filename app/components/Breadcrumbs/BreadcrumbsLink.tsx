@@ -19,7 +19,11 @@ const BreadcrumbsLink = ({
   const Icon = icon;
 
   return (
-    <Link href={href} className="text-lg flex items-center gap-1" {...props}>
+    <Link
+      href={href}
+      className="md:text-lg text-sm flex items-center gap-1"
+      {...props}
+    >
       <Icon />
       {children}
     </Link>

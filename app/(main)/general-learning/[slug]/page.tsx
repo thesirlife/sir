@@ -55,7 +55,7 @@ const GeneralLearningArticle = async ({
   return (
     <div
       className={`${
-        isLoggedIn ? " bg-navy-primary" : "bg-blueGrey-50"
+        isLoggedIn ? "max-lg:px-4 bg-navy-primary" : "bg-blueGrey-50"
       } h-full flex flex-col items-center justify-center`}
     >
       <div className="container">

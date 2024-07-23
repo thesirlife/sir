@@ -19,7 +19,7 @@ const AIChatBot = async () => {
     <>
       <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
         <div className="container">
-          <div className="py-10 px-4 sm:px-0">
+          <div className="py-10 max-lg:px-4">
             <Breadcrumbs />
             <h1 className="text-3xl font-bold">Personal AI Confidant</h1>
           </div>

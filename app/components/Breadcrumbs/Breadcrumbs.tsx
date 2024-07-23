@@ -35,7 +35,7 @@ const Breadcrumbs = ({ title = "" }: BreadcrumbsProps) => {
 
   return (
     <div>
-      <ul className="flex flex-col sm:flex-row list-none p-0 m-0">
+      <ul className="flex flex-row flex-wrap list-none p-0 m-0 max-md:text-sm">
         <li>
           <BreadcrumbsLink href="/" icon={Home}>
             My Dashboard

@@ -27,11 +27,11 @@ const CtaBoxWide = ({
 }: PropsWithChildren<CtaBoxWideProps>) => {
   return (
     <Paper elevation={2} square {...props}>
-      <div className="flex flex-row gap-4 p-6 justify-between max-w-[560px]">
-        <div className="flex flex-col overflow-x-hidden basis-2/3">
-          <h3 className="text-xl font-bold mb-2">{header}</h3>
+      <div className="flex md:flex-row flex-col gap-4 p-6 justify-between max-md:items-center max-w-[560px]">
+        <div className="flex flex-col overflow-x-hidden basis-2/3  max-md:items-center">
+          <h3 className="text-xl  font-bold mb-2">{header}</h3>
           <div
-            className="text-navy-secondary overflow-hidden"
+            className="text-navy-secondary overflow-hidden max-md:text-center"
             dangerouslySetInnerHTML={{
               __html: children as string,
             }}

@@ -33,20 +33,24 @@ const BrainGames = async ({
 
   return (
     <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
-      <div className="container">
-        <div className="flex flex-row items-center justify-between">
+      <div className="container max-lg:px-4">
+        <div className="flex flex-row items-center justify-between ">
           <div className="py-10">
             <Breadcrumbs />
             <h1 className="text-3xl font-bold">Brain Games</h1>
           </div>
-          <div className="flex flex-row gap-2 items-center">
+          <div className="md:flex hidden flex-row gap-2 items-center">
             <p>Powered By</p>
             <Image src={BrainHq} alt="Powered By Brain HQ" width={160} />
           </div>
         </div>
+        <div className="mb-8 flex-row gap-2 items-center flex md:hidden">
+          <p>Powered By</p>
+          <Image src={BrainHq} alt="Powered By Brain HQ" width={160} />
+        </div>
       </div>
       <div
-        className="max-w-3xl"
+        className="max-w-3xl max-md:px-4"
         dangerouslySetInnerHTML={{ __html: page.content?.rendered }}
       />
       <ArticlesList
