@@ -122,4 +122,5 @@ export type Articles<T> = {
 export type getPostsProps = {
   categories?: number;
   offset: number;
+  pageSize?: number;
 };
