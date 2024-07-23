@@ -8,8 +8,8 @@ type DailyChecklistProps = PaperProps & {
 
 const CheckListItems: Array<Record<string, number>> = [
   { Trivia: 0 },
-  { Article: 1 },
-  { Video: 2 },
+  { "Brain Game": 1 },
+  { Article: 2 },
 ];
 
 const DailyChecklist = ({

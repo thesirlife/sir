@@ -5,6 +5,7 @@ import Image from "next/image";
 import BrainHq from "@/app/cta-images/brain-hq.png";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import getPage from "@/app/data/getPage";
 
 export const metadata = {
   title: "Brain Games",
@@ -27,6 +28,7 @@ const BrainGames = async ({
   }
 
   const articles = await getBrainGames({ categories, offset });
+  const page = await getPage("29");
 
   return (
     <div className="bg-navy-primary h-full flex flex-col items-center justify-center">
@@ -42,6 +44,10 @@ const BrainGames = async ({
           </div>
         </div>
       </div>
+      <div
+        className="max-w-3xl"
+        dangerouslySetInnerHTML={{ __html: page.content?.rendered }}
+      />
       <ArticlesList
         isGame
         articles={articles.articles}

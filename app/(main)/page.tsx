@@ -10,6 +10,7 @@ import getTrivia from "../data/getTrivia";
 import getPage from "../data/getPage";
 import { redirect } from "next/navigation";
 import getAuthJwt from "../data/getAuthJwt";
+import getRandomBrainGame from "../data/getRandomBrainGame";
 
 const Dashboard = async ({
   searchParams,
@@ -30,6 +31,8 @@ const Dashboard = async ({
 
   const article = await getRandomArticle();
   const video = await getRandomVideo();
+  const game = await getRandomBrainGame();
+
   const trivia = await getTrivia();
   const brainGamesPage = await getPage("29");
   const generalLearningPage = await getPage("27");
@@ -44,6 +47,7 @@ const Dashboard = async ({
         article={article}
         video={video}
         trivia={trivia}
+        game={game}
       />
       <Explore
         topPages={[brainGamesPage, generalLearningPage, aiPage]}

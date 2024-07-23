@@ -13,7 +13,7 @@ import DailyChecklist from "../DailyChecklist";
 import Trivia from "../TriviaForms/Form";
 import { Post } from "@/app/types/post/types";
 import CtaBox from "../CtaBox/CtaBox";
-import brainGames from "@/app/cta-images/brain-games.jpg";
+import brainGames from "@/app/cta-images/brain-hq-default.jpg";
 import { shuffleArray } from "@/app/util/shuffleArray";
 import { Choice, TriviaPost } from "@/app/types/trivia/types";
 
@@ -21,12 +21,14 @@ type FeaturedActivityCarouselProps = {
   article: Post;
   video: Post;
   trivia: TriviaPost;
+  game?: Post;
 };
 
 const FeaturedActivityCarousel = ({
   article,
   video,
   trivia,
+  game,
 }: FeaturedActivityCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
@@ -104,6 +106,29 @@ const FeaturedActivityCarousel = ({
                   </div>
                 </CarouselItem>
               )}
+              {game && (
+                <CarouselItem className="flex justify-center">
+                  <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-10 md:gap-20 h-full w-full">
+                    <h2
+                      className="text-4xl font-bold md:basis-1/2"
+                      dangerouslySetInnerHTML={{ __html: game.title.rendered }}
+                    />
+                    <div className="flex flex-col basis-1/2">
+                      <CtaBox
+                        header={game.title.rendered}
+                        image={brainGames}
+                        imageOnTop
+                        link={{
+                          href: game.game_link || "",
+                          label: "Play Game",
+                        }}
+                      >
+                        {game.excerpt.rendered}
+                      </CtaBox>
+                    </div>
+                  </div>
+                </CarouselItem>
+              )}
               {article && (
                 <CarouselItem className="flex justify-center">
                   <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-10 md:gap-20 h-full w-full">
@@ -127,32 +152,6 @@ const FeaturedActivityCarousel = ({
                         }}
                       >
                         {article.excerpt.rendered}
-                      </CtaBox>
-                    </div>
-                  </div>
-                </CarouselItem>
-              )}
-              {video && (
-                <CarouselItem className="flex justify-center">
-                  <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-10 md:gap-20 h-full w-full">
-                    <h2
-                      className="text-4xl font-bold md:basis-1/2"
-                      dangerouslySetInnerHTML={{ __html: video.title.rendered }}
-                    />
-                    <div className="flex flex-col basis-1/2">
-                      <CtaBox
-                        header={video.title.rendered}
-                        image={
-                          video._embedded?.["wp:featuredmedia"][0].source_url ||
-                          brainGames
-                        }
-                        imageOnTop
-                        link={{
-                          href: `general-learning/${video.slug}`,
-                          label: "Watch Video",
-                        }}
-                      >
-                        {video.excerpt.rendered}
                       </CtaBox>
                     </div>
                   </div>
