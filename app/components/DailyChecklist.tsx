@@ -7,9 +7,9 @@ type DailyChecklistProps = PaperProps & {
 };
 
 const CheckListItems: Array<Record<string, number>> = [
-  { Trivia: 0 },
-  { "Brain Game": 1 },
-  { Article: 2 },
+  { "Complete Trivia": 0 },
+  { "Complete BrainGame": 1 },
+  { "Read Article": 2 },
 ];
 
 const DailyChecklist = ({
@@ -21,10 +21,10 @@ const DailyChecklist = ({
   return (
     <Paper
       elevation={2}
-      className={`inline-flex flex-row md:py-3 md:pr-3 md:pl-6 py-1 pr-1 pl-2 items-center bg-white rounded-full drop-shadow-md ${className}`}
+      className={`max-sm:w-[90%] inline-flex flex-row md:py-3 md:pr-3 md:pl-6 py-1 pr-1 pl-2 items-center bg-white rounded-full drop-shadow-md ${className}`}
       {...props}
     >
-      <p className="md:pr-4 pr-2 text-navy-primary max-md:text-sm">
+      <p className="md:pr-4 pr-2 max-sm:pl-2 text-navy-primary max-md:text-sm">
         My Daily Checklist
       </p>
       <ButtonGroup color="secondary" className="gap-1">
@@ -35,7 +35,7 @@ const DailyChecklist = ({
             onFocus={() =>
               setCurrentSlide && setCurrentSlide(Object.values(item)[0])
             }
-            className={`rounded-full max-md:text-xs  py-2 ${
+            className={`rounded-full max-w-[140px] max-md:text-xs leading-tight  py-2 ${
               currentSlide === Object.values(item)[0] &&
               "bg-green-primary text-white"
             }`}
