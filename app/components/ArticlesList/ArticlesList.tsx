@@ -12,12 +12,14 @@ const ArticlesList = async ({
   articles,
   categories,
   total = "0",
+  pageSize = 5,
 }: {
   offset: number;
   isGame?: boolean;
   categories: number;
   articles: Post[];
   total: string;
+  pageSize?: number;
 }) => {
   const session = await auth();
 
@@ -60,7 +62,12 @@ const ArticlesList = async ({
               );
             })}
           <div className="flex flex-row justify-center">
-            <Pagination total={total} offset={offset} categories={categories} />
+            <Pagination
+              total={total}
+              offset={offset}
+              categories={categories}
+              pageSize={pageSize}
+            />
           </div>
         </div>
       </div>

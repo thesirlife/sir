@@ -26,8 +26,9 @@ const BrainGames = async ({
   if (!session?.user.email) {
     redirect("/enter-box-code");
   }
+  const pageSize = 10;
 
-  const articles = await getBrainGames({ categories, offset });
+  const articles = await getBrainGames({ categories, offset, pageSize });
   const page = await getPage("29");
 
   return (
@@ -54,6 +55,7 @@ const BrainGames = async ({
         total={articles.total}
         offset={offset}
         categories={categories}
+        pageSize={pageSize}
       />
     </div>
   );

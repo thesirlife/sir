@@ -109,10 +109,16 @@ const FeaturedActivityCarousel = ({
               {game && (
                 <CarouselItem className="flex justify-center">
                   <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-10 md:gap-20 h-full w-full">
-                    <h2
-                      className="text-4xl font-bold md:basis-1/2"
-                      dangerouslySetInnerHTML={{ __html: game.title.rendered }}
-                    />
+                    <div className="flex flex-col md:basis-1/2">
+                      <h2 className=" mb-4 text-4xl font-bold">
+                        It&apos;s time for your daily BrainGame!
+                      </h2>
+                      <p>
+                        Brain games are an excellent way to keep the mind active
+                        and sharp. Click here and select what you are feeling up
+                        to today. A little goes a long way.
+                      </p>
+                    </div>
                     <div className="flex flex-col basis-1/2">
                       <CtaBox
                         header={game.title.rendered}

@@ -7,9 +7,15 @@ type PaginationProps = {
   offset: number;
   categories: number;
   total: string;
+  pageSize?: number;
 };
 
-const Pagination = ({ offset, total, categories }: PaginationProps) => {
+const Pagination = ({
+  offset,
+  total,
+  categories,
+  pageSize = 5,
+}: PaginationProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -34,28 +40,32 @@ const Pagination = ({ offset, total, categories }: PaginationProps) => {
         href={
           pathname +
           "?" +
-          createQueryString(offset < 0 ? offset - 5 : 0, categories)
+          createQueryString(offset < 0 ? offset - pageSize : 0, categories)
         }
       />
-      {Array.from({ length: Math.ceil(parseInt(total) / 5) }).map(
+      {Array.from({ length: Math.ceil(parseInt(total) / pageSize) }).map(
         (_, index) => (
           <PaginationItem
             key={index}
             scroll={false}
-            selected={offset / 5 === index}
+            selected={offset / pageSize === index}
             page={index + 1}
             component={Link}
-            href={pathname + "?" + createQueryString(index * 5, categories)}
+            href={
+              pathname + "?" + createQueryString(index * pageSize, categories)
+            }
           />
         )
       )}
       <PaginationItem
         type="next"
         scroll={false}
-        disabled={parseInt(total) - offset <= 5}
+        disabled={parseInt(total) - offset <= pageSize}
         component={Link}
         href={
-          pathname + "?" + createQueryString(Number(offset) + 5, categories)
+          pathname +
+          "?" +
+          createQueryString(Number(offset) + pageSize, categories)
         }
       />
     </>
