@@ -31,7 +31,11 @@ const Explore = ({ topPages, userId, jwt }: ExploreProps) => {
     });
 
 		// @ts-ignore
-		pendo.track("Visited Community");
+		pendo.track("Visited Community", {
+			visitor: {
+				id: "${userId}"
+			},
+		});
   };
   return (
     <div className="bg-navy-primary pb-14 flex flex-col items-center justify-center">

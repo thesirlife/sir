@@ -183,6 +183,7 @@ const ArticleCard = ({
 							// @ts-ignore
 							pendo.track("Play Game", {
 								game: header,
+								visitorId: session.user.id,
 							});
               handleGame(e);
             }

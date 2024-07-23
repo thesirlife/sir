@@ -22,6 +22,7 @@ type FeaturedActivityCarouselProps = {
   video: Post;
   trivia: TriviaPost;
   game?: Post;
+	userId: Number;
 };
 
 const FeaturedActivityCarousel = ({
@@ -29,6 +30,7 @@ const FeaturedActivityCarousel = ({
   video,
   trivia,
   game,
+	userId,
 }: FeaturedActivityCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
@@ -101,6 +103,7 @@ const FeaturedActivityCarousel = ({
                         title={trivia?.title.rendered}
                         choices={choices}
                         trivia_meta_snippet={trivia?.trivia_meta_snippet}
+												userId={userId}
                       />
                     </div>
                   </div>

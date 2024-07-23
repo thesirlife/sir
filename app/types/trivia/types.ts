@@ -26,6 +26,7 @@ export type TTrivia = {
   title: string;
   trivia_meta_snippet: string;
   choices: Choice[];
+	userId: Number;
 };
 
 export type Choice = {

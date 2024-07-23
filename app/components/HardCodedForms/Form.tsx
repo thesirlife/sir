@@ -8,12 +8,14 @@ import { Choice } from "@/app/types/trivia/types";
 type HardCodedFormProps = {
   choices: Choice[];
   explanation: string;
+	userId: Number;
 };
 
 const HardCodedForm = ({
   children,
   explanation,
   choices,
+	userId,
 }: PropsWithChildren<HardCodedFormProps>) => {
   const [currentChoice, setCurrentChoice] = useState<Choice>();
   const [isCorrect, setIsCorrect] = useState<boolean>();
@@ -23,6 +25,7 @@ const HardCodedForm = ({
 		// @ts-ignore
 		pendo.track("Checked Trivia", {
 			answer: choice,
+			visitorId: userId
 		});
 
     if (choice.isAnswer) {
@@ -61,6 +64,7 @@ const HardCodedForm = ({
 								// @ts-ignore
 								pendo.track("Answered Trivia", {
 									answer: choice,
+									visitorId: userId
 								});
 								setCurrentChoice(choice)
 							}}
