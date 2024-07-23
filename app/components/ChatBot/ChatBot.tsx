@@ -101,6 +101,10 @@ const ChatBot = ({ userId }: ChatBotProps) => {
         event: "interactedWithChatbot",
         value: true,
       });
+			// @ts-ignore
+			pendo.track("Asked Chatbot", {
+				input: newInput,
+			});
       setInitialScreen(false);
     }
 

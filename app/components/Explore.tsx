@@ -29,6 +29,9 @@ const Explore = ({ topPages, userId, jwt }: ExploreProps) => {
       event: "communityCalloutClicked",
       value: true,
     });
+
+		// @ts-ignore
+		pendo.track("Visited Community");
   };
   return (
     <div className="bg-navy-primary pb-14 flex flex-col items-center justify-center">

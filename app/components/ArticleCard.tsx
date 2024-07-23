@@ -178,7 +178,12 @@ const ArticleCard = ({
               event: isGame ? "gameClicked" : "articleClicked",
               value: isGame ? gameUrl : articleUrl,
             });
+
             if (isGame) {
+							// @ts-ignore
+							pendo.track("Play Game", {
+								game: header,
+							});
               handleGame(e);
             }
           }}

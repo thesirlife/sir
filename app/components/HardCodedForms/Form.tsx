@@ -5,7 +5,6 @@ import { PropsWithChildren, useState } from "react";
 import SubmitButton from "../SubmitButton";
 import { Check } from "@mui/icons-material";
 import { Choice } from "@/app/types/trivia/types";
-import { sendGAEvent } from "@next/third-parties/google";
 type HardCodedFormProps = {
   choices: Choice[];
   explanation: string;
@@ -21,16 +20,17 @@ const HardCodedForm = ({
   const [submitted, setSubmittted] = useState<boolean>();
 
   const checkAnswer = (choice: Choice) => {
+		// @ts-ignore
+		pendo.track("Checked Trivia", {
+			answer: choice,
+		});
+
     if (choice.isAnswer) {
       setIsCorrect(true);
     } else {
       setIsCorrect(false);
     }
     setSubmittted(true);
-    sendGAEvent({
-      event: "triviaSubmitted",
-      value: `Choice: ${currentChoice} - Answer: ${isCorrect}`,
-    });
   };
 
   return (
@@ -57,7 +57,13 @@ const HardCodedForm = ({
               key={choice.text}
               variant="outlined"
               clickable={false}
-              onClick={() => setCurrentChoice(choice)}
+              onClick={() => {
+								// @ts-ignore
+								pendo.track("Answered Trivia", {
+									answer: choice,
+								});
+								setCurrentChoice(choice)
+							}}
               sx={{
                 "& .MuiChip-label": {
                   overflow: "visible",
