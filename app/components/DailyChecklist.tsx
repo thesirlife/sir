@@ -21,10 +21,10 @@ const DailyChecklist = ({
   return (
     <Paper
       elevation={2}
-      className={`max-sm:w-[90%] inline-flex flex-row md:py-3 md:pr-3 md:pl-6 py-1 pr-1 pl-2 items-center bg-white rounded-full drop-shadow-md ${className}`}
+      className={`max-sm:w-[90%] inline-flex flex-col md:flex-row md:py-3  md:pl-6 py-2 pr-3 pl-3 items-center bg-white rounded-full drop-shadow-md ${className}`}
       {...props}
     >
-      <p className="md:pr-4 pr-2 max-sm:pl-2 text-navy-primary max-md:text-sm">
+      <p className="md:pr-4 pr-2 max-md:pb-2 max-sm:pl-2 text-navy-primary">
         My Daily Checklist
       </p>
       <ButtonGroup color="secondary" className="gap-1">
