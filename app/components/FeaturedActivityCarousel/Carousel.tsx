@@ -23,14 +23,21 @@ type FeaturedActivityCarouselProps = {
   trivia: TriviaPost;
   game?: Post;
 	userId: Number;
+	session: {
+    user: {
+      id: number;
+      email: string;
+      name: string;
+    };
+  };
 };
 
 const FeaturedActivityCarousel = ({
   article,
-  video,
   trivia,
   game,
 	userId,
+	session,
 }: FeaturedActivityCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
@@ -131,6 +138,8 @@ const FeaturedActivityCarousel = ({
                           href: game.game_link || "",
                           label: "Play Game",
                         }}
+												session={session}
+												isGame={true}
                       >
                         {game.excerpt.rendered}
                       </CtaBox>

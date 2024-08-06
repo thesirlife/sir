@@ -43,6 +43,7 @@ const Dashboard = async () => {
         trivia={trivia}
         game={game}
 				userId={session.user.id}
+				session={session}
       />
       <Explore
         topPages={[brainGamesPage, generalLearningPage, aiPage]}
