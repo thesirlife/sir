@@ -32,9 +32,7 @@ const Explore = ({ topPages, userId, jwt }: ExploreProps) => {
 
 		// @ts-ignore
 		pendo.track("Visited Community", {
-			visitor: {
-				id: "${userId}"
-			},
+			visitorId: userId
 		});
   };
   return (
