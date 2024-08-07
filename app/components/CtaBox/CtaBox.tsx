@@ -25,7 +25,7 @@ type CtaBoxProps = PaperProps & {
   altBodyText?: boolean;
   imageOnTop?: boolean;
   isGame?: boolean;
-	session: {
+	session?: {
     user: {
       id: number;
       email: string;
@@ -52,19 +52,21 @@ const CtaBox = ({
 	const handleGame = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const result = await createBrainHQUser(
-      session?.user.id,
-      session?.user.email,
-      session?.user.name
-    );
-    // when you get the type of the response from the API, you can replace Object with that type
-    // then, the errors below should resolve since they now exist on the type, instead of just the generic Object type
-    if (!result.error) {
-      const { web } = result;
-      window.open(web, "_blank")?.focus();
-    } else {
-      console.error(result.error);
-    }
+		if (session) {
+			const result = await createBrainHQUser(
+				session?.user.id,
+				session?.user.email,
+				session?.user.name
+			);
+			// when you get the type of the response from the API, you can replace Object with that type
+			// then, the errors below should resolve since they now exist on the type, instead of just the generic Object type
+			if (!result.error) {
+				const { web } = result;
+				window.open(web, "_blank")?.focus();
+			} else {
+				console.error(result.error);
+			}
+		}
   };
 
   const Icon = icon;

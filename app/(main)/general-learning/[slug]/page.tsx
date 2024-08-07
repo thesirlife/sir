@@ -170,6 +170,7 @@ const GeneralLearningArticle = async ({
                 className="mt-20"
                 altBodyText
                 narrow
+								session={session || null}
               >
                 Join SIR for monthly boxes delivered right to your door
               </CtaBox>
