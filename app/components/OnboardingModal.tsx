@@ -5,11 +5,22 @@ import Button from "./global/Button";
 import { NavigateNext } from "@mui/icons-material";
 import { Modal, Paper } from "@mui/material";
 import { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import onboarding from "@/app/cta-images/onboarding.jpg";
 
 const OnboardingModal = () => {
-  const [open, setOpen] = useState(true);
-  const handleClose = () => setOpen(false);
+	const searchParams = useSearchParams()
+  const newUser = searchParams.get('newUser')
+
+  const [open, setOpen] = useState(newUser ? true : false);
+
+	const router = useRouter();
+	const pathname = usePathname();
+
+  const handleClose = () => {
+		setOpen(false);
+		router.replace(pathname);
+	};
 
   return (
     <Modal open={open} onClose={handleClose}>

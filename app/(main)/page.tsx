@@ -13,18 +13,11 @@ import getAuthJwt from "../data/getAuthJwt";
 import getRandomBrainGame from "../data/getRandomBrainGame";
 import getTagById from "../data/getTagById";
 
-const Dashboard = async ({
-  searchParams,
-}: {
-  searchParams?: {
-    newUser?: boolean;
-  };
-}) => {
+const Dashboard = async () => {
   const session = await auth();
   if (!session?.user.email) {
     redirect("/enter-box-code");
   }
-  const firstLogin = searchParams?.newUser;
 
   const name = session?.user.name
     ? session?.user.name
@@ -42,7 +35,7 @@ const Dashboard = async ({
 
   return (
     <div>
-      {firstLogin ? <OnboardingModal /> : null}
+      <OnboardingModal />
       <WelcomeBanner user={name} />
       <FeaturedActivityCarousel
         article={article}
@@ -50,6 +43,7 @@ const Dashboard = async ({
         trivia={trivia}
         game={game}
 				userId={session.user.id}
+				session={session}
       />
       <Explore
         topPages={[brainGamesPage, generalLearningPage, aiPage]}
