@@ -44,6 +44,10 @@ export const authOptions: NextAuthConfig = {
     signOut: "/auth/signout",
   },
 
+	session: {
+		maxAge: 1440, // 24 hours
+	},
+
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
