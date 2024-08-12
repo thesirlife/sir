@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 const SetPasswordForm = () => {
   const [serverFormState, action] = useFormState(setPassword, {
     status: "pending" as FormState["status"],
+    message: "" as FormState["message"],
   });
 
   type FormInput = {
@@ -29,7 +30,7 @@ const SetPasswordForm = () => {
   return (
     <div>
       <div className="flex flex-col items-center">
-        <h2 className="font-bold">Set Your New Password</h2>
+        <h2 className="font-bold text-center mb-2">Set Your New Password</h2>
         <p className="text-lg mb-8 opacity-60 text-center">
           Enter your information, along with the code sent via email, to reset
           your password.
@@ -37,9 +38,9 @@ const SetPasswordForm = () => {
       </div>
       <form
         action={action}
-        className="flex flex-col items-center justify-center"
+        className="flex flex-col md:items-center justify-center"
       >
-        <div className="flex flex-col gap-4 [&>*]:max-w-[260px]">
+        <div className="flex flex-col gap-6 md:[&>*]:w-[300px]">
           <Controller
             control={control}
             name="email"
@@ -129,12 +130,18 @@ const SetPasswordForm = () => {
         </div>
         <Divider className="my-8" flexItem />
         <SubmitButton disabled={!isValid}>Set Password</SubmitButton>
-        {serverFormState.status === "error" && (
-          <p className="text-red-500 font-semibold text-center max-w-100 mt-4">
-            Something went wrong. Please double check your information and try
-            again.
-          </p>
-        )}
+        {serverFormState.status === "error" ?
+					serverFormState.message ? (
+						<p className="text-red-500 font-semibold text-center max-w-100 mt-4">
+							{serverFormState.message}
+						</p>
+					) : (
+						<p className="text-red-500 font-semibold text-center max-w-100 mt-4">
+							Something went wrong. Please double check your information and try
+							again.
+						</p>
+					)
+        : null}
       </form>
     </div>
   );

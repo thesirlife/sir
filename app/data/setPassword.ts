@@ -10,14 +10,13 @@ const setPassword = async (
     password,
     code,
   });
-
-  const reponse = await fetch(
+  const response = await fetch(
     `${process.env.NEXT_PUBLIC_RESETPASS_ENDPOINT}/set-password?${params}`,
     {
       method: "POST",
     }
   );
-  const data = await reponse.json();
+  const data = await response.json();
 
   return data;
 };

@@ -10,7 +10,7 @@ const SetPasswordPage = async () => {
     <>
       <Header isLoggedIn={Boolean(session?.user.email)} onLoginPage />
       <div className="flex items-center justify-center w-full my-6">
-        <Paper square className="max-w-[760px] w-full p-16">
+        <Paper square className="max-w-[760px] w-full py-16 px-8 md:p-16">
           <SetPasswordForm />
         </Paper>
       </div>

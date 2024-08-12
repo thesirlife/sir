@@ -10,6 +10,7 @@ const newUserSchema = z.object({
 
 export type FormState = {
   status: "reset" | "error";
+	message: string;
 };
 
 export const setPassword = async (formState: FormState, formData: FormData) => {
@@ -23,6 +24,7 @@ export const setPassword = async (formState: FormState, formData: FormData) => {
 
     if (response.data.status === 500) {
       formState.status = "error";
+			formState.message = response.message;
     }
     if (response.data.status === 200) {
       formState.status = "reset";
@@ -33,5 +35,6 @@ export const setPassword = async (formState: FormState, formData: FormData) => {
 
   return {
     status: formState.status,
+		message: formState.message,
   };
 };

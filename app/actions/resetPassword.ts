@@ -8,6 +8,7 @@ const newUserSchema = z.object({
 
 export type FormState = {
   status: "reset" | "error";
+	message: string;
 };
 
 export const resetPasswordAction = async (
@@ -22,6 +23,7 @@ export const resetPasswordAction = async (
 
     if (response.data.status === 500) {
       formState.status = "error";
+			formState.message = response.message;
     }
     if (response.data.status === 200) {
       formState.status = "reset";
@@ -32,5 +34,6 @@ export const resetPasswordAction = async (
 
   return {
     status: formState.status,
+		message: formState.message,
   };
 };
