@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 const ResetPasswordForm = () => {
   const [serverFormState, action] = useFormState(resetPasswordAction, {
     status: "pending" as FormState["status"],
+    message: "" as FormState["message"],
   });
 
   type FormInput = {
@@ -25,16 +26,16 @@ const ResetPasswordForm = () => {
   return (
     <div>
       <div className="flex flex-col items-center">
-        <h2 className="font-bold">Reset Your Password</h2>
+        <h2 className="font-bold text-center mb-2">Reset Your Password</h2>
         <p className="text-lg mb-8 opacity-60 text-center">
           Enter your email below to reset your password.
         </p>
       </div>
       <form
         action={action}
-        className="flex flex-col items-center justify-center"
+        className="flex flex-col md:items-center justify-center"
       >
-        <div className="flex flex-col gap-4 [&>*]:max-w-[260px]">
+        <div className="flex flex-col gap-4 md:[&>*]:w-[260px]">
           <Controller
             control={control}
             name="email"
@@ -57,11 +58,18 @@ const ResetPasswordForm = () => {
 
         <Divider className="my-8" flexItem />
         <SubmitButton disabled={!isValid}>Reset Password</SubmitButton>
-        {serverFormState.status === "error" && (
-          <p className="text-red-500 font-semibold text-center max-w-100 mt-4">
-            Your email address is incorrect. Please double check and try again.
-          </p>
-        )}
+        {serverFormState.status === "error" ?
+					serverFormState.message ? (
+						<p className="text-red-500 font-semibold text-center max-w-100 mt-4">
+							{serverFormState.message}
+						</p>
+					) : (
+						<p className="text-red-500 font-semibold text-center max-w-100 mt-4">
+							Something went wrong. Please double check your information and try
+							again.
+						</p>
+					)
+        : null}
       </form>
     </div>
   );
