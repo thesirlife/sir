@@ -83,7 +83,7 @@ const CtaBox = ({
         } max-w-[442px]`}
       >
         <div
-          className={`basis-1/2 relative ${
+          className={`basis-1/2 relative max-h-[160px] ${
             imageOnTop ? "order-first" : "order-last"
           }`}
         >
@@ -92,7 +92,7 @@ const CtaBox = ({
             alt={header || ""}
             width={imageWidth}
             height={imageHeight}
-            className="w-full max-h-[160px] object-cover"
+            className="w-full h-full object-cover"
           />
           {Icon && (
             <IconWithBackground
@@ -101,7 +101,7 @@ const CtaBox = ({
             />
           )}
         </div>
-        <div className="flex flex-col basis-1/2 max-md:text-center overflow-x-hidden">
+        <div className="flex flex-col basis-1/2 max-md:text-center">
           <h3
             className="text-xl font-bold mb-2"
             dangerouslySetInnerHTML={{ __html: header || ("" as string) }}
@@ -110,7 +110,7 @@ const CtaBox = ({
             className={`${
               altBodyText
                 ? "text-navy-primary text-lg"
-                : "text-navy-secondary overflow-hidden "
+                : "text-navy-secondary"
             }`}
             dangerouslySetInnerHTML={{
               __html: children as string,
@@ -126,7 +126,7 @@ const CtaBox = ({
             </div>
           ) : null}
 					{link && isGame ? (
-						<div className="text-orange-primary text-sm uppercase mt-8">
+						<div className="text-orange-primary text-sm uppercase mt-8 hover:cursor-pointer">
 							<Button
 								color="warning"
 								variant="text"

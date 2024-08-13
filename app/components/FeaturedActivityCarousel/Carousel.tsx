@@ -120,7 +120,7 @@ const FeaturedActivityCarousel = ({
                 <CarouselItem className="flex justify-center">
                   <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-10 md:gap-20 h-full w-full">
                     <div className="flex flex-col md:basis-1/2">
-                      <h2 className=" mb-4 text-4xl font-bold">
+                      <h2 className="mb-4 text-4xl font-bold">
                         It&apos;s time for your daily BrainGame!
                       </h2>
                       <p>
@@ -150,12 +150,19 @@ const FeaturedActivityCarousel = ({
               {article && (
                 <CarouselItem className="flex justify-center">
                   <div className="max-w-[956px] flex flex-col md:flex-row items-center justify-around md:justify-between gap-10 md:gap-20 h-full w-full">
-                    <h2
-                      className="text-4xl font-bold md:basis-1/2"
-                      dangerouslySetInnerHTML={{
-                        __html: article.title.rendered,
-                      }}
-                    />
+										<div className="flex flex-col md:basis-1/2">
+											<h2
+												className="mb-4 text-4xl font-bold"
+												dangerouslySetInnerHTML={{
+													__html: article.title.rendered,
+												}}
+											/>
+											<div
+												dangerouslySetInnerHTML={{
+													__html: article.excerpt.rendered,
+												}}
+											/>
+										</div>
                     <div className="flex flex-col basis-1/2">
                       <CtaBox
                         header={article.title.rendered}
@@ -168,9 +175,7 @@ const FeaturedActivityCarousel = ({
                           href: `general-learning/${article.slug}`,
                           label: "Read Article",
                         }}
-                      >
-                        {article.excerpt.rendered}
-                      </CtaBox>
+                      />
                     </div>
                   </div>
                 </CarouselItem>
