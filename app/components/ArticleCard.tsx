@@ -110,8 +110,8 @@ const ArticleCard = ({
   };
 
   useEffect(() => {
-    (async () => {
-      setImageUrl(await getMediaById(imageId));
+		(async () => {
+			setImageUrl(await getMediaById(imageId));
     })();
 
     (async () => {
@@ -140,13 +140,13 @@ const ArticleCard = ({
       } gap-5 min-h-[192px] p-8`}
     >
       {imageUrl !== undefined && (
-        <div className="basis-1/2 relative">
+        <div className="basis-1/2 relative max-h-[160px]">
           <Image
             src={imageUrl.source_url || (isGame ? BrainHq : "")}
             alt={header}
             width={imageWidth ? imageWidth : 212}
             height={imageHeight ? imageHeight : 144}
-            className="w-full rounded"
+            className="w-full h-full object-cover"
           />
 
           {tagId && (
