@@ -65,7 +65,8 @@ export const authOptions: NextAuthConfig = {
           );
 
           if (!res.ok) {
-            return null;
+						console.log(res);
+						return null;
           }
 
           const parsedResponse: AuthResponse = await res.json();
