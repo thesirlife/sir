@@ -13,6 +13,7 @@ export const login = async (formState: FormState, formData: FormData) => {
     formState.status = "success";
     await signIn("credentials", formData);
   } catch (error) {
+		console.log(error);
     if (error instanceof AuthError) formState.status = "error";
   }
 
