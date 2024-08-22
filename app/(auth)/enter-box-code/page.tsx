@@ -9,7 +9,7 @@ export const metadata = {
   description: "The page to enter the box code.",
 };
 
-const SignInPage = async () => {
+const BoxCodePage = async () => {
   const session = await auth();
   if (session?.user.email) {
     redirect(`/`);
@@ -27,4 +27,4 @@ const SignInPage = async () => {
   );
 };
 
-export default SignInPage;
+export default BoxCodePage;

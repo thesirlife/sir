@@ -5,12 +5,11 @@ import { auth } from "@/auth";
 import LoggedOutFooter from "../components/Register/Footer";
 const MainLayout = async ({ children }: PropsWithChildren) => {
   const session = await auth();
-
   return (
     <>
-      <Header isLoggedIn={Boolean(session?.user.email)} />
+      <Header isLoggedIn={Boolean(session?.user?.email)} />
       {children}
-      {session?.user.email ? <Footer /> : <LoggedOutFooter />}
+      {session?.user?.email ? <Footer /> : <LoggedOutFooter />}
     </>
   );
 };
