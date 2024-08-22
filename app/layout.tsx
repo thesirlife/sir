@@ -45,8 +45,6 @@ export default async function RootLayout({
   const name = session?.user?.name ? session.user.name : "Not Logged In";
   const userId = session?.user?.id ? session.user.id : "Not Logged In";
 
-  console.log(emailAddress);
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
