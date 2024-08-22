@@ -15,11 +15,11 @@ import getTagById from "../data/getTagById";
 
 const Dashboard = async () => {
   const session = await auth();
-  if (!session?.user.email) {
+  if (!session?.user?.email) {
     redirect("/enter-box-code");
   }
 
-  const name = session?.user.name
+  const name = session?.user?.name
     ? session?.user.name
     : session?.user.email || "";
 
@@ -42,8 +42,8 @@ const Dashboard = async () => {
         video={video}
         trivia={trivia}
         game={game}
-				userId={session.user.id}
-				session={session}
+        userId={session.user.id}
+        session={session}
       />
       <Explore
         topPages={[brainGamesPage, generalLearningPage, aiPage]}

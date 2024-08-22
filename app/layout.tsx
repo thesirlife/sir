@@ -39,9 +39,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
-	const emailAddress = session?.user?.email ? session.user.email : null;
-	const name = session?.user?.name ? session.user.name : null;
-	const userId = session?.user?.id ? session.user.id : null;
+  const emailAddress = session?.user?.email
+    ? session.user.email
+    : "Not Logged In";
+  const name = session?.user?.name ? session.user.name : "Not Logged In";
+  const userId = session?.user?.id ? session.user.id : "Not Logged In";
 
   return (
     <StyledEngineProvider injectFirst>
@@ -61,7 +63,7 @@ export default async function RootLayout({
             />
             <HubspotTracking session={session} />
             <Script id="pendo-script" strategy="afterInteractive">
-							{`
+              {`
 								(function(apiKey){
 										(function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
 										v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
@@ -83,7 +85,7 @@ export default async function RootLayout({
 										});
 								})('${process.env.PENDO_API_KEY}');
 							`}
-						</Script>
+            </Script>
           </body>
           <GoogleAnalytics gaId="G-L7T5ZQH0G5" />
         </html>
