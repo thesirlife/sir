@@ -9,10 +9,8 @@ import Button from "../global/Button";
 
 const SignInForm = () => {
   const [formState, action] = useFormState(login, {
-    status: "pending" as FormState["status"],
+    status: "pending" as FormState["status"]
   });
-
-  formState.status === "success" && redirect("/");
 
   return (
     <div>
