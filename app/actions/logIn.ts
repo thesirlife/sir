@@ -2,28 +2,25 @@
 
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
-
-import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export type FormState = {
   status: "success" | "error" | "pending";
 };
 
 export const login = async (formState: FormState, formData: FormData) => {
-	try {
+  try {
     formState.status = "success";
     await signIn("credentials", formData);
   } catch (error) {
-		console.log(error);
     if (error instanceof AuthError) formState.status = "error";
+  } finally {
+    if (formState.status === "success") {
+      redirect("/");
+    }
   }
-  // formState.status = "success";
-  // const signin = await signIn("credentials", formData);
-	// console.log(signin);
-
-  // revalidatePath("/", "layout");
 
   return {
-    status: formState.status,
+    status: formState.status
   };
 };
